@@ -1,0 +1,125 @@
+export function Key({ pressKey }: { pressKey: string }) {
+    return (
+        <div className="-left-6 absolute flex size-[3.125rem] items-center justify-center">
+            <svg
+                width="3.125rem"
+                height="3.125rem"
+                viewBox="0 0 50 50"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M20.7574 4.24264C23.1005 1.8995 26.8995 1.89949 29.2426 4.24264L45.7574 20.7574C48.1005 23.1005 48.1005 26.8995 45.7574 29.2426L29.2426 45.7574C26.8995 48.1005 23.1005 48.1005 20.7574 45.7574L4.24264 29.2426C1.8995 26.8995 1.89949 23.1005 4.24264 20.7574L20.7574 4.24264Z"
+                    fill="#151515"
+                    fill-opacity="0.7"
+                />
+                <path
+                    d="M20.7574 4.24264C23.1005 1.8995 26.8995 1.89949 29.2426 4.24264L45.7574 20.7574C48.1005 23.1005 48.1005 26.8995 45.7574 29.2426L29.2426 45.7574C26.8995 48.1005 23.1005 48.1005 20.7574 45.7574L4.24264 29.2426C1.8995 26.8995 1.89949 23.1005 4.24264 20.7574L20.7574 4.24264Z"
+                    fill="url(#paint0_linear_728_1465)"
+                    fill-opacity="0.2"
+                />
+                <path
+                    d="M22.1716 6.57843C23.7337 5.01633 26.2663 5.01633 27.8284 6.57843L43.4216 22.1716C44.9837 23.7337 44.9837 26.2663 43.4216 27.8284L27.8284 43.4216C26.2663 44.9837 23.7337 44.9837 22.1716 43.4216L6.57843 27.8284C5.01633 26.2663 5.01633 23.7337 6.57843 22.1716L22.1716 6.57843Z"
+                    fill="#151515"
+                    fill-opacity="0.7"
+                />
+                <path
+                    d="M22.1716 6.57843C23.7337 5.01633 26.2663 5.01633 27.8284 6.57843L43.4216 22.1716C44.9837 23.7337 44.9837 26.2663 43.4216 27.8284L27.8284 43.4216C26.2663 44.9837 23.7337 44.9837 22.1716 43.4216L6.57843 27.8284C5.01633 26.2663 5.01633 23.7337 6.57843 22.1716L22.1716 6.57843Z"
+                    fill="url(#paint1_linear_728_1465)"
+                    fill-opacity="0.2"
+                />
+                <path
+                    d="M22.5254 6.93164C23.8921 5.56521 26.1078 5.56521 27.4746 6.93164L43.0684 22.5254C44.4348 23.8921 44.4348 26.1078 43.0684 27.4746L27.4746 43.0684C26.1079 44.4348 23.8922 44.4348 22.5254 43.0684L6.93164 27.4746C5.56521 26.1079 5.56521 23.8922 6.93164 22.5254L22.5254 6.93164Z"
+                    stroke="url(#paint2_linear_728_1465)"
+                    stroke-opacity="0.7"
+                />
+                <path
+                    d="M23.7275 10.5557C24.4304 9.85292 25.5696 9.85292 26.2725 10.5557L39.4443 23.7275C40.1471 24.4304 40.1471 25.5696 39.4443 26.2725L26.2725 39.4443C25.5696 40.1471 24.4304 40.1471 23.7275 39.4443L10.5557 26.2725C9.85292 25.5696 9.85292 24.4304 10.5557 23.7275L23.7275 10.5557Z"
+                    fill="url(#paint3_linear_728_1465)"
+                    stroke="rgb(var(--primaryColor))"
+                    stroke-width="0.4"
+                />
+                <defs>
+                    <linearGradient
+                        id="paint0_linear_728_1465"
+                        x1="-2.5"
+                        y1="1.875"
+                        x2="25"
+                        y2="50"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop
+                            stop-color="rgb(var(--primaryColor))"
+                            stop-opacity="0.7"
+                        />
+                        <stop
+                            offset="1"
+                            stop-color="rgb(var(--primaryColor))"
+                            stop-opacity="0"
+                        />
+                    </linearGradient>
+                    <linearGradient
+                        id="paint1_linear_728_1465"
+                        x1="1.625"
+                        y1="5.34375"
+                        x2="25"
+                        y2="46.25"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop
+                            stop-color="rgb(var(--primaryColor))"
+                            stop-opacity="0.7"
+                        />
+                        <stop
+                            offset="1"
+                            stop-color="rgb(var(--primaryColor))"
+                            stop-opacity="0"
+                        />
+                    </linearGradient>
+                    <linearGradient
+                        id="paint2_linear_728_1465"
+                        x1="25"
+                        y1="3.75"
+                        x2="25"
+                        y2="46.25"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop
+                            offset="0.0721073"
+                            stop-color="rgb(var(--primaryColor))"
+                            stop-opacity="0"
+                        />
+                        <stop
+                            offset="0.5"
+                            stop-color="rgb(var(--primaryColor))"
+                        />
+                        <stop
+                            offset="0.937911"
+                            stop-color="rgb(var(--primaryColor))"
+                            stop-opacity="0"
+                        />
+                    </linearGradient>
+                    <linearGradient
+                        id="paint3_linear_728_1465"
+                        x1="12.2941"
+                        y1="9"
+                        x2="31.2857"
+                        y2="43.8571"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop
+                            offset="0.238476"
+                            stop-color="rgb(var(--primaryColor))"
+                        />
+                        <stop
+                            offset="0.845384"
+                            stop-color="rgb(var(--primaryColor))"
+                            stop-opacity="0.2"
+                        />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <h1 className="absolute z-10 font-medium text-base">{pressKey}</h1>
+        </div>
+    );
+}

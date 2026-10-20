@@ -1,0 +1,61 @@
+.timer-wrapper {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  animation: timerFadeIn 0.4s ease-out;
+}
+
+@keyframes timerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.timer-accent-top,
+.timer-accent-bottom {
+  width: 30px;
+  height: 8px;
+  background: #0143bb;
+}
+
+.timer-bg {
+  background: linear-gradient(
+    90deg,
+    rgba(23, 23, 23, 0) 0%,
+    rgba(23, 23, 23, 0.5) 50.82%,
+    rgba(23, 23, 23, 0) 100%
+  );
+  width: 361px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.timer-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-text {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: #fff;
+  letter-spacing: 1px;
+  line-height: 1;
+}

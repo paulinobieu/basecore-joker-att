@@ -1,0 +1,2 @@
+[watcher]
+ignore = ["dist", "build", ".output"]

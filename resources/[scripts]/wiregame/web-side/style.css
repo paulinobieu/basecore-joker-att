@@ -1,0 +1,119 @@
+/*--------------------------------------------------------------------------------------------------------------------------------------
+-- RESET
+--------------------------------------------------------------------------------------------------------------------------------------*/
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	user-select: none;
+}
+
+html,body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: transparent;
+}
+/*--------------------------------------------------------------------------------------------------------------------------------------
+-- BOARD
+--------------------------------------------------------------------------------------------------------------------------------------*/
+#app {
+	display: none;
+	place-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+#app.Active {
+	display: grid;
+}
+
+#app svg {
+	width: 70vmin;
+	height: auto;
+	touch-action: none;
+}
+/*--------------------------------------------------------------------------------------------------------------------------------------
+-- DURATION
+--------------------------------------------------------------------------------------------------------------------------------------*/
+.Duration {
+	position: absolute;
+	top: 30px;
+	right: 10px;
+	color: red;
+	font-size: 2rem;
+	font-family: monospace;
+}
+/*--------------------------------------------------------------------------------------------------------------------------------------
+-- WIRES
+--------------------------------------------------------------------------------------------------------------------------------------*/
+[data-wire="0"] { --Wire: #324d9c; --Shade: #25378d }
+[data-wire="1"] { --Wire: #e52320; --Shade: #a71916 }
+[data-wire="2"] { --Wire: #ffeb13; --Shade: #aa9f17 }
+[data-wire="3"] { --Wire: #a6529a; --Shade: #90378c }
+
+/* As tomadas ficam apagadas ate o sorteio definir o data-wire de cada uma. */
+.PlugFace,.SocketFace { fill: var(--Wire,#1d1d1b) }
+.PlugBack,.SocketBack { fill: var(--Shade,#111111) }
+
+.WireHandle {
+	fill: #ffffff;
+	opacity: 0;
+	cursor: grab;
+}
+
+.Wire.Connected .WireHandle {
+	pointer-events: none;
+	cursor: default;
+}
+
+.WireCable { pointer-events: none }
+.WireCableFace { stroke: var(--Wire); stroke-width: 18px }
+.WireCableBack { stroke: var(--Shade); stroke-width: 30px }
+/*--------------------------------------------------------------------------------------------------------------------------------------
+-- PANEL
+--------------------------------------------------------------------------------------------------------------------------------------*/
+.Paint {
+	stroke-width: 5px;
+	stroke-miterlimit: 10;
+}
+
+.Paint-Blue { fill: #273065; stroke: #1a1b36 }
+.Paint-Red { fill: #71160e; stroke: #280f10 }
+.Paint-Yellow { fill: #8c6c15; stroke: #38321a }
+.Paint-Black { fill: #212021; stroke: #000000 }
+
+.Bolt {
+	fill: #9b3015;
+	stroke: #471d12;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.SlotFrame {
+	fill: none;
+	stroke: #1d1d1b;
+	stroke-width: 6px;
+	stroke-miterlimit: 10;
+}
+
+.Lamp { fill: #d9c905 }
+
+.Light {
+	opacity: 0;
+	transition: opacity .3s;
+}
+
+.Light.Active { opacity: 1 }
+
+.ClipBody { fill: #5b5c64 }
+.ClipBolt { fill: #292829 }
+.ClipShade { fill: #2f3038 }
+
+.ClipStroke {
+	fill: none;
+	stroke: #252526;
+	stroke-width: 5px;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}

@@ -1,0 +1,73 @@
+{
+    "Web": {
+        "header": {
+            "nails": "UNHAS",
+            "menu": "MENU",
+            "description": "Explore nosso menu para uma variedade de serviços de unhas."
+        },
+        "labels": {
+            "category": "Categoria:"
+        },
+        "lengths": {
+            "length_of_nails": "Comprimento das Unhas",
+            "select_length": "Selecionar Comprimento",
+            "short": "Unhas Curtas",
+            "medium": "Unhas Médias",
+            "long": "Unhas Longas",
+            "small_french": "Francesinha Pequena"
+        },
+        "colors": {
+            "color_of_nails": "Cor das Unhas",
+            "select_color": "Selecionar Cor",
+            "none": "Nenhuma"
+        },
+        "patterns": {
+            "pattern_of_nails": "Estampa das Unhas",
+            "select_pattern": "Selecionar Estampa",
+            "none": "Nenhuma"
+        },
+        "fingers": {
+            "choose_finger": "Escolher Dedo",
+            "left_hand": "Mão Esquerda",
+            "right_hand": "Mão Direita",
+            "thumb": "Polegar",
+            "index": "Indicador",
+            "middle": "Médio",
+            "ring": "Anelar",
+            "pinkie": "Mindinho",
+            "apply": "Aplicar"
+        },
+        "save_design": {
+            "save_nail_design": "Salvar Design de Unhas",
+            "would_you_like_to_save_your_current_nail_design": "Você gostaria de salvar o design atual das suas unhas?",
+            "cancel": "Cancelar",
+            "save": "Salvar"
+        }
+    },
+    "Lua": {
+        "notify": {
+            "reloaded_nail_design": "Seu design de unhas foi recarregado do banco de dados.",
+            "no_nail_design_found": "Nenhum design de unhas encontrado no banco de dados.",
+            "please_wait_seconds": "Aguarde {0} segundos antes de usar novamente.",
+            "chair_not_found": "Cadeira não encontrada.",
+            "studio_not_found": "Estúdio de unhas não encontrado.",
+            "table_not_found": "Mesa de unhas não encontrada.",
+            "table_occupied": "A mesa selecionada está ocupada no momento.",
+            "invitation_failed": "Falha ao enviar o convite. Tente novamente.",
+            "too_far_for_invitation": "Você está muito longe do jogador para enviar um convite.",
+            "invitation_declined": "Você recusou o convite do estúdio de unhas."
+        },
+        "input": {
+            "invite_to_customer": "Convidar Cliente",
+            "player_id": "Passaporte do Jogador"
+        },
+        "target": {
+            "open_nail_design_menu": "Abrir Menu de Design de Unhas",
+            "sit_here": "Criar Design de Unhas"
+        },
+        "alert": {
+            "nail_studio_invitation_header": "Convite do Estúdio de Unhas",
+            "nail_studio_invitation_content": "Você foi convidado para uma sessão no estúdio de unhas. Deseja participar agora?"
+        }
+    }
+}

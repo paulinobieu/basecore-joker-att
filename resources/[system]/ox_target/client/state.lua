@@ -1,0 +1,48 @@
+local state = {}
+
+local isActive = false
+
+---@return boolean
+function state.isActive()
+    return isActive
+end
+
+---@param value boolean
+function state.setActive(value)
+    isActive = value
+
+    if value then
+        local theme = Theme and type(Theme.main) == 'string' and Theme.main ~= '' and Theme.main or '#dc1553'
+        SendNuiMessage(json.encode({ event = 'visible', state = true, theme = theme }))
+    end
+end
+
+local nuiFocus = false
+
+---@return boolean
+function state.isNuiFocused()
+    return nuiFocus
+end
+
+---@param value boolean
+function state.setNuiFocus(value, cursor)
+    if value then SetCursorLocation(0.5, 0.5) end
+
+    nuiFocus = value
+    SetNuiFocus(value, cursor or false)
+    SetNuiFocusKeepInput(value)
+end
+
+local isDisabled = false
+
+---@return boolean
+function state.isDisabled()
+    return isDisabled
+end
+
+---@param value boolean
+function state.setDisabled(value)
+    isDisabled = value
+end
+
+return state

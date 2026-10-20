@@ -1,0 +1,1 @@
+import{j as o}from"./index-BTr888l7.js";const e=()=>o.jsx("svg",{width:"1.5rem",height:"1.5rem",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg",children:o.jsx("path",{d:"M14 7L9 12L14 17",stroke:"white",strokeLinecap:"round",strokeLinejoin:"round"})});export{e as B};

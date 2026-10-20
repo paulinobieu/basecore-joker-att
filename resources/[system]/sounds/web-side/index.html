@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<title>sounds</title>
+		<script>
+			// Formatos aceitos na pasta ./sounds. Quando o evento manda o nome sem
+			// extensao, o player tenta cada um na ordem e usa o primeiro que existir.
+			var EXTENSIONS = ["mp3", "ogg", "wav"];
+
+			var audioPlayer = null;
+
+			function hasExtension(file) {
+				return /\.[a-z0-9]+$/i.test(file);
+			}
+
+			function buildPlayer(file, volume) {
+				var player = document.createElement("audio");
+				player.volume = volume;
+
+				var files = hasExtension(file)
+					? [file]
+					: EXTENSIONS.map(function (extension) {
+							return file + "." + extension;
+					  });
+
+				for (var index = 0; index < files.length; index++) {
+					var source = document.createElement("source");
+					source.src = "./sounds/" + files[index];
+					player.appendChild(source);
+				}
+
+				return player;
+			}
+
+			window.addEventListener("message", function (event) {
+				if (event.data.transactionType !== "playSound") {
+					return;
+				}
+
+				if (audioPlayer != null) {
+					audioPlayer.pause();
+				}
+
+				audioPlayer = buildPlayer(
+					event.data.transactionFile,
+					event.data.transactionVolume
+				);
+
+				audioPlayer.play();
+			});
+		</script>
+	</head>
+
+	<body></body>
+</html>

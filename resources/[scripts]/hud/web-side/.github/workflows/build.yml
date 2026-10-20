@@ -1,0 +1,23 @@
+name: Build UI
+on: [push, workflow_dispatch]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+   runs-on: ubuntu-latest
+   steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install
+      - run: bun run build
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "Miguel Facca"
+          git config --global user.email "miguelfacca@outlook.com"
+          git add -A
+          git commit -m "📦 build ui" || true
+          git push

@@ -1,0 +1,73 @@
+{
+    "Web": {
+        "header": {
+            "nails": "TIRNAKLAR",
+            "menu": "MENÜ",
+            "description": "Çeşitli tırnak hizmetleri için menümüzü keşfedin."
+        },
+        "labels": {
+            "category": "Kategori:"
+        },
+        "lengths": {
+            "length_of_nails": "Tırnak Uzunluğu",
+            "select_length": "Uzunluk Seç",
+            "short": "Kısa Tırnaklar",
+            "medium": "Orta Tırnaklar",
+            "long": "Uzun Tırnaklar",
+            "small_french": "Küçük Fransız Tırnakları"
+        },
+        "colors": {
+            "color_of_nails": "Tırnak Rengi",
+            "select_color": "Renk Seç",
+            "none": "Hiçbiri"
+        },
+        "patterns": {
+            "pattern_of_nails": "Tırnak Deseni",
+            "select_pattern": "Desen Seç",
+            "none": "Hiçbiri"
+        },
+        "fingers": {
+            "choose_finger": "Parmağı Seç",
+            "left_hand": "Sol El",
+            "right_hand": "Sağ El",
+            "thumb": "Başparmak",
+            "index": "İşaret",
+            "middle": "Orta",
+            "ring": "Yüzük",
+            "pinkie": "Serçe",
+            "apply": "Uygula"
+        },
+        "save_design": {
+            "save_nail_design": "Tırnak Tasarımını Kaydet",
+            "would_you_like_to_save_your_current_nail_design": "Şu anki tırnak tasarımınızı kaydetmek istiyor musunuz?",
+            "cancel": "İptal",
+            "save": "Kaydet"
+        }
+    },
+    "Lua": {
+        "notify": {
+            "reloaded_nail_design": "Tırnak tasarımınız veritabanından yeniden yüklendi.",
+            "no_nail_design_found": "Veritabanında tırnak tasarımı bulunamadı.",
+            "please_wait_seconds": "Lütfen tekrar kullanmadan önce {0} saniye bekleyin.",
+            "chair_not_found": "Sandalye bulunamadı.",
+            "studio_not_found": "Tırnak stüdyosu bulunamadı.",
+            "table_not_found": "Tırnak masası bulunamadı.",
+            "table_occupied": "Seçilen masa şu anda dolu.",
+            "invitation_failed": "Davetiye gönderilemedi. Lütfen tekrar deneyin.",
+            "too_far_for_invitation": "Davetiye göndermek için hedef oyuncudan çok uzaktasınız.",
+            "invitation_declined": "Tırnak stüdyosu davetini reddettiniz."
+        },
+        "input": {
+            "invite_to_customer": "Müşteriye Davet Et",
+            "player_id": "Oyuncu ID"
+        },
+        "target": {
+            "open_nail_design_menu": "Tırnak Tasarım Menüsünü Aç",
+            "sit_here": "Tırnak Tasarla"
+        },
+        "alert": {
+            "nail_studio_invitation_header": "Tırnak Stüdyosu Daveti",
+            "nail_studio_invitation_content": "Bir tırnak stüdyosu oturumuna davet edildiniz. Şimdi katılmak ister misiniz?"
+        }
+    }
+}

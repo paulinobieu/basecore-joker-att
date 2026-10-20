@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+
+    font-family: "Outfit", serif;
+}
+
+html {
+    font-size: calc(min(0.833vw, 1.48vh) + 10%);
+}
+
+@media screen and (min-width: 2540px) {
+    html {
+        font-size: calc(min(0.54978vw, 1.48vh) + 20%);
+    }
+}
+
+body {
+    @apply text-white overflow-hidden select-none;
+}

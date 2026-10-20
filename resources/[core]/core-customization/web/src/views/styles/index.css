@@ -1,0 +1,186 @@
+@import "./media.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Tokens
+
+   Superficies e gradientes ficam em custom properties para que o
+   tailwind.config possa expo-los como utilitarios (bg-accent,
+   bg-panel, ...). Assim nao existe folha de estilo de design
+   system: as primitivas sao componentes em @views/components/ui.
+   ============================================================ */
+:root {
+	/* Triade de cores em tripla RGB — fonte unica para gradientes com
+	   alpha. Sobrescrita em runtime por applyServerColors(). */
+	--primaryColor: 223, 21, 91;
+	--secondaryColor: 158, 14, 64;
+	--thirdyColor: 102, 9, 41;
+
+	/* Gradiente de destaque: secondary -> primary */
+	--gradient-accent: linear-gradient(
+			49.08deg,
+			rgba(var(--secondaryColor), 0.9) 1.07%,
+			rgba(var(--primaryColor), 0.9) 62.63%
+		),
+		radial-gradient(
+			98.39% 608.03% at 50% 50%,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(var(--thirdyColor), 0) 100%
+		);
+
+	/* Mesma leitura do gradiente de destaque, mas rebaixado — usado
+	   como realce de hover em cards e paineis. */
+	--gradient-accent-soft: linear-gradient(
+			49.08deg,
+			rgba(var(--secondaryColor), 0.3) 1.07%,
+			rgba(var(--primaryColor), 0.3) 62.63%
+		),
+		radial-gradient(
+			98.39% 608.03% at 50% 50%,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(var(--thirdyColor), 0) 100%
+		);
+
+	--gradient-accent-faint: linear-gradient(
+		49.08deg,
+		rgba(var(--secondaryColor), 0.14) 1.07%,
+		rgba(var(--primaryColor), 0.14) 62.63%
+	);
+
+	--gradient-accent-solid: linear-gradient(
+		49.08deg,
+		rgb(var(--secondaryColor)) 1.07%,
+		rgb(var(--primaryColor)) 62.63%
+	);
+
+	/* Borda de 1px em primary, aplicada por mascara no ::before */
+	--gradient-outline: linear-gradient(
+			90deg,
+			rgba(237, 234, 229, 0.06) 0%,
+			rgba(153, 153, 153, 0.054) 100%
+		), linear-gradient(0deg, rgb(var(--primaryColor)), rgb(var(--primaryColor)));
+
+	/* Superficies */
+	--surface-panel: linear-gradient(
+			0deg,
+			rgba(30, 30, 33, 0.82),
+			rgba(30, 30, 33, 0.82)
+		),
+		linear-gradient(0deg, rgba(221, 221, 221, 0.02), rgba(221, 221, 221, 0.02)),
+		radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.02) 100%
+		);
+
+	--surface-raise: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.02) 100%
+		),
+		linear-gradient(0deg, rgba(221, 221, 221, 0.08), rgba(221, 221, 221, 0.08));
+
+	--surface-field: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.04) 100%
+		),
+		linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04));
+
+	--surface-card: radial-gradient(
+		50% 50% at 50% 50%,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(255, 255, 255, 0.04) 100%
+	);
+
+	--surface-overlay: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.03) 100%
+		), linear-gradient(0deg, rgba(38, 38, 42, 0.97), rgba(38, 38, 42, 0.97));
+
+	--surface-toast: linear-gradient(
+			0deg,
+			rgba(37, 37, 40, 0.95),
+			rgba(37, 37, 40, 0.95)
+		),
+		linear-gradient(0deg, rgba(221, 221, 221, 0.02), rgba(221, 221, 221, 0.02));
+
+	/* Sobe a base escura propria: botoes que flutuam sobre a cena do
+	   jogo precisam garantir o proprio contraste. */
+	--surface-ghost: linear-gradient(
+			0deg,
+			rgba(221, 221, 221, 0.17),
+			rgba(221, 221, 221, 0.17)
+		), linear-gradient(0deg, rgba(30, 30, 33, 0.92), rgba(30, 30, 33, 0.92));
+
+	--surface-ghost-hover: linear-gradient(
+			0deg,
+			rgba(221, 221, 221, 0.25),
+			rgba(221, 221, 221, 0.25)
+		), linear-gradient(0deg, rgba(30, 30, 33, 0.92), rgba(30, 30, 33, 0.92));
+}
+
+@layer base {
+	* {
+		margin: 0;
+		padding: 0;
+		outline: 0;
+		box-sizing: border-box;
+
+		font-family: "Montserrat", sans-serif;
+	}
+
+	body {
+		@apply h-screen w-screen select-none overflow-hidden text-white;
+	}
+
+	#root {
+		@apply h-full w-full;
+	}
+
+	::-webkit-scrollbar {
+		width: 0.3rem;
+		height: 0.3rem;
+		border-radius: 5px;
+	}
+
+	::-webkit-scrollbar-track {
+		border-radius: 5px;
+		background-color: #d9d9d90a;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 5px;
+		background: var(--gradient-accent-solid);
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		filter: brightness(0.75);
+	}
+}
+
+body::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 2147483647;
+	pointer-events: none;
+	background-color: rgba(0, 0, 0, 0.001);
+	will-change: opacity;
+	animation: nui-amd-keepalive 4s linear infinite;
+}
+
+@keyframes nui-amd-keepalive {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.999;
+	}
+}

@@ -1,0 +1,704 @@
+/* GManager, VManager e Estoque.
+   Mesmos tokens planos da garagem; a estrutura original dos painéis é mantida. */
+
+#manager.core-manager {
+  --cm-accent: var(--theme, #ca416b);
+  --cm-accent-rgb: var(--theme-rgb, 202, 65, 107);
+  --cm-panel: rgba(18, 18, 20, 0.96);
+  --cm-card: rgba(24, 24, 26, 0.72);
+  --cm-control: rgba(18, 18, 20, 0.72);
+  --cm-control-hover: rgba(255, 255, 255, 0.08);
+  --cm-border: rgba(255, 255, 255, 0.1);
+  --cm-border-hover: rgba(255, 255, 255, 0.22);
+  --cm-text: rgba(255, 255, 255, 0.9);
+  --cm-muted: rgba(255, 255, 255, 0.48);
+  --cm-radius: 10px;
+  --cm-control-radius: 8px;
+
+  width: 56rem;
+  height: 38rem;
+  max-width: calc(100vw - 36px);
+  max-height: calc(100vh - 36px);
+  color: #fff;
+  background: var(--cm-panel);
+  border: 1px solid var(--cm-border);
+  border-radius: 12px;
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.38), 0 28px 80px rgba(0, 0, 0, 0.52);
+  font-family: "Mulish", sans-serif;
+}
+
+#manager.core-manager::before {
+  content: none;
+}
+
+#manager.core-manager * {
+  box-sizing: border-box;
+}
+
+/* Neutraliza a camada antiga CORE UNIFY somente nestes três painéis. */
+#manager.core-manager .button {
+  isolation: auto;
+  overflow: hidden;
+}
+
+#manager.core-manager .button::before,
+#manager.core-manager .button:hover::before {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  border: 0 !important;
+  filter: none !important;
+}
+
+/* Cabeçalho */
+
+#manager.core-manager .panel-header {
+  min-height: 72px;
+  padding: 16px 20px;
+  background: transparent;
+  border-bottom: 1px solid var(--cm-border);
+}
+
+#manager.core-manager .panel-header .panel-title-group {
+  gap: 4px;
+  padding: 0;
+}
+
+#manager.core-manager .panel-header .panel-title-group::before {
+  content: none;
+}
+
+#manager.core-manager .panel-header .title {
+  color: #fff;
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+#manager.core-manager .panel-header .subtitle {
+  color: var(--cm-muted);
+  font-family: "Mulish", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+#manager.core-manager .panel-header .leave {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.72);
+  background: var(--cm-control);
+  border: 1px solid var(--cm-border);
+  border-radius: var(--cm-control-radius);
+  font-size: 13px;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+#manager.core-manager .panel-header .leave:hover {
+  color: #fff;
+  background: var(--cm-control-hover);
+  border-color: var(--cm-border-hover);
+}
+
+/* Barra de ferramentas e controles */
+
+#manager.core-manager .panel-nav {
+  min-height: 62px;
+  gap: 10px;
+  padding: 11px 20px;
+  background: transparent;
+  border-bottom: 1px solid var(--cm-border);
+}
+
+#manager.core-manager .panel-nav input,
+#manager.core-manager .gm-form-page input:not([type="checkbox"]) {
+  height: 40px;
+  margin: 0;
+  padding: 0 13px;
+  color: var(--cm-text);
+  background: var(--cm-control);
+  border: 1px solid var(--cm-border);
+  border-radius: var(--cm-control-radius);
+  box-shadow: none;
+  font-family: "Mulish", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+#manager.core-manager .panel-nav input:hover,
+#manager.core-manager .gm-form-page input:not([type="checkbox"]):hover {
+  background: var(--cm-control);
+  border-color: var(--cm-border-hover);
+}
+
+#manager.core-manager .panel-nav input:focus,
+#manager.core-manager .gm-form-page input:not([type="checkbox"]):focus {
+  background: var(--cm-control);
+  border-color: var(--cm-accent);
+  box-shadow: none;
+}
+
+#manager.core-manager input::placeholder {
+  color: rgba(255, 255, 255, 0.36);
+}
+
+#manager.core-manager .panel-nav .new,
+#manager.core-manager .v-modal-btn-confirm,
+#manager.core-manager--garages .gm-form-add {
+  display: flex;
+  width: auto;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 0;
+  padding: 0 16px;
+  color: #fff !important;
+  background: var(--cm-accent) !important;
+  border: 1px solid var(--cm-accent) !important;
+  border-radius: var(--cm-control-radius) !important;
+  box-shadow: none;
+  font-family: "Mulish", sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: normal;
+  white-space: nowrap;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+#manager.core-manager .panel-nav .new:hover,
+#manager.core-manager--garages .gm-form-add:hover {
+  background: rgba(var(--cm-accent-rgb), 0.82) !important;
+  border-color: rgba(var(--cm-accent-rgb), 0.82) !important;
+  filter: none;
+  transform: none;
+}
+
+#manager.core-manager--vehicles .panel-nav .new:nth-child(2) {
+  color: #ff9b9b !important;
+  background: var(--cm-control) !important;
+  border-color: rgba(255, 100, 100, 0.28) !important;
+}
+
+#manager.core-manager--vehicles .panel-nav .new:nth-child(2):hover {
+  background: rgba(255, 100, 100, 0.1) !important;
+  border-color: rgba(255, 100, 100, 0.42) !important;
+}
+
+/* Dropdown compartilhado */
+
+#manager.core-manager .select {
+  width: 15rem;
+  margin: 0;
+  font-family: "Mulish", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#manager.core-manager .select-selected {
+  height: 40px;
+  padding: 0 34px 0 13px;
+  color: var(--cm-text);
+  background: var(--cm-control);
+  border: 1px solid var(--cm-border);
+  border-radius: var(--cm-control-radius);
+  line-height: 38px;
+}
+
+#manager.core-manager .select-selected:hover,
+#manager.core-manager .select-selected.select-arrow-active {
+  border-color: var(--cm-border-hover);
+}
+
+#manager.core-manager .select-selected::after {
+  top: 17px;
+  right: 14px;
+  border-width: 4px;
+  border-color: rgba(255, 255, 255, 0.62) transparent transparent transparent;
+}
+
+#manager.core-manager .select-selected.select-arrow-active::after {
+  top: 12px;
+  border-color: transparent transparent #fff transparent;
+}
+
+#manager.core-manager .select-items {
+  margin-top: 6px;
+  padding: 5px;
+  background: rgba(18, 18, 20, 0.99);
+  border: 1px solid var(--cm-border);
+  border-radius: var(--cm-control-radius);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.46);
+}
+
+#manager.core-manager .select-items div {
+  height: 34px;
+  padding: 0 10px;
+  color: rgba(255, 255, 255, 0.68);
+  border: 0;
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 34px;
+}
+
+#manager.core-manager .select-items div:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#manager.core-manager .select-items .same-as-selected {
+  color: #fff;
+  background: var(--cm-accent);
+}
+
+/* Área rolável */
+
+#manager.core-manager #list {
+  gap: 10px;
+  padding: 18px 20px 20px;
+}
+
+#manager.core-manager #list::-webkit-scrollbar,
+#manager.core-manager .gm-form-page::-webkit-scrollbar {
+  width: 4px;
+}
+
+#manager.core-manager #list::-webkit-scrollbar-track,
+#manager.core-manager .gm-form-page::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+}
+
+#manager.core-manager #list::-webkit-scrollbar-thumb,
+#manager.core-manager .gm-form-page::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 3px;
+}
+
+#manager.core-manager .empty,
+#manager.core-manager .gm-empty {
+  color: rgba(255, 255, 255, 0.42) !important;
+  font-family: "Mulish", sans-serif;
+  font-size: 12px !important;
+}
+
+/* Estoque: mantém a grade existente. */
+
+#manager.core-manager--stock #list {
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+}
+
+#manager.core-manager--stock #list .item {
+  min-height: 150px;
+  gap: 8px;
+  padding: 11px;
+  background: var(--cm-card) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: var(--cm-radius);
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+#manager.core-manager--stock #list .item:hover {
+  background: var(--cm-card) !important;
+  border-color: var(--cm-border-hover) !important;
+  transform: none;
+}
+
+#manager.core-manager--stock #list .item .name {
+  color: var(--cm-text);
+  font-family: "Mulish", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+#manager.core-manager--stock #list .item img {
+  width: 100%;
+  height: 68px;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.44));
+}
+
+#manager.core-manager--stock #list .item .buttons {
+  gap: 6px;
+}
+
+#manager.core-manager--stock #list .item .buttons input {
+  height: 32px;
+  color: #fff;
+  background: var(--cm-control);
+  border: 1px solid var(--cm-border);
+  border-radius: 7px;
+  font-family: "Mulish", sans-serif;
+}
+
+#manager.core-manager--stock #list .item .buttons .save {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: var(--cm-accent);
+  border: 1px solid var(--cm-accent);
+  border-radius: 7px;
+  line-height: normal;
+}
+
+#manager.core-manager--stock #list .item .buttons .save:hover {
+  background: rgba(var(--cm-accent-rgb), 0.82);
+}
+
+/* VManager: mantém as linhas horizontais. */
+
+#manager.core-manager--vehicles #list.char,
+#manager.core-manager--garages #list.char {
+  gap: 8px;
+}
+
+#manager.core-manager--vehicles .cveh {
+  min-height: 74px;
+  padding: 9px 11px;
+  background: var(--cm-card) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: var(--cm-radius);
+}
+
+#manager.core-manager--vehicles .cveh:hover {
+  background: var(--cm-card) !important;
+  border-color: var(--cm-border-hover) !important;
+}
+
+#manager.core-manager--vehicles .cveh img {
+  width: 84px;
+  height: 54px;
+  padding: 5px;
+  background: var(--cm-control);
+  border: 1px solid var(--cm-border);
+  border-radius: 8px;
+}
+
+#manager.core-manager--vehicles .cveh .infos {
+  gap: 3px;
+}
+
+#manager.core-manager--vehicles .cveh .infos .info {
+  color: var(--cm-muted);
+  font-family: "Mulish", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+#manager.core-manager--vehicles .cveh .infos .info:first-child {
+  color: var(--cm-text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#manager.core-manager--vehicles .cveh .buttons {
+  gap: 6px;
+}
+
+#manager.core-manager--vehicles .cveh .buttons .button {
+  display: flex;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 11px;
+  color: rgba(255, 255, 255, 0.82) !important;
+  background: var(--cm-control) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: 7px;
+  font-family: "Mulish", sans-serif;
+  font-size: 8px;
+  font-weight: 800;
+  line-height: normal;
+}
+
+#manager.core-manager--vehicles .cveh .buttons .button:hover {
+  color: #fff !important;
+  background: var(--cm-control-hover) !important;
+  border-color: var(--cm-border-hover) !important;
+}
+
+#manager.core-manager--vehicles .cveh .buttons .button.find {
+  color: #fff !important;
+  background: var(--cm-accent) !important;
+  border-color: var(--cm-accent) !important;
+}
+
+#manager.core-manager--vehicles .cveh .buttons .button.find:hover {
+  background: rgba(var(--cm-accent-rgb), 0.82) !important;
+  border-color: rgba(var(--cm-accent-rgb), 0.82) !important;
+}
+
+#manager.core-manager--vehicles .cveh .buttons .button.remove {
+  color: #ff9b9b !important;
+  background: var(--cm-control) !important;
+  border-color: rgba(255, 100, 100, 0.26) !important;
+}
+
+#manager.core-manager--vehicles .cveh .buttons .button.remove:hover {
+  background: rgba(255, 100, 100, 0.1) !important;
+  border-color: rgba(255, 100, 100, 0.4) !important;
+}
+
+#manager.core-manager--vehicles .cveh .buttons .button.renew {
+  color: rgba(255, 255, 255, 0.82) !important;
+  background: var(--cm-control) !important;
+  border-color: var(--cm-border) !important;
+}
+
+/* GManager: mesmas abas, linhas e formulários, agora usando os tokens acima. */
+
+#manager.core-manager--garages .core-manager__tabs {
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 11px 20px !important;
+  background: transparent !important;
+  border-bottom: 1px solid var(--cm-border) !important;
+}
+
+#manager.core-manager--garages .core-manager__tabs > div {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px !important;
+  color: rgba(255, 255, 255, 0.74) !important;
+  background: var(--cm-control) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: var(--cm-control-radius) !important;
+  font-family: "Mulish", sans-serif;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+}
+
+#manager.core-manager--garages .core-manager__tabs > div::after {
+  content: none;
+}
+
+#manager.core-manager--garages .core-manager__tabs > div:hover {
+  color: #fff !important;
+  border-color: var(--cm-border-hover) !important;
+}
+
+#manager.core-manager--garages .core-manager__tabs > div.is-active {
+  color: #fff !important;
+  background: var(--cm-accent) !important;
+  border-color: var(--cm-accent) !important;
+}
+
+#manager.core-manager--garages .core-manager__tabs > div.is-active i {
+  color: #fff;
+}
+
+#manager.core-manager--garages .gm-garage-row,
+#manager.core-manager--garages .gm-vehicle-row {
+  min-height: 72px;
+  margin-bottom: 0 !important;
+  padding: 10px 11px !important;
+  background: var(--cm-card) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: var(--cm-radius) !important;
+}
+
+#manager.core-manager--garages .gm-garage-row:hover,
+#manager.core-manager--garages .gm-vehicle-row:hover {
+  background: var(--cm-card) !important;
+  border-color: var(--cm-border-hover) !important;
+}
+
+#manager.core-manager--garages .gm-garage-row__icon,
+#manager.core-manager--garages .gm-vehicle-row__icon {
+  color: #fff !important;
+  background: var(--cm-accent) !important;
+  border: 1px solid var(--cm-accent) !important;
+  border-radius: 8px !important;
+}
+
+#manager.core-manager--garages .gm-type-badge {
+  color: rgba(255, 255, 255, 0.72) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 0 !important;
+}
+
+#manager.core-manager--garages .gm-icon-button {
+  width: 34px !important;
+  height: 34px !important;
+  color: rgba(255, 255, 255, 0.68) !important;
+  background: var(--cm-control) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: 7px !important;
+}
+
+#manager.core-manager--garages .gm-icon-button:hover {
+  background: var(--cm-control-hover) !important;
+  border-color: var(--cm-border-hover) !important;
+}
+
+#manager.core-manager--garages .core-manager__load-more {
+  color: rgba(255, 255, 255, 0.82) !important;
+  background: var(--cm-control) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: var(--cm-control-radius) !important;
+}
+
+#manager.core-manager--garages .core-manager__load-more:hover {
+  color: #fff !important;
+  background: var(--cm-control-hover) !important;
+  border-color: var(--cm-border-hover) !important;
+}
+
+#manager.core-manager--garages .gm-form-page {
+  padding: 18px 20px 20px;
+  color: var(--cm-text);
+  font-family: "Mulish", sans-serif;
+}
+
+#manager.core-manager--garages .gm-form-page .text {
+  margin-bottom: 5px;
+  color: var(--cm-muted);
+  font-family: "Mulish", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+#manager.core-manager--garages .gm-form-page input[type="checkbox"] {
+  accent-color: var(--cm-accent);
+}
+
+#manager.core-manager--garages .gm-form-section {
+  padding: 12px !important;
+  background: var(--cm-card) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: var(--cm-radius) !important;
+}
+
+#manager.core-manager--garages .gm-form-action {
+  min-height: 40px;
+  color: rgba(255, 255, 255, 0.82) !important;
+  background: var(--cm-control) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: var(--cm-control-radius) !important;
+}
+
+#manager.core-manager--garages .gm-form-action:hover {
+  color: #fff !important;
+  background: var(--cm-control-hover) !important;
+  border-color: var(--cm-border-hover) !important;
+}
+
+#manager.core-manager--garages .gm-form-page button:not(.gm-form-add) {
+  color: rgba(255, 255, 255, 0.72) !important;
+  background: var(--cm-control) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: 7px !important;
+  box-shadow: none !important;
+}
+
+#manager.core-manager--garages .gm-form-page button:not(.gm-form-add):hover {
+  color: #fff !important;
+  background: var(--cm-control-hover) !important;
+  border-color: var(--cm-border-hover) !important;
+}
+
+#manager.core-manager--garages .gm-form-page button[title^="Remover"] {
+  color: #ff9b9b !important;
+  border-color: rgba(255, 100, 100, 0.26) !important;
+}
+
+#manager.core-manager--garages .gm-form-warning {
+  color: rgba(255, 255, 255, 0.66) !important;
+  background: var(--cm-card) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: var(--cm-control-radius) !important;
+}
+
+#manager.core-manager--garages > .v-modal-actions {
+  min-height: 64px;
+  padding: 11px 20px !important;
+  background: transparent;
+  border-top: 1px solid var(--cm-border) !important;
+}
+
+#manager.core-manager--garages > .v-modal-actions .v-modal-btn-cancel,
+#manager.core-manager--garages > .v-modal-actions .v-modal-btn-confirm {
+  position: static;
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--cm-control-radius);
+  box-shadow: none;
+  font-family: "Mulish", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+#manager.core-manager--garages > .v-modal-actions .v-modal-btn-cancel {
+  color: rgba(255, 255, 255, 0.76);
+  background: var(--cm-control);
+  border: 1px solid var(--cm-border);
+}
+
+#manager.core-manager--garages > .v-modal-actions .v-modal-btn-confirm {
+  color: #fff;
+  background: var(--cm-accent);
+  border: 1px solid var(--cm-accent);
+}
+
+#manager.core-manager--garages > .v-modal-actions .v-modal-btn-cancel::before,
+#manager.core-manager--garages > .v-modal-actions .v-modal-btn-confirm::before {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  border: 0 !important;
+}
+
+#manager.core-manager--garages > .v-modal-actions .v-modal-btn-cancel:hover {
+  color: #fff;
+  background: var(--cm-control-hover);
+  border-color: var(--cm-border-hover);
+}
+
+#manager.core-manager--garages > .v-modal-actions .v-modal-btn-confirm:hover {
+  background: rgba(var(--cm-accent-rgb), 0.82);
+  border-color: rgba(var(--cm-accent-rgb), 0.82);
+}
+
+@media (max-width: 760px) {
+  #manager.core-manager {
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+  }
+
+  #manager.core-manager .panel-nav {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  #manager.core-manager .panel-nav .select,
+  #manager.core-manager .panel-nav input {
+    min-width: 0;
+    flex: 1 1 180px;
+  }
+
+  #manager.core-manager--vehicles .cveh {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  #manager.core-manager--vehicles .cveh .buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,1 @@
+import{r as s}from"./index-Y7qciPcn.js";function o(a){const e=new Image;return e.src=a,new Promise(t=>{e.onerror=()=>t(!1),e.onload=()=>t(!0)})}const c=a=>{const[e,t]=s.useState(!0);return s.useEffect(()=>{(async()=>{try{const r=await o(a);t(r)}catch(r){console.error("Error validating image:",r),t(!1)}})()},[a]),{isImageValid:e,imageUrl:a}};export{c as u};

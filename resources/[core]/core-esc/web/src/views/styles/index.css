@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	box-sizing: border-box;
+
+	font-family: "Outfit", sans-serif;
+}
+
+html {
+	font-size: 0.833vw;
+}
+
+@media screen and (min-width: 2540px) {
+	html {
+		font-size: 0.62475vw;
+	}
+}
+
+body {
+	@apply text-white overflow-hidden select-none;
+}
+
+.maskAvatar {
+	-webkit-mask: radial-gradient(
+		circle at calc(100% + -0rem) 0rem,
+		transparent 0.75rem,
+		black 0.8rem
+	);
+	mask: radial-gradient(
+		circle at calc(100% + -0rem) 0rem,
+		transparent 0.75rem,
+		black 0.8rem
+	);
+}
+
+.hideScroll::-webkit-scrollbar {
+	display: none;
+}

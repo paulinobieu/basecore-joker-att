@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  font-size: 1vh;
+}
+
+body {
+  user-select: none;
+  white-space: nowrap;
+  margin: 0;
+  overflow: hidden;
+  color: whitesmoke;
+
+  --bg-color: rgba(21, 21, 21, 0.7);
+  --theme-color-rgb: 1, 67, 187;
+  --theme-color: rgba(var(--theme-color-rgb), 0.8);
+  --theme-color-strong: rgb(var(--theme-color-rgb));
+
+  transition: opacity 200ms linear;
+}
+
+p {
+  margin: 0;
+}
+
+#container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#options-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: 20% -50%;
+}
+
+/* ── Option containers ─────────────────────────────────────── */
+
+.option-container {
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: "Outfit", "Gotham", "Roboto", sans-serif;
+  background: rgba(21, 21, 21, 0.75);
+  font-size: 1.15rem;
+  vertical-align: middle;
+  margin: 0.4rem 0.2rem;
+  transition: all 200ms ease;
+  transform-origin: left top;
+  height: 2.8rem;
+  padding: 0 1rem;
+  min-width: 13rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 0;
+}
+
+.option-container::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: linear-gradient(135deg, var(--theme-color-strong) -48%, rgba(var(--theme-color-rgb), 0.012) 123%);
+  border: 1px solid rgba(var(--theme-color-rgb), 0.6);
+  border-radius: 4px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-travel {
+  to { --border-angle: 360deg; }
+}
+
+/* ── Inner ring ─────────────────────────────────────────────── */
+
+.inner-ring {
+  position: absolute;
+  inset: 5px;
+  border-radius: 4px;
+  background: linear-gradient(150.26deg, rgba(var(--theme-color-rgb), 0.14) 0.57%, rgba(var(--theme-color-rgb), 0) 81.82%), rgba(21, 21, 21, 0.7);
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+
+.animated-background {
+  display: none;
+}
+
+.option-container.highlighted {
+  border-color: var(--theme-color-strong);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.option-container.highlighted::before {
+  opacity: 1;
+}
+
+.option-container:hover {
+  transform: translateY(-1px) scale(1.03);
+  border-color: var(--theme-color-strong);
+}
+
+.option-container:hover::before {
+  opacity: 0.85;
+}
+
+.option-icon {
+  display: none;
+}
+
+.option-label {
+  font-weight: 600;
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Key container ─────────────────────────────────────────── */
+
+#interact-container {
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+  position: relative;
+}
+
+#interact-key-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#interact-progress {
+  position: absolute;
+  width: 100%;
+  height: 0%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(var(--theme-color-rgb), 0.35);
+  transition: height 0ms;
+  border-radius: 0.5rem;
+  z-index: 0;
+}
+
+#interact-key {
+  font-size: 1.5rem;
+  position: absolute;
+  color: #fff;
+  font-family: "Outfit", "Gotham", "Roboto", sans-serif;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  letter-spacing: 0.02em;
+}
+
+#interact-key i {
+  color: #fff;
+  font-size: 1rem;
+}
+
+@font-face {
+  font-family: "Gotham";
+  font-style: normal;
+  font-weight: 300;
+  src: url("./fonts/Gotham-Light.otf") format("opentype"),
+       url("./fonts/GOTHAM-LIGHT.TTF") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/Gotham-Book.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./fonts/Gotham-Medium.otf") format("opentype"),
+       url("./fonts/GOTHAM-MEDIUM.TTF") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/GOTHAM-BOLD.TTF") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  font-style: normal;
+  font-weight: 900;
+  src: url("./fonts/GOTHAM-BLACK.TTF") format("truetype");
+  font-display: swap;
+}
+
+@keyframes progress {
+  from { height: 0%; }
+  to   { height: 100%; }
+}

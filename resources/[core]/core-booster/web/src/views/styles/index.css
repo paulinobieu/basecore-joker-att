@@ -1,0 +1,396 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	box-sizing: border-box;
+
+	font-family: "Mulish", sans-serif;
+}
+
+html {
+	font-size: 0.75vw;
+}
+
+@media screen and (min-width: 158.75rem) {
+	html {
+		font-size: 0.625vw;
+	}
+}
+
+body {
+	@apply text-white overflow-hidden select-none;
+}
+
+body,
+#root {
+	height: 100vh;
+	width: 100vw;
+}
+
+/* ============================================================
+   COR DO BLOCO
+
+   `--cardColor` nasce apontando para o destaque do servidor, entao
+   todo bloco que nao carrega cor propria acompanha o tema. So o
+   beneficio que define `accent` sobrescreve as duas variaveis no
+   proprio card, e a partir dali tudo dentro dele (hexagono, faixa,
+   selos, scrollbar) responde a essa cor.
+   ============================================================ */
+:root {
+	--cardColor: var(--primaryColor);
+	--cardShade: var(--secondaryColor);
+}
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+.customScrollbar::-webkit-scrollbar {
+	width: 0.3125rem;
+}
+
+.customScrollbar::-webkit-scrollbar-track {
+	background-color: #d9d9d90a;
+	border-radius: 0.3125rem;
+}
+
+.customScrollbar::-webkit-scrollbar-thumb {
+	background: linear-gradient(
+		49.08deg,
+		rgba(var(--cardShade), 0.9) 1.07%,
+		rgba(var(--cardColor), 0.9) 62.63%
+	);
+	border-radius: 0.3125rem;
+}
+
+.customScrollbar::-webkit-scrollbar-thumb:hover {
+	filter: brightness(0.75);
+}
+
+/* ============================================================
+   BENEFICIO
+   O mesmo bloco serve ao boost, que tem roxo fixo, e a tag, que
+   segue o destaque do servidor: o que muda e so o `--cardColor`.
+   O clarao nasce no canto do hexagono, nao no centro, e a faixa da
+   esquerda e o que da identidade a cada card.
+   ============================================================ */
+.benefit-card {
+	background: linear-gradient(
+			118deg,
+			rgba(var(--cardColor), 0.09) 0%,
+			rgba(var(--cardColor), 0.02) 38%,
+			rgba(255, 255, 255, 0.012) 100%
+		),
+		radial-gradient(
+			55% 32% at 0% 0%,
+			rgba(var(--cardColor), 0.14) 0%,
+			rgba(var(--cardColor), 0) 100%
+		);
+	box-shadow: inset 0 0.0625rem 0 0 rgba(var(--cardColor), 0.08);
+}
+
+.benefit-rail {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 0.1875rem;
+	background: linear-gradient(
+		180deg,
+		rgba(var(--cardColor), 0.9) 0%,
+		rgba(var(--cardColor), 0.25) 45%,
+		rgba(var(--cardColor), 0) 100%
+	);
+	pointer-events: none;
+}
+
+/*
+   Sem `filter: blur()`: no CEF a camada borrada e repintada quando
+   algo passa por cima (a previa abrindo e fechando) e deixa tile
+   velho na tela, o famoso rastro. A suavidade sai das paradas do
+   gradiente, que nao criam camada de filtro.
+*/
+.benefit-glow {
+	position: absolute;
+	width: 220%;
+	aspect-ratio: 1;
+	border-radius: 9999px;
+	background: radial-gradient(
+		50% 50% at 50% 50%,
+		rgba(var(--cardColor), 0.16) 0%,
+		rgba(var(--cardColor), 0.08) 28%,
+		rgba(var(--cardColor), 0.03) 48%,
+		rgba(var(--cardColor), 0) 72%
+	);
+	pointer-events: none;
+}
+
+.status-chip {
+	background: linear-gradient(
+		0deg,
+		rgba(var(--cardColor), 0.14),
+		rgba(var(--cardColor), 0.14)
+	);
+}
+
+.status-chip.is-off {
+	background: linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 0.05),
+		rgba(255, 255, 255, 0.05)
+	);
+}
+
+.claimed-badge {
+	background: linear-gradient(
+		0deg,
+		rgba(82, 255, 151, 0.14),
+		rgba(82, 255, 151, 0.14)
+	);
+}
+
+/* ============================================================
+   PREVIA DAS RECOMPENSAS
+   O CEF nao aceita backdrop-filter, entao a legibilidade sai de
+   camada opaca: o veu escurece o painel de tras e o modal fecha
+   o fundo com uma base solida embaixo dos gradientes.
+   ============================================================ */
+.modal-overlay {
+	background: rgba(5, 5, 7, 0.88);
+}
+
+.modal-panel {
+	background: linear-gradient(
+			0deg,
+			rgba(var(--cardColor), 0.05),
+			rgba(var(--cardColor), 0.05)
+		),
+		radial-gradient(
+			70% 40% at 50% 0%,
+			rgba(var(--cardColor), 0.1) 0%,
+			rgba(var(--cardColor), 0) 100%
+		),
+		linear-gradient(0deg, #141418, #141418);
+	box-shadow: 0 1.25rem 3rem 0 rgba(0, 0, 0, 0.6);
+}
+
+.reward-card {
+	background: linear-gradient(
+			0deg,
+			rgba(var(--cardColor), 0.06),
+			rgba(var(--cardColor), 0.06)
+		),
+		linear-gradient(0deg, #1b1b21, #1b1b21);
+}
+
+.reward-thumb {
+	background: linear-gradient(
+		0deg,
+		rgba(0, 0, 0, 0.35),
+		rgba(0, 0, 0, 0.35)
+	);
+	box-shadow: inset 0 0 0 0.0625rem rgba(255, 255, 255, 0.04);
+}
+
+.tag-chip {
+	background: linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 0.08),
+		rgba(255, 255, 255, 0.08)
+	);
+	box-shadow: inset 0 0 0 0.0625rem rgba(255, 255, 255, 0.05);
+}
+
+.player-card {
+	background: linear-gradient(
+			0deg,
+			rgba(255, 255, 255, 0.03),
+			rgba(255, 255, 255, 0.03)
+		),
+		radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.04) 100%
+		);
+}
+
+/* ============================================================
+   BOTOES
+   Seguem `--cardColor`, entao o botao dentro de um beneficio de cor
+   propria acende na cor dele e o resto da tela acende no destaque
+   do servidor.
+   ============================================================ */
+.ghost-btn {
+	z-index: 0;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.02) 100%
+		),
+		linear-gradient(0deg, rgba(221, 221, 221, 0.08), rgba(221, 221, 221, 0.08));
+	background-blend-mode: screen;
+	transition: all 300ms ease;
+}
+
+.ghost-btn::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	z-index: -1;
+	background: linear-gradient(
+			49.08deg,
+			rgba(var(--cardShade), 0.9) 1.07%,
+			rgba(var(--cardColor), 0.9) 62.63%
+		),
+		radial-gradient(
+			98.39% 608.03% at 50% 50%,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(var(--cardShade), 0) 100%
+		);
+	background-blend-mode: screen;
+	box-shadow: 0 0 0.625rem 0 rgba(var(--cardColor), 0.651);
+	opacity: 0;
+	transition: all 300ms ease;
+}
+
+.ghost-btn::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	padding: 0.0625rem;
+	mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+	mask-composite: exclude;
+	background: linear-gradient(
+			90deg,
+			rgba(237, 234, 229, 0.06) 0%,
+			rgba(153, 153, 153, 0.054) 100%
+		), linear-gradient(0deg, rgb(var(--cardColor)), rgb(var(--cardColor)));
+	background-blend-mode: screen;
+	opacity: 0;
+	transition: all 300ms ease;
+}
+
+.ghost-btn:not(:disabled):hover::after,
+.ghost-btn:not(:disabled):hover::before,
+.ghost-btn.is-active::after,
+.ghost-btn.is-active::before {
+	opacity: 1;
+}
+
+.accent-btn {
+	z-index: 0;
+	background: linear-gradient(
+			49.08deg,
+			rgba(var(--cardShade), 0.9) 1.07%,
+			rgba(var(--cardColor), 0.9) 62.63%
+		),
+		radial-gradient(
+			98.39% 608.03% at 50% 50%,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(var(--cardShade), 0) 100%
+		);
+	background-blend-mode: screen;
+	box-shadow: 0 0 0.625rem 0 rgba(var(--cardColor), 0.35);
+	transition: all 300ms ease;
+}
+
+.accent-btn:not(:disabled):hover {
+	filter: brightness(0.75);
+}
+
+.ghost-btn:disabled,
+.accent-btn:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+/* ============================================================
+   AMD/CEF compositor fix.
+
+   Keeps rgba/gradient panel layers alive permanently so the
+   AMD compositor in CEF doesn't classify them as "fully
+   transparent" and discard them (which makes panels render
+   invisible at rest and only reappear on hover/animations).
+
+   `:where(...)` carries zero specificity so existing author
+   rules (including `position: absolute|fixed`) always win.
+
+   Classes cujo `::after` e usado pelo design (ghost-btn) ficam
+   de fora da lista do keepalive.
+
+   Sem `backface-visibility: hidden`: quem mantem a camada viva e
+   o `::after` animado abaixo, e a propriedade so acrescentava a
+   promocao do elemento a camada composta propria. Com o rem em
+   0.75vw quase toda medida cai em pixel fracionario, entao essa
+   camada era reamostrada e deixava os SVGs e o texto borrados.
+
+   See [scripts]/hud/AMD-NUI-FIX.md for full rationale.
+   ============================================================ */
+:where(
+		[class*="-shell"],
+		[class*="-panel"],
+		[class*="-frame"],
+		[class*="-modal"],
+		[class*="-popup"],
+		[class*="-overlay"],
+		[class*="-dialog"],
+		[class*="-window"],
+		[class*="-wrapper"],
+		[class*="-container"],
+		[class*="-content"],
+		[class*="-inner"],
+		[class*="-card"],
+		[class*="-btn"],
+		[class*="-bar"],
+		[class*="-badge"],
+		[class*="-glow"],
+		[style*="linear-gradient"],
+		[style*="rgba("]
+	) {
+	position: relative;
+	isolation: isolate;
+}
+
+[class*="-shell"]::after,
+[class*="-panel"]::after,
+[class*="-frame"]::after,
+[class*="-modal"]::after,
+[class*="-popup"]::after,
+[class*="-dialog"]::after,
+[class*="-window"]::after,
+[class*="-wrapper"]::after,
+[class*="-container"]::after,
+[class*="-content"]::after,
+[class*="-inner"]::after,
+[class*="-card"]::after,
+[class*="-bar"]::after,
+[class*="-badge"]::after,
+[class*="-glow"]::after,
+[style*="linear-gradient"]::after,
+[style*="rgba("]::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: -1;
+	background-color: rgba(0, 0, 0, 0.001);
+	will-change: opacity;
+	animation: nui-amd-keepalive 4s linear infinite;
+	border-radius: inherit;
+}
+
+@keyframes nui-amd-keepalive {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.999;
+	}
+}

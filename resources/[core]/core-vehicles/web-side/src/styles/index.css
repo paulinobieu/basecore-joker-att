@@ -1,0 +1,3721 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap');
+:root {
+    --theme: #0143bb;
+    --theme-rgb: 1,67,187;
+    --panel-bg: linear-gradient(108deg, rgba(21, 28, 37, 0.96) 0%, rgba(8, 8, 9, 0.96) 100%);
+    --panel-border: #22222B;
+    --card-bg: radial-gradient(95.47% 60.03% at 49.84% 76.67%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%), linear-gradient(91deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 100%);
+    --input-bg: radial-gradient(95.47% 60.03% at 49.84% 76.67%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 100%), linear-gradient(91deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 100%);
+    --text-85: rgba(255,255,255,0.85);
+    --text-65: rgba(255,255,255,0.65);
+    --text-50: rgba(255,255,255,0.50);
+    --text-35: rgba(255,255,255,0.35);
+    --border-subtle: rgba(255,255,255,0.05);
+    --border-input: rgba(255,255,255,0.10);
+}
+
+::-webkit-scrollbar {
+    border-radius: 10px;
+    width: 4px;
+}
+  
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 14px 14px transparent;
+    border: solid 4px transparent;
+    border-left: none;
+    border-radius: 10px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: var(--theme);
+    border-radius: 10px;
+}
+  
+::-webkit-scrollbar-button {
+    display: none;
+    border-radius: 10px;
+}
+
+
+body {
+    user-select: none;
+    font-family: 'Outfit', sans-serif; font-weight: 400;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: none;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+#left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100vh;
+    background-image: linear-gradient(95deg, rgba(var(--theme-rgb),0.1), transparent 80%);
+    animation: slideFromLeft .4s ease;
+}
+
+#right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100vh;
+    background-image: linear-gradient(-95deg, rgba(var(--theme-rgb),0.1), transparent 80%);
+    transform: scaleY(-1);
+    animation: slideFromRight .4s ease;
+}
+
+@keyframes slideFromLeft {
+    0% { left: -1000px; }
+    100% { left: 0px; }
+}
+
+@keyframes slideToLeft {
+    0% { left: 0px; }
+    100% { left: -1000px; }
+}
+
+@keyframes slideFromRight {
+    0% { right: -1000px; }
+    100% { right: 0px; }
+}
+
+@keyframes slideToRight {
+    0% { right: 0px; }
+    100% { right: -1000px; }
+}
+
+
+@keyframes garageSlideIn {
+    0%   { transform: translateY(-50%) translateX(-400px); opacity: 0; }
+    100% { transform: translateY(-50%) translateX(0); opacity: 1; }
+}
+
+@keyframes garageSlideOut {
+    0%   { transform: translateY(-50%) translateX(0); opacity: 1; }
+    100% { transform: translateY(-50%) translateX(-400px); opacity: 0; }
+}
+
+/* ---------- lateral gradient overlay ---------- */
+
+.gp-gradient {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 22%, rgba(0,0,0,0) 55%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    animation: gradFadeIn .3s ease forwards;
+}
+
+@keyframes gradFadeIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes gradFadeOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.mechanic-gradient {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 20%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.35) 80%, rgba(0,0,0,0.82) 100%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    animation: gradFadeIn .3s ease forwards;
+}
+
+/* ================================================
+   GARAGE — left-side floating panel  (refresh 2026-04)
+   Clean layout, no skewed/striped decorations.
+   Buttons follow the core (moneywash) inset-3 style.
+   ================================================ */
+
+#garage-panel {
+    position: absolute;
+    top: 50%;
+    left: 40px;
+    transform: translateY(-50%);
+    width: 420px;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: garageSlideIn .35s ease;
+    font-family: 'Outfit', sans-serif;
+    color: #fff;
+    overflow: visible;
+}
+
+/* ---------- header / breadcrumb ---------- */
+.gv-breadcrumb {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.3px;
+    margin-bottom: -8px;
+}
+
+.gv-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 14px;
+}
+
+.gv-title i {
+    color: var(--theme);
+    font-size: 16px;
+}
+
+/* ---------- toolbar (home + search) ---------- */
+.gv-toolbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.gv-icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    border: 1px solid var(--theme);
+    background: transparent;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    position: relative;
+    z-index: 0;
+    pointer-events: none;
+    cursor: default;
+}
+
+.gv-icon-btn::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: linear-gradient(135deg, var(--theme) -48%, rgba(var(--theme-rgb), 0.012) 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+    border-radius: 4px;
+    z-index: -1;
+}
+
+.gv-search {
+    flex: 1;
+    height: 38px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+    transition: border-color 0.15s ease;
+}
+
+.gv-search:focus-within {
+    border-color: rgba(var(--theme-rgb), 0.5);
+}
+
+.gv-search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 0;
+}
+
+.gv-search input::placeholder {
+    color: rgba(255,255,255,0.28);
+}
+
+.gv-search i {
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+}
+
+/* ---------- section header ---------- */
+.gv-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2px;
+}
+
+.gv-section-head span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.2px;
+}
+
+.gv-section-head i {
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.gv-section-head i:hover {
+    color: #fff;
+}
+
+/* ---------- vehicle list ---------- */
+
+#garage-panel #vehicles {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    max-height: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 4px;
+}
+
+#garage-panel #vehicles::-webkit-scrollbar {
+    width: 3px;
+}
+
+#garage-panel #vehicles::-webkit-scrollbar-thumb {
+    background: rgba(var(--theme-rgb), 0.5);
+    border-radius: 2px;
+}
+
+#garage-panel #vehicles .empty {
+    padding: 20px 12px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+}
+
+#garage-panel #vehicles .empty i {
+    margin-right: 6px;
+    color: var(--theme);
+}
+
+/* ---------- vehicle card ---------- */
+
+#garage-panel #vehicles .vehicle {
+    position: relative;
+    min-height: 122px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    background: #15171c;
+    display: grid;
+    grid-template-columns: 1.15fr 1.5fr;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+#garage-panel #vehicles .vehicle:hover {
+    border-color: rgba(var(--theme-rgb), 0.5);
+}
+
+#garage-panel #vehicles .vehicle.selected,
+#garage-panel #vehicles .vehicle.selected:hover {
+    border-color: var(--theme);
+    background: linear-gradient(90deg, rgba(var(--theme-rgb), 0.10) 0%, rgba(var(--theme-rgb), 0.02) 70%), #15171c;
+    box-shadow: 0 0 0 1px rgba(var(--theme-rgb), 0.25), 0 6px 18px -8px rgba(var(--theme-rgb), 0.4);
+}
+
+/* left: name + bars */
+.vc-info {
+    padding: 14px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.vc-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.1px;
+    line-height: 1.05;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vc-sub {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.2px;
+    margin-top: -4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: none;
+}
+
+.vc-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.vc-bar {
+    display: grid;
+    grid-template-columns: 14px 1fr auto;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+}
+
+.vc-bar i {
+    color: var(--theme);
+    font-size: 11px;
+    text-align: center;
+}
+
+.vc-bar-label {
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    white-space: nowrap;
+    font-size: 11px;
+}
+
+.vc-bar-pct {
+    color: rgba(255,255,255,0.55);
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.2px;
+}
+
+.vc-bar-track {
+    grid-column: 2 / -1;
+    margin-top: -2px;
+    height: 6px;
+    background: transparent;
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.vc-bar-track::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0.08) 0,
+        rgba(255,255,255,0.08) 5px,
+        transparent 5px,
+        transparent 7px
+    );
+}
+
+.vc-bar-fill {
+    position: relative;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--theme) 0,
+        var(--theme) 5px,
+        transparent 5px,
+        transparent 7px
+    );
+    border-radius: 0;
+    transition: width 0.3s ease;
+}
+
+/* right: image + badges */
+.vc-image {
+    position: relative;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.vc-image > img {
+    max-width: 88%;
+    max-height: 70%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 18px;
+}
+
+.vc-pay-badge {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 8px 24px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    color: #fff;
+    background: transparent;
+    border: 1px solid var(--theme);
+    border-radius: 4px;
+    text-transform: uppercase;
+    pointer-events: auto;
+    z-index: 2;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+    isolation: isolate;
+}
+
+.vc-pay-badge::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: linear-gradient(135deg, var(--theme) -48%, rgba(var(--theme-rgb), 0.012) 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+    border-radius: 2px;
+    z-index: -1;
+}
+
+.vc-pay-badge:hover {
+    filter: brightness(1.15);
+}
+
+.vehicle.unpaid-blur .vc-image > img {
+    filter: brightness(0.4) blur(2.5px);
+    transition: filter 0.3s ease;
+}
+
+.vehicle.unpaid-blur:hover .vc-image > img {
+    filter: brightness(0.6) blur(2.5px);
+}
+
+.vc-star {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 15px;
+    z-index: 2;
+    transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+
+.vc-star.selected {
+    color: var(--theme);
+    text-shadow: 0 0 8px rgba(var(--theme-rgb), 0.6);
+}
+
+.vc-image-overlay {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    z-index: 1;
+}
+
+.vc-tag {
+    position: relative;
+    isolation: isolate;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 5px 11px;
+    border-radius: 4px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+    text-transform: uppercase;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.1;
+    z-index: 0;
+}
+
+.vc-tag::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.18) -48%, rgba(255,255,255,0.012) 123%);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 2px;
+    z-index: -1;
+}
+
+.vc-tag i {
+    font-size: 10px;
+}
+
+.vc-tag.paid {
+    color: #fff;
+    background: transparent;
+    border: 1px solid var(--theme);
+}
+
+.vc-tag.paid::before {
+    background: linear-gradient(135deg, var(--theme) -48%, rgba(var(--theme-rgb), 0.012) 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+}
+
+.vc-tag.unpaid {
+    color: #fff;
+    background: transparent;
+    border: 1px solid #ef4444;
+}
+
+.vc-tag.unpaid::before {
+    background: linear-gradient(135deg, #ef4444 -48%, rgba(239,68,68,0.012) 123%);
+    border: 1px solid rgba(239, 68, 68, 0.6);
+}
+
+.vc-rent-price {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--theme);
+    letter-spacing: 0.5px;
+}
+
+/* borrow badge */
+#garage-panel #vehicles .vehicle .borrow {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.55);
+    z-index: 2;
+}
+
+/* ---------- close button ---------- */
+
+.leave {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: color 0.15s ease;
+    z-index: 10;
+}
+
+.leave:hover {
+    color: #fff;
+}
+
+/* ---------- action buttons ---------- */
+
+#garage-panel #vehicle-info {
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+#garage-panel #vehicle-info .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+}
+
+#garage-panel #vehicle-info .actions .action-row {
+    display: flex;
+    gap: 8px;
+    height: 44px;
+    flex: 0 0 44px;
+}
+
+#garage-panel #vehicle-info .actions .action {
+    flex: 0 0 44px;
+    width: 100%;
+    height: 44px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #fff;
+    background: #14161b;
+    border: 1px solid rgba(255,255,255,0.18);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: 'Outfit', sans-serif;
+    padding: 0 14px;
+    position: relative;
+    z-index: 0;
+}
+
+#garage-panel #vehicle-info .actions .action-row .action {
+    flex: 1 1 0;
+    width: auto;
+    height: 100%;
+}
+
+#garage-panel #vehicle-info .actions .action::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.10) -48%, rgba(255,255,255,0.03) 123%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 5px;
+    z-index: -1;
+    transition: filter 0.2s ease;
+}
+
+#garage-panel #vehicle-info .actions .action:hover {
+    border-color: rgba(255,255,255,0.28);
+}
+
+#garage-panel #vehicle-info .actions .action:hover::before {
+    filter: brightness(1.4);
+}
+
+#garage-panel #vehicle-info .actions .action i {
+    font-size: 13px;
+    color: var(--theme);
+    line-height: 1;
+}
+
+#garage-panel #vehicle-info .actions .action b {
+    font-weight: 800;
+    color: #fff;
+}
+
+/* primary  inset-3 themed (core style) */
+#garage-panel #vehicle-info .actions .action.parkOut {
+    border: 1px solid var(--theme);
+}
+
+#garage-panel #vehicle-info .actions .action.parkOut::before {
+    background: linear-gradient(135deg, var(--theme) -48%, rgba(var(--theme-rgb), 0.012) 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+}
+
+#garage-panel #vehicle-info .actions .action.parkOut:hover::before {
+    filter: brightness(1.15);
+}
+
+#garage-panel #vehicle-info .actions .action.parkOut i {
+    color: #fff;
+}
+
+/* secondary  outlined themed */
+#garage-panel #vehicle-info .actions .action.parkIn {
+    border: 1px solid var(--theme);
+}
+
+#garage-panel #vehicle-info .actions .action.parkIn::before {
+    background: linear-gradient(135deg, rgba(var(--theme-rgb), 0.18) -48%, rgba(var(--theme-rgb), 0.012) 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.25);
+}
+
+#garage-panel #vehicle-info .actions .action.parkIn:hover::before {
+    filter: brightness(1.3);
+}
+
+#garage-panel #vehicle-info .actions .action.parkIn i {
+    color: var(--theme);
+}
+
+/* ---------- park near vehicle (subtle) ---------- */
+
+.parkNearVehicle {
+    width: 100%;
+    border-radius: 6px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    background: linear-gradient(180deg, rgba(20, 22, 28, 0.65) 0%, rgba(14, 16, 20, 0.65) 100%);
+    border: 1px dashed rgba(255,255,255,0.14);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    margin-top: 2px;
+    white-space: nowrap;
+}
+
+.parkNearVehicle:hover {
+    color: #fff;
+    border-color: rgba(var(--theme-rgb), 0.5);
+    background: linear-gradient(180deg, rgba(var(--theme-rgb), 0.12) 0%, rgba(var(--theme-rgb), 0.04) 100%);
+}
+
+.gp-hint { display: none; }
+
+#v-modals {
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#v-modals > * {
+    pointer-events: auto;
+}
+
+.modal {
+    width: 420px;
+    max-width: 90vw;
+    padding: 22px 22px 18px;
+    background:
+        linear-gradient(15.52deg, rgba(var(--theme-rgb), 0.10) -2.94%, rgba(var(--theme-rgb), 0) 105.36%),
+        linear-gradient(164.65deg, rgba(10, 10, 10, 0.99) 47.85%, rgba(11, 11, 11, 0.85) 99.58%);
+    border-radius: 12px;
+    border: 0.6px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 25px 60px -12px rgba(0,0,0,0.7);
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    animation: panelIn 0.25s cubic-bezier(0.2,0.8,0.2,1) both;
+    color: #fff;
+}
+
+.modal .title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.modal .text {
+    font-weight: 500;
+    margin-top: 8px;
+    color: rgba(255,255,255,0.65);
+    font-size: 12.5px;
+    line-height: 1.45;
+}
+
+.modal .text b {
+    color: #fff;
+    font-weight: 700;
+}
+
+.modal .buttons {
+    margin-top: 18px;
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+.modal .buttons .button {
+    flex: 1;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 6px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.15s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(180deg, rgba(28, 32, 40, 0.9) 0%, rgba(18, 20, 26, 0.9) 100%);
+    color: rgba(255,255,255,0.85);
+}
+
+.modal .buttons .button.cancel:hover {
+    border-color: rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+.modal .buttons .button.confirm {
+    background: transparent;
+    border: 1px solid var(--theme);
+    color: #fff;
+    position: relative;
+    z-index: 0;
+}
+
+.modal .buttons .button.confirm::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, var(--theme) -48%, rgba(var(--theme-rgb), 0.012) 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+    border-radius: 4px;
+    z-index: -1;
+    transition: filter 0.2s ease;
+}
+
+.modal .buttons .button.confirm:hover::before {
+    filter: brightness(1.15);
+}
+
+.modal input {
+    margin-top: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    color: #fff;
+    outline: none;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    border-radius: 6px;
+    padding: 0 12px;
+    height: 38px;
+    line-height: 38px;
+    width: 100%;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0;
+    transition: border-color 0.15s ease;
+}
+
+.modal input:focus {
+    border-color: rgba(var(--theme-rgb), 0.6);
+}
+
+/* ===== v-modal (moneywash style) ===== */
+
+.v-modal-frame {
+    background: rgba(217, 217, 217, 0.12);
+    border: 0.6px solid rgba(255, 255, 255, 0.3);
+    padding: 0.625rem;
+    border-radius: 15px;
+    box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.6);
+    position: relative;
+    overflow: hidden;
+    animation: vModalIn 0.25s cubic-bezier(0.2,0.8,0.2,1) both;
+    font-family: 'Outfit', sans-serif;
+}
+
+@keyframes vModalIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.v-modal-content {
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+    background:
+        linear-gradient(15.52deg, rgba(var(--theme-rgb), 0.10) -2.94%, rgba(var(--theme-rgb), 0) 105.36%),
+        linear-gradient(164.65deg, rgba(10, 10, 10, 0.99) 47.85%, rgba(11, 11, 11, 0.792) 99.58%);
+    border: 0.6px solid rgba(255, 255, 255, 0.3);
+    border-radius: 11px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #fff;
+}
+
+.v-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.v-modal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.v-modal-header-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--theme);
+    border-radius: 6px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 0;
+    font-size: 13px;
+}
+
+.v-modal-header-icon::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: linear-gradient(135deg, var(--theme) -48%, rgba(var(--theme-rgb), 0.012) 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+    border-radius: 4px;
+    z-index: -1;
+}
+
+.v-modal-header-title {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.v-modal-close-btn {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Outfit', sans-serif;
+}
+
+.v-modal-close-btn:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.v-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.v-modal-description {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.55;
+}
+
+.v-modal-description b,
+.v-modal-description strong,
+.v-text-highlight {
+    color: var(--theme);
+    font-weight: 700;
+}
+
+.gm-form-page {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 1.5rem 1.25rem;
+}
+
+.gm-form-page::-webkit-scrollbar {
+    width: 4px;
+}
+
+.gm-form-page::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.10);
+    border-radius: 4px;
+}
+
+.v-modal-input,
+.v-modal-body input,
+.v-modal-body input[type="text"],
+.v-modal-body input[type="number"],
+.gm-form-page input,
+.gm-form-page input[type="text"],
+.gm-form-page input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
+    height: 40px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    text-align: left;
+    margin: 0;
+}
+
+.v-modal-input::placeholder,
+.v-modal-body input::placeholder,
+.gm-form-page input::placeholder {
+    color: rgba(255,255,255,0.3);
+}
+
+.v-modal-input:focus,
+.v-modal-body input:focus,
+.gm-form-page input:focus {
+    border-color: var(--theme);
+}
+
+.v-modal-body .title,
+.gm-form-page .title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: left;
+    margin: 0;
+}
+
+.v-modal-body .text,
+.v-modal-label,
+.gm-form-page .text {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    font-size: 12.5px;
+    line-height: 1.45;
+    margin: 0;
+    text-align: left;
+    display: block;
+}
+
+.v-modal-body .text b,
+.v-modal-description b,
+.gm-form-page .text b {
+    color: #fff;
+    font-weight: 700;
+}
+
+.v-modal-body center {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.v-modal-btn-gems {
+    width: 100%;
+    box-sizing: border-box;
+    height: 40px;
+    background: transparent;
+    border: 1px solid rgba(168, 85, 247, 0.55);
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+    position: relative;
+    z-index: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.v-modal-btn-gems::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 1) -48%, rgba(168, 85, 247, 0.012) 123%);
+    border: 1px solid rgba(168, 85, 247, 0.6);
+    border-radius: 4px;
+    z-index: -1;
+    transition: filter 0.2s ease;
+}
+
+.v-modal-btn-gems:hover::before {
+    filter: brightness(1.15);
+}
+
+.v-modal-btn-gems i {
+    color: rgba(216, 180, 254, 1);
+}
+
+.v-modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.v-modal-btn-cancel,
+.v-modal-btn-confirm {
+    flex: 1;
+    box-sizing: border-box;
+    height: 42px;
+    background: transparent;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 0;
+}
+
+.v-modal-btn-cancel {
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.v-modal-btn-cancel::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 1) -48%, rgba(239, 68, 68, 0.012) 123%);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 4px;
+    z-index: -1;
+    transition: filter 0.2s ease;
+}
+
+.v-modal-btn-cancel:hover::before {
+    filter: brightness(0.85);
+}
+
+.v-modal-btn-confirm {
+    border: 1px solid var(--theme);
+}
+
+.v-modal-btn-confirm::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, var(--theme) -48%, rgba(var(--theme-rgb), 0.012) 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+    border-radius: 4px;
+    z-index: -1;
+    transition: filter 0.2s ease;
+}
+
+.v-modal-btn-confirm:hover::before {
+    filter: brightness(1.15);
+}
+
+@keyframes scaleIn { 0% { transform: scale(0); opacity: 0; } 100% {transform:  scale(1); opacity: 1; } }
+.scaleIn { animation: scaleIn .5s; }
+
+@keyframes scaleOut { 0% {transform:  scale(1); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }
+.scaleOut { animation: scaleOut .5s; }
+
+@keyframes lockNotify {
+    0% { margin-left: -700px; opacity: 0; }
+    100% { margin-left: 0px; opacity: 1; }
+}
+
+#v-notify {
+    position: absolute;
+    bottom: 250px;
+    left: 30px;
+}
+
+#v-notify .notify {
+    height: 30px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    margin-bottom: 10px;
+    border: solid 1px var(--theme);
+    width: max-content;
+    animation: lockNotify .5s ease;
+    box-shadow: 0 0 .3em rgba(var(--theme-rgb),0.36);
+    transition: all ease-in-out .3s;
+}
+
+#v-notify .notify img {
+    height: 30px;
+}
+
+#v-notify .notify i {
+    color: var(--theme);
+    margin-right: 5px;
+}
+
+#v-notify .notify .text {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 10px;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    text-shadow: 0 0 .3em rgba(0,0,0,0.3);
+    font-size: 12px;
+    color: rgb(226, 226, 226);
+}
+
+#v-notify .notify.test-drive {
+    width: 220px;
+}
+
+#v-notify .notify .title {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    font-size: 10px;
+    background-color: var(--theme); border: 1px solid rgba(var(--theme-rgb),0.5); color: white;
+    padding: 2px 10px;
+}
+
+#v-notify .notify .tip {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    font-size: 10px;
+    background-color: var(--theme); border: 1px solid rgba(var(--theme-rgb),0.5); color: white;
+    padding: 2px 10px;
+}
+
+#v-notify .notify .timer {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 10px;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    text-shadow: 0 0 .3em rgba(0,0,0,0.3);
+    font-size: 12px;
+    color: rgb(226, 226, 226);
+    background-color: var(--theme); border: 1px solid rgba(var(--theme-rgb),0.5); color: white;
+    padding: 0px 10px;
+    border-radius: 1px;
+    width: 45px;
+    text-align: center;
+    font-size: 14px;
+}
+
+#dealership {
+    /* Tela de design fixa 1920x1080 escalada proporcionalmente (--ui-scale
+       definido via JS em Dealership.tsx). Ancorada na base e centralizada,
+       cresce para cima a partir do rodapé em qualquer resolução. */
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: 1920px;
+    height: 1080px;
+    transform: translateX(-50%) scale(var(--ui-scale, 1));
+    transform-origin: bottom center;
+    animation: slideFromBottom .3s ease;
+}
+
+@keyframes slideFromBottom { 
+    0% { bottom: -1000px }
+    100% { bottom: 0px; }
+}
+
+@keyframes slideToBottom { 
+    0% { bottom: 0px; }
+    100% { bottom: -1000px }
+}
+
+#dealership .container {
+    width: 100%;
+    height: 200px;
+}
+
+#dealership .container .slider {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 80px;
+    color: black;
+    background-color: var(--theme);
+    font-size: 24px;
+    text-align: center;
+    line-height: 80px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: -0px 2px 5px -1px rgba(0,0,0,0.3);
+    transition: all ease-in-out .25s;
+}
+
+#dealership .container .slider:hover {
+    transform: translateY(-50%) scale(1.03);
+}
+
+#dealership .container .slider.left { 
+    left: 15px; 
+}
+
+#dealership .container .slider.right { 
+    right: 15px; 
+}
+
+#dealership .list {
+    width: calc(100% - 200px);
+    height: 220px;
+    margin-left: 100px;
+    overflow-x: scroll; 
+    white-space: nowrap; 
+}
+
+#dealership .list .vehicles {
+    display: flex;
+    width: max-content;
+}
+
+#dealership .list .empty {
+    margin-left: 10px;
+    margin-top: 30px;
+    font-family: 'Outfit', sans-serif; font-weight: 300;
+    text-shadow: 0 0 .3em rgba(0,0,0,0.3);
+    color: rgb(226,226,226);
+    font-size: 18px;
+}
+
+#dealership .list .empty i {
+    color: var(--theme);
+    margin-right: 5px;
+}
+
+#dealership .list .vehicle {
+    width: 280px;
+    height: 180px;
+    margin: 10px 10px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+    position: relative;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    cursor: pointer;
+    transition: all ease-in-out .25s;
+    border: solid 2px rgba(255, 255, 255, 0.027);
+    border-top: none;
+    box-shadow: 5px 0 8px rgba(0, 0, 0, 0.5);
+    box-shadow: -5px 0 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5);
+}
+
+#dealership .list .vehicle .borrow-icon {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    font-size: 12px;
+    opacity: .7;
+}
+
+#dealership .list .vehicle.selected {
+    border-bottom: solid 2px var(--theme);
+    border-radius: 0px; 
+    text-shadow: 0 0 .3em rgba(var(--theme-rgb),0.36);
+    background: rgba(var(--theme-rgb),0.15);
+}
+
+#dealership .list .vehicle.selected .borrow-icon {
+    color: var(--theme);
+    text-shadow: 0 0 .3em rgba(255, 255, 255, 0.226);
+}
+
+#dealership .list .vehicle.selected .name {
+    color: var(--theme);
+    text-shadow: 0 0 .3em rgba(255, 255, 255, 0.226);
+}
+
+#dealership .list .vehicle:hover {
+    background: linear-gradient(to bottom, rgba(73, 73, 73, 0.0) 0%, rgba(41, 41, 41, 0.8) 88%);
+}
+
+#dealership .list .vehicle.selected:hover {
+    border-radius: 0px;
+    background: rgba(var(--theme-rgb),0.15);
+}
+
+#dealership .list .vehicle img {
+    height: 110px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#dealership .list .vehicle.selected img {
+    filter: none;
+}
+
+#dealership .list .vehicle .name {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    text-align: end;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    text-shadow: 0 0 .3em rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 250px;
+    text-shadow: 0 0 .3em #ffffff5d;
+}
+
+#dealership .title {
+    left: 110px;
+    position: absolute;
+    top: -105px;
+    color: var(--theme);
+    text-shadow: 0 0 .3em rgba(var(--theme-rgb),0.36);
+    font-size: 30px;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+}
+
+#dealership .subtitle {
+    left: 110px;
+    position: absolute;
+    top: -70px;
+    text-shadow: 0 0 .3em rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+    font-family: 'Outfit', sans-serif; font-weight: 300;
+    font-size: 12px;
+    margin-left: 5px;
+}
+ 
+#dealership .categories {
+    position: absolute;
+    left: 110px;
+    top: -45px;
+    display: flex;
+}
+
+#dealership .categories .category {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    box-shadow: none;
+    margin-right: 10px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    color: rgb(226,226,226);
+    padding: 2px 10px;
+    letter-spacing: 1px;
+    transition: all ease-in-out .25s;
+    cursor: pointer;
+}
+
+#dealership .categories .category.garage {
+    background-image: none;
+    background-color: var(--theme);
+    color: black;
+    text-shadow: none;
+    border: 1px solid var(--theme); border: 1px solid rgba(var(--theme-rgb),0.5); color: white;
+}
+
+#dealership .categories .category:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(var(--theme-rgb),0.25);
+}
+
+#dealership .categories .category.active, #dealership .categories .category.active:hover {
+    border: 1px solid var(--theme);
+    box-shadow: 0 0 .3em rgba(var(--theme-rgb),0.36);
+    background: rgba(var(--theme-rgb),0.2);
+}
+
+#dealership .vehicle-info {
+    position: absolute;
+    right: 94px;
+    bottom: 220px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    width: 250px;
+    box-shadow: none;
+    padding: 10px;
+}
+
+#dealership .vehicle-info .title {
+    font-size: 16px;
+    text-align: justify;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    text-shadow: 0 0 .3em rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--theme);
+    text-shadow: 0 0 .3em rgba(var(--theme-rgb),0.36);
+    position: absolute;
+    top: -55px;
+    left: 0px;
+    font-size: 26px;
+    width: 270px;
+}
+
+#dealership .vehicle-info .subtitle {
+    text-shadow: 0 0 .3em rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+    font-family: 'Outfit', sans-serif; font-weight: 300;
+    font-size: 12px;
+    position: absolute;
+    top: -25px;
+    left: 0px;
+    width: 270px;
+    margin: 0px;
+}
+
+#dealership .vehicle-info .infos {
+    font-size: 12px;
+}
+
+#dealership .vehicle-info .infos .info {
+    display: flex;
+    border-bottom: solid 1px rgba(var(--theme-rgb),0.4);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    margin-top: 6px;
+    padding: 10px;
+}
+
+#dealership .vehicle-info .infos .info .key {
+    color: rgb(185, 185, 185);
+    width: 100px;
+    float: left;
+    font-family: 'Outfit', sans-serif; font-weight: 300;
+    line-height: 20px;
+    height: 20px;
+}
+
+#dealership .vehicle-info .infos .info .key i {
+    line-height: 20px;
+    height: 20px;
+    width: 20px;
+    background-color: var(--theme);
+    box-shadow: 0 0 .3em rgba(var(--theme-rgb),0.22);
+    color: black;
+    text-shadow: none;
+    text-align: center;
+    border-radius: 6px;
+    margin-right: 5px;
+}
+
+#dealership .vehicle-info .infos .info .value {
+    width: calc(100% - 100px);
+    text-align: end;
+    letter-spacing: 1px;
+    text-shadow: 0 0 .3em rgba(0,0,0,0.3);
+    line-height: 20px;
+    height: 20px;
+}
+
+#dealership .vehicle-info .actions {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#dealership .vehicle-info .actions .action {
+    margin: 3px auto;
+    width: calc(50% - 7px);
+    height: 40px;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: center;
+    line-height: 40px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    letter-spacing: .5px;
+    color: rgb(226,226,226);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+#dealership .vehicle-info .actions .action:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+#dealership .vehicle-info .actions .action.rent {
+    background-image: none;
+    background-color: var(--theme);
+}
+
+#dealership .vehicle-info .actions .action.buy {
+    background-image: none;
+    background-color: var(--theme);
+}
+
+#dealership .vehicle-info .actions .action.testDrive {
+    width: calc(100% - 5px);
+    background-image: none;
+    background-color: #797979;
+}
+
+
+.dealer-modal-colors::-webkit-scrollbar {
+    display: none;
+}
+
+.dealer-modal-colors {
+    width: 320px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    background-color: rgba(122, 122, 122, 0.418);
+    border: solid 2px rgba(255, 255, 255, 0.171);
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+.dealer-modal-colors .color, .dealer-modal-colors .color2 {
+    position: relative;
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.dealer-modal-colors .color.selected::after, .dealer-modal-colors .color2.selected::after {
+    text-align: center;
+    font-family: "FontAwesome";
+    font-size: 16px;
+    text-shadow: 0 0 .05em black;
+    content: '\f00c';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-shadow: 0 0 .3em rgba(0,0,0,.3);
+}
+
+.modal-range {
+    width: 320px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    margin: 10px;
+    width: 300px;
+    border: none !important;
+    padding: 0px !important;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+    background-image: linear-gradient(90deg, var(--theme) 33%, var(--theme) 100%);
+    background-size: 70% 100%;
+    background-repeat: no-repeat;
+}
+
+input[type="range"]:focus, input[type="range"]:hover {
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: 0 0 2px 0 #555;
+    transition: background .3s ease-in-out;
+    cursor: pointer;
+}
+  
+input[type=range]::-webkit-slider-runnable-track  {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+#dealership .leave {
+    left: 80px;
+    width: 20px;
+    position: absolute;
+    top: -85px;
+    font-size: 20px;
+    text-shadow: 0 0 .2em rgba(0,0,0,0.3);
+    color: rgb(196, 194, 194);
+    cursor: pointer;
+    transition: all ease-in-out .25s;
+}
+
+#dealership .leave:hover {
+    color: rgb(255, 255, 255);
+}
+
+#manager {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: var(--panel-bg);
+    border-radius: 1rem;
+    border: 1px solid var(--panel-border);
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    width: 56rem;
+    max-width: 96vw;
+    height: 38rem;
+    max-height: 94vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Outfit', sans-serif;
+    animation: panelIn 0.32s cubic-bezier(0.2,0.8,0.2,1) both;
+    overflow: hidden;
+}
+
+@keyframes panelIn {
+    from { opacity: 0; transform: translate(-50%,-50%) scale(0.97); }
+    to   { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+}
+
+#manager .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+}
+
+#manager .panel-header .panel-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+#manager .panel-header .title {
+    position: static;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-85);
+    text-shadow: none;
+    font-family: 'Outfit', sans-serif;
+}
+
+#manager .panel-header .subtitle {
+    position: static;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-35);
+    letter-spacing: 1px;
+    text-shadow: none;
+    text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
+}
+
+#manager .panel-header .leave {
+    position: static;
+    font-size: 1.1rem;
+    color: var(--text-50);
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0.25rem;
+}
+
+#manager .panel-header .leave:hover {
+    color: #fff;
+}
+
+#manager .panel-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+}
+
+#manager .panel-nav input {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    color: #fff;
+    outline: none;
+    border: 1px solid var(--border-input);
+    background: var(--input-bg);
+    border-radius: 0.375rem;
+    padding: 0 0.75rem;
+    height: 2.25rem;
+    line-height: 2.25rem;
+    font-size: 0.875rem;
+    letter-spacing: 0;
+    text-align: left;
+    flex: 1;
+    margin: 0;
+    width: auto;
+    transition: border-color 0.2s;
+}
+
+#manager .panel-nav input:focus {
+    border-color: rgba(255,255,255,0.2);
+}
+
+#manager .panel-nav input::placeholder {
+    color: var(--text-35);
+}
+
+#manager .panel-nav .select {
+    margin: 0;
+    width: 15rem;
+    flex-shrink: 0;
+}
+
+#manager .panel-nav .new {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    color: #fff;
+    outline: none;
+    border: none;
+    background: var(--theme);
+    border-radius: 0.375rem;
+    padding: 0 1rem;
+    height: 2.25rem;
+    line-height: 2.25rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 0;
+    width: auto;
+}
+
+#manager .panel-nav .new:hover {
+    background: rgba(var(--theme-rgb),0.85);
+    transform: none;
+}
+
+#manager #list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+    align-content: start;
+}
+
+#manager #list::-webkit-scrollbar {
+    width: 4px;
+}
+
+#manager #list::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.10);
+    border-radius: 4px;
+}
+
+#manager #list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#manager #list .item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    transition: border-color 0.2s;
+    height: auto;
+    width: auto;
+    margin: 0;
+}
+
+#manager #list .item:hover {
+    border-color: rgba(255,255,255,0.12);
+}
+
+#manager #list .item .name {
+    position: static;
+    transform: none;
+    left: auto;
+    width: 100%;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--text-85);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: none;
+}
+
+#manager #list .item img {
+    position: static;
+    transform: none;
+    left: auto;
+    top: auto;
+    height: 4rem;
+    object-fit: contain;
+}
+
+#manager #list .item .buttons {
+    position: static;
+    transform: none;
+    left: auto;
+    bottom: auto;
+    display: flex;
+    gap: 0.35rem;
+    width: 100%;
+}
+
+#manager #list .item .buttons input {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    color: #fff;
+    outline: none;
+    border: 1px solid var(--border-input);
+    background: var(--input-bg);
+    border-radius: 0.375rem;
+    padding: 0;
+    height: 1.75rem;
+    line-height: 1.75rem;
+    width: 100%;
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 0;
+    flex: 1;
+}
+
+#manager #list .item .buttons .save {
+    border-radius: 0.375rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    line-height: 1.75rem;
+    text-align: center;
+    background: var(--theme);
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    margin: 0;
+    transition: background 0.2s;
+}
+
+#manager #list .item .buttons .save:hover {
+    background: rgba(var(--theme-rgb),0.8);
+}
+
+#manager .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-35);
+    font-size: 0.875rem;
+    padding: 2rem 0;
+}
+
+/* ---- Character Veh Manager (list mode) ---- */
+
+#manager #list.char {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    grid-template-columns: none;
+}
+
+.cveh {
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0.65rem 0.85rem;
+    gap: 0.85rem;
+    position: relative;
+    transition: border-color 0.2s;
+    margin: 0;
+}
+
+.cveh:hover {
+    border-color: rgba(255,255,255,0.12);
+}
+
+.cveh img {
+    height: 3.5rem;
+    width: 5rem;
+    object-fit: contain;
+    background: rgba(255,255,255,0.02);
+    padding: 0.35rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.cveh .infos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin: 0;
+    padding: 0;
+}
+
+.cveh .infos .info {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--text-65);
+    height: auto;
+    line-height: 1.3;
+}
+
+.cveh .infos .info:first-child {
+    font-weight: 600;
+    color: var(--text-85);
+    font-size: 0.85rem;
+}
+
+.cveh .buttons {
+    position: static;
+    transform: none;
+    display: flex;
+    gap: 0.4rem;
+    flex-shrink: 0;
+}
+
+.cveh .buttons .button {
+    height: 1.75rem;
+    line-height: 1.75rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    text-shadow: none;
+    margin: 0;
+    padding: 0 0.75rem;
+    text-align: center;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-85);
+    width: auto;
+}
+
+.cveh .buttons .button:hover {
+    border-color: rgba(255,255,255,0.15);
+    transform: none;
+}
+
+.cveh .buttons .button.renew {
+    background: rgba(104, 146, 19, 0.25);
+    border-color: rgba(104, 146, 19, 0.4);
+    color: #b8e060;
+}
+
+.cveh .buttons .button.renew:hover {
+    background: rgba(104, 146, 19, 0.35);
+}
+
+.cveh .buttons .button.remove {
+    background: rgba(173, 46, 46, 0.2);
+    border-color: rgba(173, 46, 46, 0.35);
+    color: #e87070;
+}
+
+.cveh .buttons .button.remove:hover {
+    background: rgba(173, 46, 46, 0.3);
+}
+
+.cveh .buttons .button.find {
+    background: rgba(var(--theme-rgb), 0.15);
+    border-color: rgba(var(--theme-rgb), 0.3);
+    color: rgba(var(--theme-rgb), 0.9);
+}
+
+.cveh .buttons .button.find:hover {
+    background: rgba(var(--theme-rgb), 0.25);
+}
+
+.modal-text-tip {
+    font-size: 10px;
+    text-shadow: 0 0 .3em rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+    color: rgb(206, 206, 206);
+}
+
+.select {
+    margin: 0;
+    width: 15rem;
+    position: relative;
+    font-size: 0.875rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+}
+
+.select::-webkit-scrollbar {
+    display: none;
+}
+
+.select select {
+    display: none;
+}
+
+.select-selected {
+    border-radius: 0.375rem;
+    background: var(--input-bg);
+    border: 1px solid var(--border-input);
+}
+
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 22px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 11px;
+}
+
+.select-items div,.select-selected {
+    line-height: 2.25rem;
+    height: 2.25rem;
+    color: #ffffff;
+    padding: 0 0.75rem;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.select-items {
+    border-radius: 0.375rem;
+    position: absolute;
+    background: rgba(21, 28, 37, 0.98);
+    border: 1px solid var(--border-input);
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    max-height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+    margin-top: 5px;
+}
+
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+    background-color: rgba(255,255,255,0.06);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mechanic-tip {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    line-height: 24px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mechanic-tip > div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mechanic-tip .key {
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    background: var(--theme);
+    border: none;
+    border-radius: 6px;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: 12px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.mechanic-tip .tip {
+    font-size: 11px;
+    font-family: 'Outfit', sans-serif; font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.rotate-tip i, .mechanic-tip i {
+    font-size: 20px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+#mechanic-menu {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 40px;
+    animation: garageSlideIn .35s ease;
+}
+
+/* ---- Garage-aligned shell ---- */
+#mechanic-menu .menu {
+    margin-left: 0;
+    width: 360px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Title styled exactly like .gv-title (clean, bottom border, no brush) */
+#mechanic-menu .menu .title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 14px;
+    margin: 0;
+    position: static;
+    text-align: left;
+}
+
+/* Kill the legacy brushed mask under the title */
+#mechanic-menu .menu .title::after {
+    content: none;
+    display: none;
+}
+
+#mechanic-menu .menu .leave { display: none; }
+
+/* Subtitle aligned like the garage breadcrumb */
+#mechanic-menu .menu .subtitle {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    text-align: left;
+    margin: -8px 0 4px;
+    text-shadow: none;
+}
+
+#mechanic-menu .menu #categories {
+    direction: ltr;
+    width: 100%;
+    max-height: 560px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0;
+    scrollbar-gutter: stable both-edges;
+}
+
+#mechanic-menu .menu #categories::-webkit-scrollbar { width: 4px; }
+#mechanic-menu .menu #categories::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.08); border-radius: 2px;
+}
+
+/* Replica exata SidebarItem (core-admin .btn-accent), opaca p/ fundo do jogo */
+#mechanic-menu .menu #categories .category {
+    width: 100%;
+    height: 44px;
+    min-height: 44px;
+    flex: 0 0 44px;
+    padding: 0 16px;
+    background: #1a1d24;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    font-family: 'Outfit', sans-serif; font-weight: 500;
+    color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    direction: ltr;
+    position: relative;
+    isolation: isolate;
+    z-index: 0;
+    box-shadow: none;
+}
+
+#mechanic-menu .menu #categories .category::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, var(--theme) -48%, #15171c 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+    border-radius: 4px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+}
+
+#mechanic-menu .menu #categories .category img {
+    width: 22px;
+    height: 22px;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    flex-shrink: 0;
+    opacity: .55;
+    transition: opacity 0.15s ease;
+}
+
+#mechanic-menu .menu #categories .category:hover {
+    border-color: var(--theme);
+    color: #fff;
+}
+#mechanic-menu .menu #categories .category:hover::before { opacity: 0.85; }
+#mechanic-menu .menu #categories .category:hover img { opacity: 1; }
+
+#mechanic-menu .menu #categories .category.active,
+#mechanic-menu .menu #categories .category.active:hover {
+    border-color: var(--theme);
+    color: #fff;
+    font-weight: 700;
+}
+#mechanic-menu .menu #categories .category.active::before { opacity: 1; }
+#mechanic-menu .menu #categories .category.active img { opacity: 1; }
+
+#mechanic-category {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 40px;
+    animation: slideFromRight .3s ease;
+}
+
+#mechanic-category .menu {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 12px;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+}
+
+#mechanic-category .menu .title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 14px;
+    margin: 0;
+    width: 100%;
+    position: static;
+    line-height: 1;
+}
+
+#mechanic-category .menu .title::after { content: none !important; display: none !important; }
+
+#mechanic-category .menu #items {
+    max-width: 100%;
+    max-height: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+    gap: 6px;
+    justify-content: flex-start;
+    padding-right: 4px;
+}
+
+#mechanic-category .menu #items::-webkit-scrollbar { width: 4px; }
+#mechanic-category .menu #items::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.08); border-radius: 2px;
+}
+
+#mechanic-category .menu #items .item {
+    position: relative;
+    background: #15171c;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    width: 80px;
+    height: 80px;
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    box-shadow: none;
+}
+
+#mechanic-category .menu #items .item:hover {
+    border-color: rgba(var(--theme-rgb),0.3);
+    background: #181b21;
+}
+
+#mechanic-category .menu #items .item .id {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 28px;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    text-shadow: none;
+}
+
+#mechanic-category .menu #items .item .price {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Outfit', sans-serif; font-weight: 400;
+    font-size: 10px;
+    letter-spacing: .5px;
+    width: 100%;
+    text-align: center;
+    color: rgba(255,255,255,0.45);
+}
+
+#mechanic-category .menu #items .item.selected {
+    border-color: var(--theme);
+    background: linear-gradient(90deg, rgba(var(--theme-rgb),0.10), rgba(var(--theme-rgb),0.02) 70%), #15171c;
+}
+
+#mechanic-category .menu #items .item.selected .id {
+    color: white;
+}
+
+#mechanic-category .menu #items .item.selected .price {
+    color: rgba(255,255,255,0.85);
+}
+
+#mechanic-category .menu .label {
+    width: 100%;
+    padding: 0 2px;
+    text-align: left;
+    margin-top: 6px;
+    margin-bottom: 0;
+    height: auto;
+    line-height: 1;
+    position: relative;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    background: transparent;
+    text-shadow: none;
+    box-sizing: border-box;
+}
+
+#mechanic-category .menu .label::before { content: none !important; display: none !important; }
+
+.picker {
+    width: 100%;
+    height: 40px;
+    background-color: gray;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: none;
+    color: transparent;
+    box-sizing: border-box;
+}
+
+.menu-range {
+    width: 100%;
+    display: block;
+    margin-top: 12px;
+}
+
+.menu-range .info {
+    height: 36px;
+    line-height: 36px;
+    background: #14161b;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    padding: 0 14px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-range .info .key {
+    font-family: 'Outfit', sans-serif; font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1.5px;
+}
+
+.menu-range .info .value {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    font-size: 12px;
+}
+
+.menu-range input[type='range'] {
+    width: 100% !important;
+    margin: 6px 0 0 0;
+}
+
+.switcher {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    height: 36px;
+    line-height: 36px;
+    background: #14161b;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    padding: 0 14px;
+}
+
+#mechanic-category .switcher {
+    font-size: 12px;
+    font-family: 'Outfit', sans-serif; font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    color: rgba(255,255,255,0.7);
+    box-sizing: border-box;
+}
+
+.switch {
+    visibility: hidden;
+    position: absolute;
+    margin-left: -9999px;
+}
+
+.switch + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    margin: 3px 10px;
+}
+  
+.switch--shadow + label {
+    padding: 2px;
+    width: 40px;
+    height: 10px;
+    background-color: #dddddd;
+    border-radius: 6px;
+}
+
+.switch--shadow + label:before,
+.switch--shadow + label:after {
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    bottom: 1px;
+    content: "";
+}
+
+.switch--shadow + label:before {
+    right: 1px;
+    background-color: #f1f1f1;
+    border-radius: 6px;
+    transition: background 0.4s;
+}
+
+.switch--shadow + label:after {
+    margin-top: -5px;
+    height: 22px;
+    width: 22px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s;
+}
+
+.switch--shadow:checked + label:before {
+    background-color: var(--theme);
+}
+
+.switch--shadow:checked + label:after {
+    transform: translateX(20px);
+}
+
+.menu .index-colors {
+    margin-top: 5px;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.menu .index-colors .btn {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menu .index-colors .btn:hover {
+    border-color: rgba(var(--theme-rgb),0.3);
+}
+
+.menu .index-colors .btn.remove {
+    background-color: rgba(0,0,0,0.3);
+}
+
+#mechanic-menu .menu .cart {
+    margin-top: 4px;
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+
+#mechanic-menu .menu .cart .button {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 44px;
+    line-height: 44px;
+    background-color: transparent;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+    color: #fff;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mechanic-menu .menu .cart .button:hover {
+    filter: brightness(1.1);
+}
+
+#mechanic-menu .menu .cart .total {
+    flex: 1;
+    background: #14161b;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    text-align: center;
+    height: 44px;
+    line-height: 44px;
+    border-radius: 6px;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+}
+
+
+#mechanic-menu .menu #invoices {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+#mechanic-menu .menu #invoices .invoice {
+    margin-bottom: 10px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+    line-height: 60px;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    transition: all 0.2s ease;
+    padding: 10px;
+}
+
+#mechanic-menu .menu #invoices .invoice::-webkit-scrollbar {
+    display: none;
+}
+
+#mechanic-menu .menu #invoices .invoice .info {
+    width: 100%;
+    margin: 10px 0px;
+    display: flex;
+}
+
+#mechanic-menu .menu #invoices .invoice .info .key {
+    height: 28px;
+    line-height: 28px;
+    text-align: justify;
+    margin-left: 10px;
+    padding-left: 10px;
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-bottom: 1px;
+    background: rgba(var(--theme-rgb),0.15);
+    color: var(--theme);
+    font-size: 11px;
+    border-radius: 6px 0 0 6px;
+    letter-spacing: 0.5px;
+}
+
+#mechanic-menu .menu #invoices .invoice .info .value {
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    text-align: justify;
+    margin-right: 10px;
+    font-family: 'Outfit', sans-serif; font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    border-radius: 0 6px 6px 0;
+}
+
+#mechanic-menu .menu #invoices .invoice .buttons {
+    margin-top: 15px;
+    display: flex;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    letter-spacing: .5px;
+}
+
+#mechanic-menu .menu #invoices .invoice .buttons .call {
+    background-color: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.06);
+    width: 35%;
+    margin: 0px auto;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#mechanic-menu .menu #invoices .invoice .buttons .apply {
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.04);
+    width: 35%;
+    margin: 0px auto;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: not-allowed;
+    transition: all 0.2s ease;
+    color: rgba(255,255,255,0.35);
+}
+
+#mechanic-menu .menu #invoices .invoice .buttons .cancel {
+    background-color: rgba(156, 30, 30, 0.6);
+    border: 1px solid rgba(156, 30, 30, 0.3);
+    width: 15%;
+    margin: 0px auto;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#mechanic-menu .menu #invoices .invoice .buttons .call:hover {
+    border-color: rgba(var(--theme-rgb),0.3);
+}
+
+#mechanic-menu .menu #invoices .invoice .buttons .apply:hover {
+    border-color: rgba(255,255,255,0.08);
+}
+
+#mechanic-menu .menu #invoices .invoice .buttons .cancel:hover {
+    border-color: rgba(200, 50, 50, 0.5);
+}
+
+#mechanic-menu .menu #invoices .invoice .buttons .apply.currentVehicle {
+    background-color: rgba(40, 150, 108, 0.5);
+    border: 1px solid rgba(40, 150, 108, 0.3);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    pointer-events: all;
+    color: rgba(255,255,255,0.85);
+}
+
+#v-menu {
+    position: absolute;
+    bottom: 30px;
+    left: 330px;
+}
+
+#v-menu .buttons {
+    display: flex;
+    font-family: 'Montserrat';
+    color: white;
+    text-align: center;
+    max-width: 295px;
+    flex-wrap: wrap;
+}
+
+#v-menu .buttons .button {
+    margin: 2px;
+    width:  35px;
+    height: 35px;
+    border: solid 2px rgba(128, 128, 128, 0.322);
+    background-color: rgba(27, 27, 27, 0.767);
+    border-radius: 1px;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all ease-in-out .25s;
+    box-shadow: -0px 2px 5px -1px rgba(0,0,0,0.3);
+}
+
+#v-menu .buttons .button:hover {
+    background-color: #dddddd2c;
+    border: 1px solid var(--theme);
+}
+
+/* ====== NEW DEALERSHIP DESIGN ====== */
+
+#dealership .dl-bottom-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#dealership .dl-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0 40px;
+    position: relative;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+#dealership .dl-categories {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#dealership .dl-controls .category {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 4px;
+    box-shadow: none !important;
+    height: 30px;
+    line-height: 30px;
+    font-size: 11px;
+    color: rgb(226,226,226) !important;
+    padding: 0 15px;
+    letter-spacing: 1px;
+    transition: all ease-in-out .25s;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    transform: skewX(-15deg);
+    margin: 0;
+}
+
+#dealership .dl-controls .category span {
+    display: inline-block;
+    transform: skewX(15deg);
+}
+
+#dealership .dl-controls .category.active,
+#dealership .dl-controls .category:hover {
+    background: var(--theme) !important;
+    color: white !important;
+    border-color: rgba(var(--theme-rgb), 0.5) !important;
+}
+
+#dealership .dl-search-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#dealership .dl-search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 0 15px;
+    height: 30px;
+    transform: skewX(-15deg);
+}
+#dealership .dl-search-box i {
+    transform: skewX(15deg);
+    margin-right: 10px;
+    color: rgba(255,255,255,0.4);
+}
+#dealership .dl-search-box input {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    width: 150px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transform: skewX(15deg);
+}
+
+#dealership .dl-teste-btn {
+    background: var(--theme);
+    color: white;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transform: skewX(-15deg);
+    transition: all 0.2s;
+}
+#dealership .dl-teste-btn span { display: inline-block; transform: skewX(15deg); }
+#dealership .dl-teste-btn:hover { background: rgba(var(--theme-rgb), 0.8); }
+#dealership .dl-teste-btn i { transform: skewX(15deg); margin-right: 5px; }
+
+#dealership .dl-bottom-area .list {
+    width: calc(100% - 120px) !important;
+    height: 180px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+#dealership .dl-bottom-area .list::-webkit-scrollbar { display: none; }
+#dealership .dl-bottom-area .container {
+    position: relative;
+    width: 100%;
+}
+#dealership .dl-bottom-area .container .slider { 
+    width: 30px !important; 
+    height: 30px !important; 
+    line-height: 30px !important; 
+    font-size: 16px !important; 
+    background: transparent !important; 
+    border: 1px solid rgba(255,255,255,0.4) !important; 
+    border-radius: 4px !important; 
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white !important;
+}
+#dealership .dl-bottom-area .container .slider i { color: white !important; }
+#dealership .dl-bottom-area .container .slider.left { left: 10px !important; }
+#dealership .dl-bottom-area .container .slider.right { right: 10px !important; }
+
+#dealership .list .vehicle.dl-card {
+    width: 240px;
+    height: 150px;
+    margin: 15px 10px;
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all ease-in-out .25s;
+    border: solid 1px rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+}
+
+#dealership .list .vehicle.dl-card img {
+    max-height: 80px;
+    max-width: 90%;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.5));
+}
+
+#dealership .list .dl-card-bottom {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0px;
+    width: 85%;
+    justify-content: center;
+}
+
+#dealership .list .dl-card-bottom .name {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 4px 0 0 4px;
+    position: static;
+    text-align: center;
+    width: 50%;
+    text-shadow: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#dealership .list .dl-card-bottom .price.dl-theme-box {
+    background: var(--theme);
+    color: white;
+    font-size: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 0 4px 4px 0;
+    margin-left: -5px;
+    width: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+#dealership .list .vehicle.dl-card.selected {
+    border: 1px solid var(--theme) !important;
+    background: rgba(var(--theme-rgb), 0.1) !important;
+}
+
+#dealership .list .vehicle.dl-card.selected .name {
+    background: white !important;
+    color: black !important;
+}
+
+#dealership .dl-footer-hint {
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 9px;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+/* Vehicle Info / Stats Area (TOP-LEFT) */
+#dealership .dl-vehicle-info {
+    position: fixed !important;
+    left: 60px !important;
+    top: 25% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 380px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+
+#dealership .dl-title-brush::after {
+    width: 140% !important;
+    height: 140% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+#dealership .dl-stats-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#dealership .dl-sh-subtitle {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 0px;
+}
+
+#dealership .dl-stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+#dealership .dl-stat-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#dealership .dl-stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 1px;
+}
+
+#dealership .dl-stat-label span { color: white; font-weight: 700; }
+
+#dealership .dl-stat-track-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#dealership .dl-stat-icon {
+    width: 28px;
+    height: 20px;
+    background: rgba(var(--theme-rgb), 0.15);
+    border: 1px solid rgba(var(--theme-rgb), 0.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme);
+    font-size: 11px;
+}
+
+#dealership .dl-stat-track {
+    flex: 1;
+    height: 16px;
+    background: repeating-linear-gradient(-75deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 8px, transparent 8px, transparent 12px);
+    border-radius: 0px;
+}
+
+#dealership .dl-stat-fill {
+    height: 100%;
+    background: repeating-linear-gradient(-75deg, var(--theme) 0, var(--theme) 8px, transparent 8px, transparent 12px);
+    transition: width 0.3s ease;
+}
+
+#dealership .dl-price-section {
+    margin-top: 50px;
+    text-align: center;
+}
+
+#dealership .dl-price-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    font-family: 'Outfit', sans-serif;
+}
+
+#dealership .dl-price-value {
+    font-size: 38px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    line-height: 1;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.gem-icon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    background-image: url('/img/dealership/diamond.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+#dealership .dl-main-actions {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+#dealership .dl-btn-comprar,
+#dealership .dl-btn-alugar {
+    width: 80%;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transform: skewX(-15deg);
+    transition: all 0.2s;
+}
+
+#dealership .dl-btn-comprar span,
+#dealership .dl-btn-alugar span {
+    display: inline-block;
+    transform: skewX(15deg);
+}
+
+#dealership .dl-btn-comprar {
+    background: var(--theme);
+    color: white;
+    border: none;
+}
+#dealership .dl-btn-comprar:hover { background: rgba(var(--theme-rgb), 0.8); }
+
+#dealership .dl-btn-alugar {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+}
+#dealership .dl-btn-alugar:hover { background: rgba(0,0,0,0.7); }
+
+/* ----------------------------------------------------------------------- */
+/* AMD/CEF compositor fix (auto-target inline rgba/gradient backgrounds).   */
+/* Keeps the GPU layer alive permanently with an imperceptible opacity     */
+/* animation on a ::before pseudo-element. Visual output is identical.    */
+/* See [scripts]/hud/AMD-NUI-FIX.md for the rationale.                     */
+/* ----------------------------------------------------------------------- */
+[style*="linear-gradient"],
+[style*="rgba("] {
+    position: relative;
+    isolation: isolate;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.001) !important;
+}
+
+[style*="linear-gradient"]::before,
+[style*="rgba("]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: inherit;
+    border-radius: inherit;
+    will-change: opacity;
+    animation: amd-keepalive 4s linear infinite;
+}
+
+@keyframes amd-keepalive {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.999;
+    }
+}
+
+/* ============================================================
+   CV-PANEL — shell compartilhado (PanelShell.tsx)
+   Mesmo layout do #garage-panel mas em classe reutiliz\u00e1vel.
+   ============================================================ */
+.cv-panel {
+    position: absolute;
+    top: 50%;
+    left: 40px;
+    transform: translateY(-50%);
+    width: 420px;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: garageSlideIn .35s ease;
+    font-family: 'Outfit', sans-serif;
+    color: #fff;
+    overflow: visible;
+}
+
+.cv-panel.cv-panel-wide { width: 520px; }
+.cv-panel.cv-panel-center {
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.cv-panel.cv-panel-right {
+    left: auto;
+    right: 40px;
+}
+
+/* ============================================================
+   CV-BTN — bot\u00e3o compartilhado (CoreButton.tsx)
+   Variantes: default / themed / danger / success
+   Mesma faixinha core ::before inset:3px
+   ============================================================ */
+.cv-btn {
+    height: 44px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-radius: 6px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #fff;
+    background: #1a1d24;
+    border: 1px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    transition: filter 0.15s ease;
+    white-space: nowrap;
+}
+
+.cv-btn-block { width: 100%; }
+
+.cv-btn::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, #20232a -48%, #15171c 123%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    z-index: -1;
+    transition: filter 0.2s ease;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.cv-btn:hover { border-color: var(--theme); background: #15171c; }
+.cv-btn:hover::before { opacity: 1; }
+.cv-btn-themed::before, .cv-btn-danger::before, .cv-btn-success::before { opacity: 1; }
+
+.cv-btn i { font-size: 13px; color: var(--theme); line-height: 1; }
+.cv-btn span { font-weight: 700; }
+
+.cv-btn:hover::before { filter: brightness(1.4); }
+
+/* themed */
+.cv-btn-themed { border-color: var(--theme); }
+.cv-btn-themed::before {
+    background: linear-gradient(135deg, var(--theme) -48%, #15171c 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+}
+.cv-btn-themed i { color: #fff; }
+
+/* danger */
+.cv-btn-danger { border-color: #ef4444; }
+.cv-btn-danger::before {
+    background: linear-gradient(135deg, #ef4444 -48%, #15171c 123%);
+    border: 1px solid rgba(239,68,68,0.6);
+}
+.cv-btn-danger i { color: #fff; }
+
+/* success */
+.cv-btn-success { border-color: #22c55e; }
+.cv-btn-success::before {
+    background: linear-gradient(135deg, #22c55e -48%, #15171c 123%);
+    border: 1px solid rgba(34,197,94,0.6);
+}
+.cv-btn-success i { color: #fff; }
+
+.cv-btn:disabled,
+.cv-btn[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   CORE UNIFY — propaga estilo da garagem (faixinha core)
+   para dealership, mechanic, manager, invoices, notify
+   ============================================================ */
+
+/* --- Cards opacos #15171c em todas as listas --- */
+#dealership .list .vehicle,
+#manager .cveh,
+#manager .item,
+#mechanic-category .item,
+.invoice {
+    background: #15171c !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+#dealership .list .vehicle.selected,
+#manager .cveh.selected,
+.invoice.currentVehicle {
+    background:
+        linear-gradient(90deg, rgba(var(--theme-rgb), 0.10), rgba(var(--theme-rgb), 0.02) 70%),
+        #15171c !important;
+    border: 1px solid rgba(var(--theme-rgb), 0.55) !important;
+}
+
+/* --- Bot\u00f5es de a\u00e7\u00e3o (faixinha core) --- */
+#dealership .action,
+#manager .button,
+.invoice .buttons .button,
+#mechanic-category .cart .button,
+#mechanic-menu .menu .button {
+    position: relative !important;
+    isolation: isolate;
+    background: transparent !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+    color: #fff !important;
+    z-index: 0;
+    overflow: visible;
+}
+
+#dealership .action::before,
+#manager .button::before,
+.invoice .buttons .button::before,
+#mechanic-category .cart .button::before,
+#mechanic-menu .menu .button::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.10) -48%, rgba(255,255,255,0.012) 123%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 5px;
+    z-index: -1;
+    transition: filter 0.2s ease;
+    pointer-events: none;
+}
+
+/* primary (themed) variants */
+#dealership .action.buy,
+#dealership .action.testDrive,
+#manager .button.new,
+#manager .button.find,
+#manager .button.save,
+.invoice .buttons .button.call,
+.invoice .buttons .button.apply,
+#mechanic-category .cart .button,
+#mechanic-menu .menu .cart .button,
+#mechanic-menu .menu .button.confirm {
+    border: 1px solid var(--theme) !important;
+}
+
+#dealership .action.buy::before,
+#dealership .action.testDrive::before,
+#manager .button.new::before,
+#manager .button.find::before,
+#manager .button.save::before,
+.invoice .buttons .button.call::before,
+.invoice .buttons .button.apply::before,
+#mechanic-category .cart .button::before,
+#mechanic-menu .menu .cart .button::before,
+#mechanic-menu .menu .button.confirm::before {
+    opacity: 1;
+    background: linear-gradient(135deg, var(--theme) -48%, #15171c 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+}
+
+/* danger (red) variants */
+#manager .button.remove,
+.invoice .buttons .button.cancel {
+    border: 1px solid #ef4444 !important;
+}
+
+#manager .button.remove::before,
+.invoice .buttons .button.cancel::before {
+    opacity: 1;
+    background: linear-gradient(135deg, #ef4444 -48%, #15171c 123%);
+    border: 1px solid rgba(239, 68, 68, 0.6);
+}
+
+/* success (green) variants */
+#manager .button.renew,
+.invoice .buttons .button.apply.currentVehicle {
+    border: 1px solid #22c55e !important;
+}
+
+#manager .button.renew::before,
+.invoice .buttons .button.apply.currentVehicle::before {
+    opacity: 1;
+    background: linear-gradient(135deg, #22c55e -48%, #15171c 123%);
+    border: 1px solid rgba(34, 197, 94, 0.6);
+}
+
+/* hover brightness (mantido) */
+#dealership .action.buy:hover::before,
+#dealership .action.testDrive:hover::before,
+#manager .button.new:hover::before,
+#manager .button.find:hover::before,
+#manager .button.save:hover::before,
+#manager .button.remove:hover::before,
+#manager .button.renew:hover::before,
+.invoice .buttons .button.call:hover::before,
+.invoice .buttons .button.apply:hover::before,
+.invoice .buttons .button.cancel:hover::before,
+#mechanic-category .cart .button:hover::before,
+#mechanic-menu .menu .cart .button:hover::before,
+#mechanic-menu .menu .button.confirm:hover::before {
+    filter: brightness(1.15);
+}
+
+/* --- Badges/tags (faixinha core) --- */
+#dealership .list .vehicle .borrow-icon,
+.invoice .info .key,
+.notify .title,
+.notify .timer {
+    position: relative !important;
+    isolation: isolate;
+    background: transparent !important;
+    border: 1px solid var(--theme) !important;
+    color: #fff !important;
+    z-index: 0;
+    overflow: visible;
+}
+
+#dealership .list .vehicle .borrow-icon::before,
+.invoice .info .key::before,
+.notify .title::before,
+.notify .timer::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: linear-gradient(135deg, var(--theme) -48%, rgba(var(--theme-rgb), 0.012) 123%);
+    border: 1px solid rgba(var(--theme-rgb), 0.6);
+    border-radius: 3px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- Modal antigo (.modal) alinhado ao v-modal --- */
+.modal {
+    background:
+        linear-gradient(15.52deg, rgba(var(--theme-rgb), 0.10) -2.94%, rgba(var(--theme-rgb), 0) 105.36%),
+        linear-gradient(164.65deg, rgba(10, 10, 10, 0.99) 47.85%, rgba(11, 11, 11, 0.792) 99.58%) !important;
+    border: 0.6px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 11px !important;
+    text-align: left !important;
+    animation: vModalIn 0.25s cubic-bezier(0.2,0.8,0.2,1) both !important;
+}
+
+.modal .title {
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* --- Mechanic category boxes opacos --- */
+#mechanic-menu .categories .category,
+#mechanic-category .categories .category {
+    background: #15171c !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+#mechanic-menu .categories .category.selected,
+#mechanic-category .categories .category.selected {
+    background:
+        linear-gradient(90deg, rgba(var(--theme-rgb), 0.10), rgba(var(--theme-rgb), 0.02) 70%),
+        #15171c !important;
+    border: 1px solid rgba(var(--theme-rgb), 0.55) !important;
+}
+
+/* --- Notify card opaco --- */
+.notify {
+    background: #15171c !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+

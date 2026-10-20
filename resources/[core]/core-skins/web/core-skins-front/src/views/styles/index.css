@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Poppins, serif;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* Campos de texto continuam selecionáveis para edição. */
+input,
+textarea {
+	-webkit-user-select: text;
+	user-select: text;
+}
+
+body {
+	color: #ffffff;
+}
+
+html {
+	font-size: calc(min(.833vw, 1.48vh) + 5%);
+}
+
+@media screen and (min-width: 158.75rem) {
+	html {
+		font-size: calc(min(.54978vw, 1.48vh) + 2.5%);
+	}
+}
+
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+	width: 0.25rem;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+	background: rgb(var(--primaryColor));
+	border-radius: 999px;
+}
+
+input[type="range"] {
+	-webkit-appearance: none;
+	appearance: none;
+	background: transparent;
+	cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+	height: 0.25rem;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.15);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 0.875rem;
+	height: 0.875rem;
+	margin-top: -0.3125rem;
+	border-radius: 0;
+	background: rgb(var(--primaryColor));
+	transform: rotate(45deg);
+}
+
+input[type="range"]::-moz-range-track {
+	height: 0.25rem;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.15);
+}
+
+input[type="range"]::-moz-range-thumb {
+	width: 0.875rem;
+	height: 0.875rem;
+	border: none;
+	border-radius: 0;
+	background: rgb(var(--primaryColor));
+	transform: rotate(45deg);
+}

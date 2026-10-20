@@ -1,0 +1,403 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	box-sizing: border-box;
+
+	font-family: "Mulish", sans-serif;
+}
+
+html {
+	font-size: 0.75vw;
+}
+
+@media screen and (min-width: 158.75rem) {
+	html {
+		font-size: 0.625vw;
+	}
+}
+
+body {
+	@apply text-white overflow-hidden select-none;
+}
+
+body,
+#root {
+	height: 100vh;
+	width: 100vw;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+.customScrollbar::-webkit-scrollbar {
+	width: 0.3125rem;
+}
+
+.customScrollbar::-webkit-scrollbar-track {
+	background-color: #d9d9d90a;
+	border-radius: 0.3125rem;
+}
+
+.customScrollbar::-webkit-scrollbar-thumb {
+	background: linear-gradient(
+		49.08deg,
+		rgba(var(--secondaryColor), 0.9) 1.07%,
+		rgba(var(--primaryColor), 0.9) 62.63%
+	);
+	border-radius: 0.3125rem;
+}
+
+.customScrollbar::-webkit-scrollbar-thumb:hover {
+	filter: brightness(0.75);
+}
+
+.customHorizontalScrollbar::-webkit-scrollbar {
+	width: 0.3125rem;
+	height: 0.3125rem;
+}
+
+.customHorizontalScrollbar::-webkit-scrollbar-track {
+	background-color: #d9d9d90a;
+	border-radius: 0.3125rem;
+}
+
+.customHorizontalScrollbar::-webkit-scrollbar-thumb {
+	background: linear-gradient(
+		49.08deg,
+		rgba(var(--secondaryColor), 0.9) 1.07%,
+		rgba(var(--primaryColor), 0.9) 62.63%
+	);
+	border-radius: 0.3125rem;
+}
+
+.customHorizontalScrollbar::-webkit-scrollbar-thumb:hover {
+	filter: brightness(0.75);
+}
+
+.hiddenScrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+/* ============================================================
+   SUPERFICIES
+   ============================================================ */
+.surface-card {
+	position: relative;
+	background: radial-gradient(
+		50% 50% at 50% 50%,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(255, 255, 255, 0.04) 100%
+	);
+}
+
+.surface-panel {
+	position: relative;
+	background: linear-gradient(
+			0deg,
+			rgba(255, 255, 255, 0.012),
+			rgba(255, 255, 255, 0.012)
+		),
+		radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.03) 100%
+		);
+}
+
+.filter-bar {
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.04) 100%
+		),
+		linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04));
+}
+
+.accent-overlay {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+			49.08deg,
+			rgba(var(--secondaryColor), 0.3) 1.07%,
+			rgba(var(--primaryColor), 0.3) 62.63%
+		),
+		radial-gradient(
+			98.39% 608.03% at 50% 50%,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(var(--thirdyColor), 0) 100%
+		);
+	background-blend-mode: screen;
+	border-radius: 0.3125rem;
+	opacity: 0;
+	transition: all 500ms ease;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.accent-overlay::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+			90deg,
+			rgba(237, 234, 229, 0.06) 0%,
+			rgba(153, 153, 153, 0.054) 100%
+		),
+		linear-gradient(
+			0deg,
+			rgba(var(--primaryColor), 0.4),
+			rgba(var(--primaryColor), 0.4)
+		);
+	border-radius: 0.3125rem;
+	background-blend-mode: screen;
+	mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+	mask-composite: exclude;
+	padding: 0.0625rem;
+	opacity: 0;
+	transition: all 500ms ease;
+}
+
+.surface-card:hover .accent-overlay,
+.surface-card:hover .accent-overlay::after {
+	opacity: 1;
+	filter: brightness(0.75);
+}
+
+.accent-overlay.is-active,
+.accent-overlay.is-active::after {
+	opacity: 1 !important;
+	filter: none;
+}
+
+/* ============================================================
+   BOTOES
+   ============================================================ */
+.ghost-btn {
+	position: relative;
+	z-index: 0;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.02) 100%
+		),
+		linear-gradient(0deg, rgba(221, 221, 221, 0.08), rgba(221, 221, 221, 0.08));
+	background-blend-mode: screen;
+	transition: all 300ms ease;
+}
+
+.ghost-btn::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	z-index: -1;
+	background: linear-gradient(
+			49.08deg,
+			rgba(var(--secondaryColor), 0.9) 1.07%,
+			rgba(var(--primaryColor), 0.9) 62.63%
+		),
+		radial-gradient(
+			98.39% 608.03% at 50% 50%,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(var(--thirdyColor), 0) 100%
+		);
+	background-blend-mode: screen;
+	box-shadow: 0 0 0.625rem 0 rgba(var(--primaryColor), 0.651);
+	opacity: 0;
+	transition: all 300ms ease;
+}
+
+.ghost-btn::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	padding: 0.0625rem;
+	mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+	mask-composite: exclude;
+	background: linear-gradient(
+			90deg,
+			rgba(237, 234, 229, 0.06) 0%,
+			rgba(153, 153, 153, 0.054) 100%
+		),
+		linear-gradient(0deg, rgb(var(--primaryColor)), rgb(var(--primaryColor)));
+	background-blend-mode: screen;
+	opacity: 0;
+	transition: all 300ms ease;
+}
+
+.ghost-btn:not(:disabled):hover::after,
+.ghost-btn:not(:disabled):hover::before,
+.ghost-btn.is-active::after,
+.ghost-btn.is-active::before {
+	opacity: 1;
+}
+
+.accent-btn {
+	position: relative;
+	z-index: 0;
+	background: linear-gradient(
+			49.08deg,
+			rgba(var(--secondaryColor), 0.9) 1.07%,
+			rgba(var(--primaryColor), 0.9) 62.63%
+		),
+		radial-gradient(
+			98.39% 608.03% at 50% 50%,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(var(--thirdyColor), 0) 100%
+		);
+	background-blend-mode: screen;
+	box-shadow: 0 0 0.625rem 0 rgba(var(--primaryColor), 0.35);
+	transition: all 300ms ease;
+}
+
+.accent-btn:not(:disabled):hover {
+	filter: brightness(0.75);
+}
+
+.danger-btn {
+	position: relative;
+	z-index: 0;
+	background: linear-gradient(
+			49.08deg,
+			rgba(96, 12, 12, 0.9) 1.07%,
+			rgba(226, 64, 64, 0.9) 62.63%
+		),
+		radial-gradient(
+			98.39% 608.03% at 50% 50%,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(226, 64, 64, 0) 100%
+		);
+	background-blend-mode: screen;
+	box-shadow: 0 0 0.625rem 0 rgba(226, 64, 64, 0.35);
+	transition: all 300ms ease;
+}
+
+.danger-btn:not(:disabled):hover {
+	filter: brightness(0.75);
+}
+
+.ghost-btn:disabled,
+.accent-btn:disabled,
+.danger-btn:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+/* ============================================================
+   TABELA
+   ============================================================ */
+.table-row-bar {
+	background: linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 0.02),
+		rgba(255, 255, 255, 0.02)
+	);
+	transition: all 300ms ease;
+}
+
+.table-row-bar:hover {
+	background: linear-gradient(
+			49.08deg,
+			rgba(var(--secondaryColor), 0.16) 1.07%,
+			rgba(var(--primaryColor), 0.16) 62.63%
+		),
+		linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02));
+	background-blend-mode: screen;
+}
+
+/* ============================================================
+   AMD/CEF compositor fix.
+
+   Keeps rgba/gradient panel layers alive permanently so the
+   AMD compositor in CEF doesn't classify them as "fully
+   transparent" and discard them (which makes panels render
+   invisible at rest and only reappear on hover/animations).
+
+   Targets common panel-shell class patterns plus inline rgba/
+   gradient backgrounds. Adds an invisible animated `::after`
+   ghost layer; visual output is unchanged.
+
+   `:where(...)` carries zero specificity so existing author
+   rules (including `position: absolute|fixed`) always win.
+
+   Classes cujo `::after` e usado pelo design (accent-overlay,
+   ghost-btn) ficam de fora da lista do keepalive.
+
+   See [scripts]/hud/AMD-NUI-FIX.md for full rationale.
+   ============================================================ */
+:where(
+    [class*="-shell"],
+    [class*="-panel"],
+    [class*="-frame"],
+    [class*="-modal"],
+    [class*="-popup"],
+    [class*="-overlay"],
+    [class*="-dialog"],
+    [class*="-window"],
+    [class*="-wrapper"],
+    [class*="-container"],
+    [class*="-content"],
+    [class*="-inner"],
+    [class*="-card"],
+    [class*="-btn"],
+    [class*="-bar"],
+    [style*="linear-gradient"],
+    [style*="rgba("]
+) {
+	position: relative;
+	isolation: isolate;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+[class*="-shell"]::after,
+[class*="-panel"]::after,
+[class*="-frame"]::after,
+[class*="-modal"]::after,
+[class*="-popup"]::after,
+[class*="-dialog"]::after,
+[class*="-window"]::after,
+[class*="-wrapper"]::after,
+[class*="-container"]::after,
+[class*="-content"]::after,
+[class*="-inner"]::after,
+[class*="-card"]::after,
+[class*="-bar"]::after,
+[style*="linear-gradient"]::after,
+[style*="rgba("]::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: -1;
+	background-color: rgba(0, 0, 0, 0.001);
+	will-change: opacity;
+	animation: nui-amd-keepalive 4s linear infinite;
+	border-radius: inherit;
+}
+
+@keyframes nui-amd-keepalive {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.999;
+	}
+}

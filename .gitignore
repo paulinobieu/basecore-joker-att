@@ -1,0 +1,8 @@
+node_modules/
+artifacts/
+cache/
+db/
+.env
+.env.*
+!.env.example
+.replxx_history

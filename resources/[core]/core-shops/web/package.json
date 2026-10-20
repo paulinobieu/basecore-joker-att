@@ -1,0 +1,32 @@
+{
+	"name": "core-shops",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"lint": "bunx biome lint --write --unsafe ./src && bunx biome format ./src"
+	},
+	"dependencies": {
+		"@tabler/icons-react": "^3.45.0",
+		"clsx": "^2.1.1",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"tailwind-merge": "^2.3.0",
+		"zustand": "^5.0.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "^20.14.9",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"@vitejs/plugin-react-swc": "^3.5.0",
+		"autoprefixer": "^10.4.21",
+		"postcss": "^8.5.3",
+		"tailwindcss": "3",
+		"typescript": "^5.2.2",
+		"vite": "^5.3.1"
+	}
+}

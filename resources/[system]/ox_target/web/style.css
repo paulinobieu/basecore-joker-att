@@ -1,0 +1,119 @@
+@import url("https://fonts.cdnfonts.com/css/akrobat");
+
+@font-face {
+  font-family: "cpx-icons-bold";
+  src: url("fonts/cpx-icons-bold.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::selection {
+  background: transparent;
+  color: #16ad76;
+}
+
+::-moz-selection {
+  background: transparent;
+  color: #16ad76;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  overflow: hidden;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  line-height: 1;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon.bold {
+  font-family: "cpx-icons-bold" !important;
+}
+
+.icon.bold.story::before {
+  content: "\ec65";
+}
+
+.target {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.target-wrapper {
+  height: 400px;
+  position: absolute;
+  top: calc(50% - 15px);
+  left: calc(50% + 30px);
+}
+
+.target-eye {
+  color: #ffffff;
+  font-size: 25px !important;
+  transition: color 100ms ease;
+}
+
+.target-eye.valid {
+  color: var(--target-active, #dc1553);
+}
+
+.target-text {
+  margin-bottom: 5px;
+  padding: 7px;
+  border-radius: 5px;
+  background: rgba(10, 10, 10, 0.25);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1px 0 rgba(0, 0, 0, 0.31);
+  transition: all 100ms ease;
+}
+
+.target-text:hover {
+  padding: 7px;
+  border-radius: 5px;
+  background-color: rgba(var(--target-active-rgb, 220, 21, 83), 0.58);
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 1px 0 rgba(0, 0, 0, 0.38);
+}
+
+.target-label-wrapper {
+  float: left;
+  color: #d6d9df;
+  letter-spacing: 1px;
+  text-shadow: 1px 0 #333333;
+}
+
+.target-label {
+  font-family: "Akrobat", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  list-style: none;
+  user-select: none;
+  white-space: nowrap;
+  text-transform: uppercase;
+}

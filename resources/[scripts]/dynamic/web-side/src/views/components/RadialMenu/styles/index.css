@@ -1,0 +1,138 @@
+/* body {
+	background-image: url("https://cdn.discordapp.com/attachments/634862353128751107/1142604411475075172/nve_screenshot6_1.png");
+	opacity: 0.75;
+} */
+
+div.menuHolder {
+    user-select: none;
+    -moz-user-select: none;
+    position: relative;
+    /* Integer (even) px so the parent's translate(-50%) stays on a whole
+       pixel. rem-based margin can resolve to fractional px in CEF and
+       defeats the even-rounding of resolvedSize. */
+    margin: 10px;
+}
+
+svg.icons {
+    display: none;
+}
+
+svg.menu {
+    position: absolute;
+    overflow: visible;
+    transition: 0.2s;
+    transition-timing-function: ease-out;
+    shape-rendering: geometricPrecision;
+    text-rendering: geometricPrecision;
+}
+
+svg.menu g.sector foreignObject > div {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+svg.menu.inner {
+    opacity: 0;
+    visibility: hidden;
+}
+
+svg.menu.outer {
+    opacity: 0;
+    visibility: hidden;
+}
+
+svg.menu > g.sector > path {
+    cursor: pointer;
+    /*transition: 0.1s;*/
+}
+
+svg.menu > g.sector > text,
+svg.menu > g.sector > use,
+svg.menu > g.center > text {
+    cursor: pointer;
+    fill: white;
+    font-weight: 700;
+}
+
+/* Drop-shadow on icons (HTML inside foreignObject) and SVG text so they
+   stay legible against bright in-game backgrounds. Values are sized for
+   the 1000-unit viewBox (≈0.36 CSS px per user unit). */
+svg.menu g.sector foreignObject i,
+svg.menu g.center text,
+svg.menu g.sector text {
+    text-shadow:
+        0 0 12px rgba(0, 0, 0, 0.9),
+        0 3px 6px rgba(0, 0, 0, 0.85),
+        0 0 2px rgba(0, 0, 0, 1);
+}
+
+svg.menu > g.sector > path {
+    transition: 0ms ease-in-out;
+}
+
+svg.menu > g.center:hover > circle {
+    fill: transparent !important;
+}
+
+svg.menu > g.center > circle {
+    cursor: pointer;
+    stroke-width: 0;
+    stroke: transparent;
+    fill: transparent;
+}
+
+svg.menu > g.center > text,
+svg.menu > g.center > use {
+    cursor: pointer;
+    fill: white;
+}
+
+svg.menu > g > foreignObject {
+    pointer-events: none;
+}
+
+.action-icon {
+    pointer-events: none;
+}
+
+/* Radial hover visuals */
+svg.menu g.sector .sectorOutline {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.35);
+    stroke-width: 0.55;
+    vector-effect: non-scaling-stroke;
+}
+
+svg.menu g.sector .sectorTopStroke {
+    fill: none;
+    stroke: rgb(var(--primaryColor));
+    stroke-width: 3;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+}
+
+svg.menu g.sector .sectorHoverBg {
+    mix-blend-mode: screen;
+}
+
+svg.menu g.sector .sectorHoverTint,
+svg.menu g.sector .sectorHoverGradient {
+    pointer-events: none;
+}
+
+svg.menu .radialOutline {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 0.0344rem;
+    vector-effect: non-scaling-stroke;
+}
+
+svg.menu g.center .centerAction {
+    font-weight: 700;
+}
+
+svg.menu g.center .centerTitle {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}

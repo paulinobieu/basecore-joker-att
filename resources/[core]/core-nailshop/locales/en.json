@@ -1,0 +1,73 @@
+{
+    "Web": {
+        "header": {
+            "nails": "NAILS",
+            "menu": "MENU",
+            "description": "Explore our menu for a variety of nail services."
+        },
+        "labels": {
+            "category": "Category:"
+        },
+        "lengths": {
+            "length_of_nails": "Length of Nails",
+            "select_length": "Select Length",
+            "short": "Short Nails",
+            "medium": "Medium Nails",
+            "long": "Long Nails",
+            "small_french": "Small French Nails"
+        },
+        "colors": {
+            "color_of_nails": "Color of Nails",
+            "select_color": "Select Color",
+            "none": "None"
+        },
+        "patterns": {
+            "pattern_of_nails": "Pattern of Nails",
+            "select_pattern": "Select Pattern",
+            "none": "None"
+        },
+        "fingers": {
+            "choose_finger": "Choose the Finger",
+            "left_hand": "Left Hand",
+            "right_hand": "Right Hand",
+            "thumb": "Thumb",
+            "index": "Index",
+            "middle": "Middle",
+            "ring": "Ring",
+            "pinkie": "Pinkie",
+            "apply": "Apply"
+        },
+        "save_design": {
+            "save_nail_design": "Save Nail Design",
+            "would_you_like_to_save_your_current_nail_design": "Would you like to save your current nail design?",
+            "cancel": "Cancel",
+            "save": "Save"
+        }
+    },
+    "Lua": {
+        "notify": {
+            "reloaded_nail_design": "Your nail design has been reloaded from the database.",
+            "no_nail_design_found": "No nail design found in the database.",
+            "please_wait_seconds": "Please wait {0} seconds before using this again.",
+            "chair_not_found": "Chair not found.",
+            "studio_not_found": "Nail studio not found.",
+            "table_not_found": "Nail table not found.",
+            "table_occupied": "The selected table is currently occupied.",
+            "invitation_failed": "Failed to send invitation. Please try again.",
+            "too_far_for_invitation": "You are too far from the target player to send an invitation.",
+            "invitation_declined": "You have declined the nail studio invitation."
+        },
+        "input": {
+            "invite_to_customer": "Invite to Customer",
+            "player_id": "Player ID"
+        },
+        "target": {
+            "open_nail_design_menu": "Open Nail Design Menu",
+            "sit_here": "Create Nail Design"
+        },
+        "alert": {
+            "nail_studio_invitation_header": "Nail Studio Invitation",
+            "nail_studio_invitation_content": "You have been invited to a nail studio session. Do you want to join now?"
+        }
+    }
+}

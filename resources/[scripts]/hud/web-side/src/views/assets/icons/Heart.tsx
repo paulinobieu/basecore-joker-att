@@ -1,0 +1,17 @@
+import { memo } from "react";
+
+export const LifeIcon = memo(() => (
+    <svg
+        width=".875rem"
+        height=".8125rem"
+        viewBox="0 0 14 13"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="relative z-10"
+    >
+        <path
+            d="M7 13L5.985 12.0649C2.38 8.7564 0 6.5673 0 3.89646C0 1.70736 1.694 0 3.85 0C5.068 0 6.237 0.573842 7 1.47357C7.763 0.573842 8.932 0 10.15 0C12.306 0 14 1.70736 14 3.89646C14 6.5673 11.62 8.7564 8.015 12.0649L7 13Z"
+            fill="white"
+        />
+    </svg>
+));

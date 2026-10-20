@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ox Target Preview</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background:
+          radial-gradient(circle at 50% 45%, rgba(119, 126, 136, 0.2), transparent 28%),
+          linear-gradient(135deg, #1d2228 0%, #111418 52%, #242a31 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="target">
+      <i id="target-eye" class="target-eye icon bold story" aria-hidden="true"></i>
+      <div class="target-wrapper">
+        <div class="target-label-wrapper">
+          <div id="options-wrapper" class="target-label"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const target = document.querySelector(".target");
+      const targetEye = document.getElementById("target-eye");
+      const optionsWrapper = document.getElementById("options-wrapper");
+
+      document.documentElement.style.setProperty("--target-active", "#dc1553");
+      target.style.display = "flex";
+      targetEye.classList.add("valid");
+
+      ["Abrir porta", "Guardar veículo", "Acessar propriedade"].forEach((label) => {
+        const option = document.createElement("div");
+        option.className = "target-text";
+        option.textContent = label;
+        optionsWrapper.appendChild(option);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,385 @@
+import { useClickSound } from "@app/hooks/useClickSound";
+import { useLayout } from "@app/hooks/useLayout";
+import { useNuiMessage } from "@app/hooks/useNuiMessage";
+import { useVisibilityStore } from "@app/stores/Visibility";
+import { cn } from "@app/utils";
+import { fetchNui } from "@app/utils/fetchNui";
+import { isEnvBrowser } from "@app/utils/misc";
+import type { MenuItem } from "@views/@types/menu";
+import { ErrorBoundary } from "@views/components/ErrorBoundary";
+import { RadialMenu } from "@views/components/RadialMenu";
+import { useCallback, useState } from "react";
+import { useShallow } from "zustand/shallow";
+
+export function Layout() {
+    const { visible, setVisible, fetchHideFrame } = useVisibilityStore(
+        useShallow((state) => ({
+            visible: state.visible,
+            setVisible: state.setVisible,
+            fetchHideFrame: state.fetchHideFrame,
+        })),
+    );
+
+    const [menuItems, setMenuItems] = useState<MenuItem[]>(
+        isEnvBrowser()
+            ? [
+                  {
+                      icon: "fas fa-sliders-h",
+                      id: "outfit",
+                      title: "Roupas",
+                      items: [
+                          {
+                              icon: "fas fa-floppy-disk",
+                              triggerArgs: ["aplicar"],
+                              id: "outfit-apply",
+                              server: true,
+                              title: "Aplicar",
+                              trigger: "player:outfitFunctions",
+                          },
+                          {
+                              icon: "fas fa-plus",
+                              triggerArgs: ["salvar"],
+                              id: "outfit-save",
+                              server: true,
+                              title: "Salvar",
+                              trigger: "player:outfitFunctions",
+                          },
+                          {
+                              icon: "fas fa-trash",
+                              triggerArgs: ["remover"],
+                              id: "outfit-remove",
+                              server: true,
+                              title: "Remover",
+                              trigger: "player:outfitFunctions",
+                          },
+                          {
+                              icon: "fas fa-door-open",
+                              id: "hair-toggle",
+                              server: false,
+                              title: "Prender/Soltar cabelo",
+                              trigger: "barbershop:toggleHair",
+                              image: "https://cdn.cpx.gg/hud/radial/hair.png",
+                          },
+                      ],
+                  },
+                  {
+                      icon: "fa-duotone fa-solid fa-clothes-hanger",
+                      id: "premiumfit",
+                      title: "Roupas Premium",
+                      items: [
+                          {
+                              icon: "fas fa-sliders-h",
+                              id: "premiumfit",
+                              title: "Premium Básico",
+                              items: [
+                                  {
+                                      icon: "fas fa-plus",
+                                      triggerArgs: ["preaplicar1"],
+                                      id: "premiumfit-apply1",
+                                      server: true,
+                                      title: "Aplicar",
+                                      trigger: "player:outfitFunctions",
+                                  },
+                                  {
+                                      icon: "fas fa-floppy-disk",
+                                      triggerArgs: ["presalvar1"],
+                                      id: "premiumfit-save1",
+                                      server: true,
+                                      title: "Salvar",
+                                      trigger: "player:outfitFunctions",
+                                  },
+                              ],
+                          },
+                          {
+                              icon: "fas fa-sliders-h",
+                              id: "premiumfit",
+                              title: "Premium Básico",
+                              items: [
+                                  {
+                                      icon: "fas fa-plus",
+                                      triggerArgs: ["preaplicar2"],
+                                      id: "premiumfit-apply2",
+                                      server: true,
+                                      title: "Aplicar",
+                                      trigger: "player:outfitFunctions",
+                                  },
+                                  {
+                                      icon: "fas fa-floppy-disk",
+                                      triggerArgs: ["presalvar2"],
+                                      id: "premiumfit-save2",
+                                      server: true,
+                                      title: "Salvar",
+                                      trigger: "player:outfitFunctions",
+                                  },
+                              ],
+                          },
+                          {
+                              icon: "fas fa-sliders-h",
+                              id: "premiumfit",
+                              title: "Premium Master",
+                              items: [
+                                  {
+                                      icon: "fas fa-plus",
+                                      triggerArgs: ["preaplicar3"],
+                                      id: "premiumfit-apply3",
+                                      server: true,
+                                      title: "Aplicar",
+                                      trigger: "player:outfitFunctions",
+                                  },
+                                  {
+                                      icon: "fas fa-floppy-disk",
+                                      triggerArgs: ["presalvar3"],
+                                      id: "premiumfit-save3",
+                                      server: true,
+                                      title: "Salvar",
+                                      trigger: "player:outfitFunctions",
+                                  },
+                              ],
+                          },
+                          {
+                              icon: "fas fa-sliders-h",
+                              id: "premiumfit",
+                              title: "Premium Master",
+                              items: [
+                                  {
+                                      icon: "fas fa-plus",
+                                      triggerArgs: ["preaplicar4"],
+                                      id: "premiumfit-apply4",
+                                      server: true,
+                                      title: "Aplicar",
+                                      trigger: "player:outfitFunctions",
+                                  },
+                                  {
+                                      icon: "fas fa-floppy-disk",
+                                      triggerArgs: ["presalvar4"],
+                                      id: "premiumfit-save4",
+                                      server: true,
+                                      title: "Salvar",
+                                      trigger: "player:outfitFunctions",
+                                  },
+                              ],
+                          },
+                      ],
+                  },
+                  {
+                      icon: "fas fa-home",
+                      id: "propertys",
+                      title: "Casa",
+                      items: [
+                          {
+                              icon: "fas fa-home",
+                              id: "propertys-list",
+                              server: false,
+                              title: "Propriedades",
+                              trigger: "homes:togglePropertys",
+                          },
+                          {
+                              icon: "fas fa-lock",
+                              triggerArgs: ["trancar"],
+                              id: "propertys-lock",
+                              server: true,
+                              title: "Trancar",
+                              trigger: "homes:invokeSystem",
+                          },
+                          {
+                              icon: "fas fa-door-open",
+                              triggerArgs: ["garagem"],
+                              id: "propertys-garage",
+                              server: true,
+                              title: "Garagem",
+                              trigger: "homes:invokeSystem",
+                              image: "https://cdn.cpx.gg/hud/radial/garage.png",
+                          },
+                          {
+                              icon: "fas fa-users-gear",
+                              triggerArgs: ["checar"],
+                              id: "propertys-permissions",
+                              server: true,
+                              title: "Permissões",
+                              trigger: "homes:invokeSystem",
+                          },
+                          {
+                              icon: "fas fa-chart-line",
+                              triggerArgs: ["tax"],
+                              id: "propertys-tax",
+                              server: true,
+                              title: "Taxas",
+                              trigger: "homes:invokeSystem",
+                          },
+                          {
+                              icon: "fas fa-box",
+                              triggerArgs: ["armario"],
+                              id: "propertys-chest",
+                              server: true,
+                              title: "Armário",
+                              trigger: "homes:invokeSystem",
+                          },
+                          {
+                              icon: "fas fa-box",
+                              triggerArgs: ["geladeira"],
+                              id: "propertys-fridge",
+                              server: true,
+                              title: "Geladeira",
+                              trigger: "homes:invokeSystem",
+                          },
+                          {
+                              icon: "fas fa-house-flag",
+                              triggerArgs: ["vender"],
+                              id: "propertys-sell",
+                              server: true,
+                              title: "Vender",
+                              trigger: "homes:invokeSystem",
+                          },
+                      ],
+                  },
+                  {
+                      icon: "fas fa-ellipsis",
+                      id: "others",
+                      title: "Outros",
+                      items: [
+                          {
+                              icon: "fas fa-circle-info",
+                              id: "others-identity",
+                              server: true,
+                              title: "Informações",
+                              trigger: "player:identityFunctions",
+                          },
+                          {
+                              icon: "fas fa-heart",
+                              id: "others-wounds",
+                              server: false,
+                              title: "Ferimentos",
+                              trigger: "paramedic:myInjuries",
+                          },
+                          {
+                              icon: "fas fa-shield",
+                              id: "others-territories",
+                              server: false,
+                              title: "GPS / Mapa",
+                              items: [
+                                  {
+                                      icon: "fas fa-circle-info",
+                                      id: "players-map-blips",
+                                      server: false,
+                                      title: "Marcadores GPS",
+                                      trigger: "blipsystem:toggleBlips",
+                                  },
+                                  {
+                                      icon: "fas fa-shield",
+                                      id: "others-wild-bet",
+                                      server: false,
+                                      title: "Áreas Jogo do Bicho",
+                                      trigger: "wild_bet:toggleZoneBlips",
+                                  },
+                                  {
+                                      icon: "fas fa-shop",
+                                      id: "others-territories",
+                                      server: false,
+                                      title: "Territórios",
+                                      trigger: "territories:toggleView",
+                                  },
+                              ],
+                          },
+                          {
+                              icon: "fas fa-wine-glass",
+                              id: "others-experience",
+                              server: true,
+                              title: "Experiência",
+                              trigger: "vrp:showExperience",
+                          },
+                          {
+                              icon: "fas fa-circle-info",
+                              id: "others-dismantle",
+                              server: true,
+                              title: "Desmanche",
+                              trigger: "inventory:Dismantle",
+                          },
+                          {
+                              icon: "fas fa-truck",
+                              id: "others-vehicle-tow",
+                              server: false,
+                              title: "Rebocar",
+                              trigger: "towdriver:invokeTow",
+                          },
+                          {
+                              icon: "fas fa-shop",
+                              id: "others-business",
+                              server: true,
+                              title: "Negócio",
+                              trigger: "business:my",
+                          },
+                      ],
+                  },
+                  {
+                      icon: "fas fa-user",
+                      id: "others-players",
+                      title: "Jogador",
+                      items: [
+                          {
+                              icon: "fas fa-car",
+                              triggerArgs: ["cv"],
+                              id: "others-players-cv",
+                              server: true,
+                              title: "Colocar no Veículo",
+                              trigger: "player:cvFunctions",
+                          },
+                          {
+                              icon: "fas fa-car",
+                              triggerArgs: ["rv"],
+                              id: "others-players-rv",
+                              server: true,
+                              title: "Remover do Veículo",
+                              trigger: "player:cvFunctions",
+                          },
+                          {
+                              icon: "fas fa-car",
+                              id: "others-players-trunk",
+                              server: true,
+                              title: "Checar Porta-Malas",
+                              trigger: "player:checkTrunk",
+                          },
+                      ],
+                  },
+              ]
+            : [],
+    );
+
+    useLayout();
+    useClickSound();
+
+    useNuiMessage("setMenuItems", setMenuItems);
+
+    const handleAction = useCallback(
+        async (item: MenuItem) => {
+            const response = await fetchNui({
+                path: "triggerAction",
+                payload: { id: item.id },
+                mockData: true,
+            });
+
+            if (!response) return;
+
+            setVisible(false);
+        },
+        [setVisible],
+    );
+
+    return (
+        <div
+            className={cn(
+                "-translate-y-1/2 -translate-x-1/2 absolute top-1/2 left-1/2 z-[2] flex items-center justify-center transition-opacity duration-500 will-change-[opacity]",
+                visible ? "opacity-100" : "opacity-0",
+            )}
+        >
+            <ErrorBoundary>
+                <RadialMenu
+                    menuItems={menuItems}
+                    isNight={false}
+                    size={"20.625rem"}
+                    onAction={handleAction}
+                    onClose={fetchHideFrame}
+                />
+            </ErrorBoundary>
+        </div>
+    );
+}

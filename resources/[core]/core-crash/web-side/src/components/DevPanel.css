@@ -1,0 +1,53 @@
+.dev-panel {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 9999;
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  min-width: 260px;
+  font-family: 'Manrope', sans-serif;
+}
+
+.dev-panel h3 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #0143bb;
+}
+
+.dev-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.dev-panel button {
+  flex: 1;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #ccc;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dev-panel button:hover {
+  background: #0143bb;
+  color: #fff;
+}
+
+.dev-demo {
+  background: #0143bb !important;
+  color: #fff !important;
+}
+
+.dev-demo:hover {
+  background: #0155e0 !important;
+}

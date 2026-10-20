@@ -1,0 +1,274 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+
+    font-family: "Outfit", serif;
+}
+
+html {
+    font-size: calc(min(0.833vw, 1.48vh) + 10%);
+}
+
+@media screen and (min-width: 158.75rem) {
+    html {
+        font-size: calc(min(0.54978vw, 1.48vh) + 25%);
+    }
+}
+
+body {
+    @apply text-white overflow-hidden select-none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 500ms ease-out;
+}
+
+.animate-fadeOut {
+    animation: fadeOut 500ms ease-out;
+}
+
+.velocimeter-runtime .duration-300 {
+    transition-duration: 100ms;
+}
+
+.gradientBorder {
+    padding: 0.0625rem;
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+}
+
+@keyframes fillProgress {
+    from {
+        height: 0;
+        y: 51;
+    }
+    to {
+        height: 42;
+        y: 9;
+    }
+}
+
+@keyframes showNotify {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0%);
+    }
+}
+@keyframes hideNotify {
+    from {
+        opacity: 1;
+        transform: translate(0%);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+@keyframes timerStroke {
+    from {
+        stroke-dashoffset: 120;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fadeInAnnounce {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0%);
+    }
+}
+
+.animate-fadeInAnnounce {
+    animation: fadeInAnnounce 350ms ease-in;
+}
+
+svg,
+span,
+h1,
+img {
+    pointer-events: none;
+}
+
+.hideScroll::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes hideChat {
+    from {
+        opacity: 1;
+        transform: translate(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+}
+@keyframes showChat {
+    from {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+/*
+ * GPU compositor consistency fix.
+ *
+ * background-blend-mode (Tailwind: bg-blend-*) renders inconsistently across
+ * Chromium/CEF GPU backends. On some AMD and integrated GPUs the blend layer
+ * is skipped/composited differently, making opaque panels look transparent.
+ *
+ * isolation: isolate forces the element into its own stacking context so the
+ * blend is always computed against a transparent backdrop (same result on
+ * every GPU). It does not change any colors, opacities, sizes or positions.
+ */
+[class*="bg-blend-"] {
+    isolation: isolate;
+}
+
+/*
+ * AMD/CEF compositor fix.
+ *
+ * Forces the menu panel into its own GPU-composited layer with an isolated
+ * stacking context, so the alpha channel of stacked rgba() gradients is
+ * preserved consistently across drivers (AMD, NVIDIA, Intel).
+ *
+ * NOTE: We deliberately avoid `contain: layout paint`, `transform` on the
+ * panel itself, and any rule on html/body, because those create a new
+ * containing block for `position: absolute` and break the panel's centering
+ * (which uses `top/left: 50%` + Tailwind's translate animation).
+ *
+ * The "ghost" alpha background forces the compositor to allocate a real
+ * RGBA layer so AMD drivers do not discard it as fully transparent.
+ */
+.menu-shell {
+    isolation: isolate;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.001);
+}
+
+/*
+ * The original gradient design lives in a pseudo-element with an infinite
+ * imperceptible opacity animation. This keeps the GPU compositor layer
+ * "alive" forever, so AMD drivers do not drop the rgba layer when the
+ * panel is static (which was making the panel turn invisible at rest and
+ * only reappear during hover/transition repaints).
+ *
+ * Pseudo-elements do not affect the host's position/layout, so the panel's
+ * absolute centering animation stays intact.
+ */
+.menu-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        linear-gradient(
+            164.65deg,
+            rgba(10, 10, 10, 0.99) 47.85%,
+            rgba(11, 11, 11, 0.792) 99.58%
+        ),
+        linear-gradient(
+            15.52deg,
+            rgba(var(--primaryColor), 0.08) -2.94%,
+            rgba(var(--primaryColor), 0) 105.36%
+        );
+    will-change: opacity;
+    animation: menu-shell-keepalive 4s linear infinite;
+}
+
+.menu-shell > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes menu-shell-keepalive {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.999;
+    }
+}
+
+/*
+ * Generic AMD/CEF compositor fix for any panel with rgba()-only backgrounds.
+ *
+ * Usage:
+ *   <div className="amd-shell ..." style={{ "--amd-bg": "linear-gradient(...)" }}>
+ *
+ * Optional CSS vars:
+ *   --amd-bg     : background-image stack (gradients) – moves to the pseudo
+ *   --amd-blend  : background-blend-mode for the pseudo (e.g. "screen")
+ *
+ * The host gets a "ghost" alpha so AMD drivers always allocate a real RGBA
+ * layer. The gradient lives in ::before with an infinite imperceptible
+ * keepalive animation, keeping the GPU layer alive permanently. We use
+ * z-index: -1 (contained by `isolation: isolate`) so children don't need
+ * any positioning tweaks.
+ */
+.amd-shell {
+    position: relative;
+    isolation: isolate;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.001);
+}
+
+.amd-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+    background: var(--amd-bg, transparent);
+    background-blend-mode: var(--amd-blend, normal);
+    will-change: opacity;
+    animation: menu-shell-keepalive 4s linear infinite;
+}

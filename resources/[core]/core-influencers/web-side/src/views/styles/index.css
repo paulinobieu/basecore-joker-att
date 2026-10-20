@@ -1,0 +1,108 @@
+@import "./creator.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	box-sizing: border-box;
+
+	font-family: "Outfit", Arial, Helvetica, sans-serif;
+}
+
+html,
+body,
+#root {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: transparent;
+	line-height: 1.2;
+}
+
+html {
+	font-size: 100%;
+}
+
+@media screen and (max-width: 1570px) {
+	html {
+		font-size: 88%;
+	}
+}
+@media screen and (max-width: 1366px) {
+	html {
+		font-size: 80%;
+	}
+}
+@media screen and (max-width: 1180px) {
+	html {
+		font-size: 70%;
+	}
+}
+@media screen and (max-height: 860px) {
+	html {
+		font-size: 86%;
+	}
+}
+@media screen and (max-height: 760px) {
+	html {
+		font-size: 74%;
+	}
+}
+@media screen and (min-aspect-ratio: 21/9) {
+	html {
+		font-size: 110%;
+	}
+}
+
+body {
+	@apply select-none text-white;
+}
+
+/* ============================================================
+   AMD/CEF compositor fix — mantém as camadas de fundo
+   rgba/gradiente "vivas" para o compositor AMD no CEF não
+   descartá-las (painel some em repouso). Camada ::after
+   invisível e animada; saída visual inalterada.
+   ============================================================ */
+:where(
+		[class*="-frame"],
+		[class*="-panel"],
+		[class*="-modal"],
+		[class*="-overlay"],
+		[class*="-card"]
+	) {
+	position: relative;
+	isolation: isolate;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+[class*="-frame"]::after,
+[class*="-panel"]::after,
+[class*="-modal"]::after,
+[class*="-overlay"]::after,
+[class*="-card"]::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: -1;
+	background-color: rgba(0, 0, 0, 0.001);
+	will-change: opacity;
+	animation: nui-amd-keepalive 4s linear infinite;
+	border-radius: inherit;
+}
+
+@keyframes nui-amd-keepalive {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.999;
+	}
+}

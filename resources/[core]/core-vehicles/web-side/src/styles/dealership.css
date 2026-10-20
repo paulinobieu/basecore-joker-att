@@ -1,0 +1,1639 @@
+/* ======================================================================= */
+/* DEALERSHIP v2 (.dz)                                                     */
+/* --u = 1px na referencia 1920x1080, derivado do MENOR entre largura e     */
+/* altura: encolhe junto em telas baixas em vez de estourar na vertical.    */
+/* ======================================================================= */
+
+#dealership.dz {
+    --u: clamp(0.55px, min(0.0521vw, 0.0926vh), 2px);
+
+    --dz-accent: var(--theme, #1FCB63);
+    --dz-accent-rgb: var(--theme-rgb, 31, 203, 99);
+    --dz-font: 'Mulish', sans-serif;
+
+    --dz-pad-x: min(calc(var(--u) * 52), 6vw);
+    --dz-pad-y: min(calc(var(--u) * 42), 5.5vh);
+    --dz-col: min(calc(var(--u) * 400), 30vw);
+
+    --dz-fs-xs: calc(var(--u) * 11);
+    --dz-fs-sm: calc(var(--u) * 12);
+    --dz-fs-md: calc(var(--u) * 13);
+    --dz-fs-lg: calc(var(--u) * 14);
+    --dz-fs-xl: calc(var(--u) * 15);
+    --dz-fs-2xl: calc(var(--u) * 16);
+    --dz-fs-card: calc(var(--u) * 21);
+    --dz-fs-title: calc(var(--u) * 44);
+    --dz-fs-veh: calc(var(--u) * 38);
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    padding: var(--dz-pad-y) var(--dz-pad-x);
+    font-family: var(--dz-font);
+    color: #fff;
+    animation: dzIn .28s ease;
+}
+
+#dealership.dz * { box-sizing: border-box; }
+
+#dealership.dz::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 16%),
+        linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.30) 26%, rgba(0,0,0,0) 44%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.34) 80%, rgba(0,0,0,0.78) 100%);
+}
+
+@keyframes dzIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* ---------------------------- TOP BAR ---------------------------------- */
+
+#dealership.dz .dz-top {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--u) * 30);
+}
+
+#dealership.dz .dz-tabs {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    overflow-x: auto;
+}
+
+#dealership.dz .dz-tabs::-webkit-scrollbar { display: none; }
+
+#dealership.dz .dz-tab {
+    position: relative;
+    flex: 0 0 auto;
+    padding: 0 calc(var(--u) * 24);
+    font-size: var(--dz-fs-xl);
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.42);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color .2s ease;
+}
+
+#dealership.dz .dz-tab:first-child { padding-left: 0; }
+#dealership.dz .dz-tab:hover { color: rgba(255,255,255,0.75); }
+#dealership.dz .dz-tab.active { color: #fff; }
+
+#dealership.dz .dz-tab:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1em;
+    background: rgba(255,255,255,0.18);
+}
+
+#dealership.dz .dz-wallet {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 34);
+    flex-shrink: 0;
+}
+
+#dealership.dz .dz-wallet-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    font-size: var(--dz-fs-2xl);
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+}
+
+#dealership.dz .dz-ic-gem {
+    font-size: 1em;
+    color: var(--dz-accent);
+}
+
+#dealership.dz .dz-ic-money {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: calc(var(--u) * 6);
+    border: 1px solid rgba(255,255,255,0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82em;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+}
+
+#dealership.dz .dz-exit {
+    display: flex;
+    align-items: center;
+    gap: 0.85em;
+    cursor: pointer;
+    font-size: var(--dz-fs-xl);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.85);
+    transition: color .2s ease;
+    white-space: nowrap;
+}
+
+#dealership.dz .dz-exit:hover { color: #fff; }
+
+#dealership.dz .dz-exit-box {
+    width: 2.1em;
+    height: 1.85em;
+    border-radius: calc(var(--u) * 6);
+    border: 1px solid rgba(255,255,255,0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    transition: all .2s ease;
+}
+
+#dealership.dz .dz-exit:hover .dz-exit-box {
+    border-color: var(--dz-accent);
+    color: var(--dz-accent);
+}
+
+/* ------------------------------ BODY ------------------------------------ */
+
+#dealership.dz .dz-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: calc(var(--u) * 40);
+    padding: calc(var(--u) * 30) 0;
+}
+
+/* ---------------------------- LEFT PANEL -------------------------------- */
+
+#dealership.dz .dz-left {
+    width: var(--dz-col);
+    flex: 0 0 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#dealership.dz .dz-badge {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    background: var(--dz-accent);
+    color: #fff;
+    font-size: var(--dz-fs-sm);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    padding: 0.6em 1.25em;
+    border-radius: calc(var(--u) * 4);
+}
+
+#dealership.dz .dz-heading {
+    flex: 0 0 auto;
+    margin-top: calc(var(--u) * 14);
+    font-size: var(--dz-fs-title);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+}
+
+#dealership.dz .dz-search {
+    flex: 0 0 auto;
+    margin-top: calc(var(--u) * 22);
+    height: calc(var(--u) * 42);
+    border-radius: calc(var(--u) * 6);
+    background: rgba(9,13,11,0.55);
+    border: 1px solid rgba(255,255,255,0.10);
+    display: flex;
+    align-items: center;
+    padding: 0 calc(var(--u) * 16);
+    gap: 0.8em;
+}
+
+#dealership.dz .dz-search input {
+    flex: 1 1 auto;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: var(--dz-fs-sm);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+}
+
+#dealership.dz .dz-search input::placeholder { color: rgba(255,255,255,0.42); }
+#dealership.dz .dz-search i { color: rgba(255,255,255,0.45); font-size: var(--dz-fs-md); }
+
+#dealership.dz .dz-list-label {
+    flex: 0 0 auto;
+    margin-top: calc(var(--u) * 22);
+    display: flex;
+    align-items: center;
+    gap: 0.85em;
+    font-size: var(--dz-fs-sm);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: #fff;
+}
+
+#dealership.dz .dz-caret-r {
+    width: 0;
+    height: 0;
+    flex-shrink: 0;
+    border-top: 0.42em solid transparent;
+    border-bottom: 0.42em solid transparent;
+    border-left: 0.66em solid var(--dz-accent);
+}
+
+#dealership.dz .dz-caret {
+    width: 0;
+    height: 0;
+    flex-shrink: 0;
+    border-top: 0.42em solid transparent;
+    border-bottom: 0.42em solid transparent;
+    border-right: 0.66em solid var(--dz-accent);
+}
+
+#dealership.dz .dz-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin-top: calc(var(--u) * 13);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: calc(var(--u) * 14);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 12);
+}
+
+#dealership.dz .dz-list::-webkit-scrollbar { width: 3px; }
+#dealership.dz .dz-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.06); border: none; box-shadow: none; }
+#dealership.dz .dz-list::-webkit-scrollbar-thumb { background-color: rgba(255,255,255,0.35); border-radius: 2px; }
+
+#dealership.dz .dz-list-more {
+    flex: 0 0 auto;
+    margin: calc(var(--u) * 16) auto 0;
+    width: calc(var(--u) * 26);
+    height: calc(var(--u) * 26);
+    border-radius: 50%;
+    border: 1px solid rgba(var(--dz-accent-rgb), 0.65);
+    color: var(--dz-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--dz-fs-xs);
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+#dealership.dz .dz-list-more:hover { background: rgba(var(--dz-accent-rgb), 0.16); }
+
+#dealership.dz .dz-left-note {
+    flex: 0 0 auto;
+    margin-top: calc(var(--u) * 18);
+    font-size: var(--dz-fs-sm);
+    line-height: 1.5;
+    color: rgba(255,255,255,0.38);
+}
+
+#dealership.dz .dz-empty {
+    padding: calc(var(--u) * 42) calc(var(--u) * 20);
+    text-align: center;
+    font-size: var(--dz-fs-md);
+    color: rgba(255,255,255,0.4);
+}
+
+#dealership.dz .dz-empty i { margin-right: 0.6em; }
+
+/* ------------------------------ CARD ------------------------------------ */
+
+#dealership.dz .dz-card {
+    position: relative;
+    flex: 0 0 auto;
+    height: calc(var(--u) * 142);
+    border-radius: calc(var(--u) * 8);
+    background: rgba(8,12,10,0.52);
+    border: 1px solid rgba(255,255,255,0.07);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s ease, background .2s ease;
+}
+
+#dealership.dz .dz-card:hover { border-color: rgba(255,255,255,0.18); }
+
+#dealership.dz .dz-card.selected {
+    border-color: var(--dz-accent);
+    background: linear-gradient(90deg, rgba(var(--dz-accent-rgb),0.24) 0%, rgba(var(--dz-accent-rgb),0.04) 100%);
+}
+
+#dealership.dz .dz-card-info {
+    position: absolute;
+    left: calc(var(--u) * 20);
+    top: calc(var(--u) * 15);
+    right: 44%;
+    z-index: 2;
+}
+
+#dealership.dz .dz-card-top {
+    font-size: var(--dz-fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#dealership.dz .dz-card.selected .dz-card-top { color: var(--dz-accent); }
+
+#dealership.dz .dz-card-name {
+    margin-top: 0.15em;
+    font-size: var(--dz-fs-card);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#dealership.dz .dz-card-badge {
+    margin-top: calc(var(--u) * 14);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    height: 2.3em;
+    padding: 0 1.2em;
+    border-radius: calc(var(--u) * 5);
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: var(--dz-fs-md);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+#dealership.dz .dz-card.selected .dz-card-badge {
+    background: var(--dz-accent);
+    border-color: var(--dz-accent);
+    color: #fff;
+}
+
+#dealership.dz .dz-card img {
+    position: absolute;
+    right: -3%;
+    top: 10%;
+    width: 60%;
+    height: 74%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 12px rgba(0,0,0,0.55));
+    z-index: 1;
+}
+
+#dealership.dz .dz-card-icon {
+    position: absolute;
+    left: calc(var(--u) * 22);
+    bottom: calc(var(--u) * 14);
+    font-size: var(--dz-fs-xs);
+    color: rgba(255,255,255,0.5);
+    z-index: 2;
+}
+
+/* --------------------------- RIGHT PANEL -------------------------------- */
+
+#dealership.dz .dz-right {
+    width: var(--dz-col);
+    flex: 0 0 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    overflow: hidden;
+}
+
+#dealership.dz .dz-veh-name {
+    flex: 0 0 auto;
+    font-size: var(--dz-fs-veh);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+}
+
+#dealership.dz .dz-veh-desc {
+    flex: 0 1 auto;
+    overflow: hidden;
+    margin-top: calc(var(--u) * 20);
+    padding-right: calc(var(--u) * 15);
+    border-right: 2px solid var(--dz-accent);
+    font-size: var(--dz-fs-md);
+    line-height: 1.55;
+    color: rgba(255,255,255,0.55);
+}
+
+#dealership.dz .dz-section-label {
+    flex: 0 0 auto;
+    margin-top: calc(var(--u) * 34);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.85em;
+    font-size: var(--dz-fs-sm);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #fff;
+}
+
+#dealership.dz .dz-stats {
+    flex: 0 0 auto;
+    margin-top: calc(var(--u) * 22);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 22);
+}
+
+#dealership.dz .dz-stat-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: calc(var(--u) * 12);
+}
+
+#dealership.dz .dz-stat-value {
+    font-size: var(--dz-fs-lg);
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    white-space: nowrap;
+}
+
+#dealership.dz .dz-stat-label {
+    font-size: var(--dz-fs-lg);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #fff;
+    white-space: nowrap;
+}
+
+#dealership.dz .dz-stat-bar {
+    margin-top: calc(var(--u) * 9);
+    height: calc(var(--u) * 8);
+    min-height: 4px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.11);
+    overflow: hidden;
+}
+
+#dealership.dz .dz-stat-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--dz-accent);
+    transition: width .3s ease;
+}
+
+#dealership.dz .dz-buy {
+    flex: 0 0 auto;
+    margin-top: calc(var(--u) * 34);
+    height: calc(var(--u) * 50);
+    border-radius: calc(var(--u) * 6);
+    background: var(--dz-accent);
+    color: #fff;
+    font-size: var(--dz-fs-2xl);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85em;
+    cursor: pointer;
+    transition: filter .2s ease;
+}
+
+#dealership.dz .dz-buy:hover { filter: brightness(1.12); }
+
+#dealership.dz .dz-testdrive {
+    flex: 0 0 auto;
+    margin-top: calc(var(--u) * 14);
+    height: calc(var(--u) * 48);
+    border-radius: calc(var(--u) * 6);
+    background: rgba(8,12,10,0.55);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    font-size: var(--dz-fs-md);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85em;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+#dealership.dz .dz-testdrive:hover { border-color: var(--dz-accent); color: var(--dz-accent); }
+
+#dealership.dz .dz-testdrive .dz-steering-wheel {
+    width: 1.25em;
+    height: 1.25em;
+    flex: 0 0 auto;
+}
+
+.v-modal-frame .v-modal-header-icon .dz-steering-wheel {
+    width: calc(var(--vm-u) * 19);
+    height: calc(var(--vm-u) * 19);
+}
+
+/* ------------------------------ BOTTOM ---------------------------------- */
+
+#dealership.dz .dz-bottom {
+    position: relative;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    min-height: calc(var(--u) * 140);
+}
+
+#dealership.dz .dz-colors {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 58);
+}
+
+#dealership.dz .dz-hexes {
+    --hx: calc(var(--u) * 46);
+    --hy: calc(var(--hx) * 1.13);
+    position: relative;
+    flex-shrink: 0;
+    width: calc(var(--hx) * 2);
+    height: calc(var(--hy) * 2.5);
+}
+
+#dealership.dz .dz-hex {
+    position: absolute;
+    width: var(--hx);
+    height: var(--hy);
+    padding: calc(var(--u) * 3);
+    background: rgba(255,255,255,0.14);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    cursor: pointer;
+    transition: transform .18s ease, background .18s ease;
+}
+
+#dealership.dz .dz-hex span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+#dealership.dz .dz-hex:hover { transform: scale(1.08); }
+#dealership.dz .dz-hex.active { background: var(--dz-accent); transform: scale(1.12); }
+
+#dealership.dz .dz-hex-0 { left: calc(var(--hx) * 0.5); top: 0; }
+#dealership.dz .dz-hex-1 { left: 0; top: calc(var(--hy) * 0.75); }
+#dealership.dz .dz-hex-2 { left: var(--hx); top: calc(var(--hy) * 0.75); }
+#dealership.dz .dz-hex-3 {
+    left: calc(var(--hx) * 0.587);
+    top: calc(var(--hy) * 1.58);
+    width: calc(var(--hx) * 0.826);
+    height: calc(var(--hy) * 0.826);
+    opacity: 0.6;
+}
+
+#dealership.dz .dz-wheel {
+    display: block;
+    flex-shrink: 0;
+    width: calc(var(--u) * 148);
+    height: calc(var(--u) * 148);
+    border-radius: 50%;
+    cursor: crosshair;
+}
+
+/* ------------------------------ HINTS ----------------------------------- */
+
+#dealership.dz .dz-hints {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 34);
+    flex-shrink: 0;
+}
+
+#dealership.dz .dz-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.9em;
+    font-size: var(--dz-fs-xs);
+}
+
+#dealership.dz .dz-key {
+    min-width: 2.9em;
+    height: 2.3em;
+    padding: 0 0.8em;
+    border-radius: calc(var(--u) * 5);
+    border: 1px solid rgba(var(--dz-accent-rgb), 0.55);
+    color: var(--dz-accent);
+    font-size: 1em;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dealership.dz .dz-hint span {
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    color: rgba(255,255,255,0.55);
+    white-space: nowrap;
+}
+
+/* ------- janelas estreitas: esconde a coluna direita vazia --------------- */
+
+@media (max-width: 900px) {
+    #dealership.dz .dz-body { gap: calc(var(--u) * 20); }
+    #dealership.dz .dz-colors { position: static; transform: none; margin-right: auto; }
+    #dealership.dz .dz-bottom { flex-wrap: wrap; gap: calc(var(--u) * 16); }
+    #dealership.dz .dz-hints { display: none; }
+}
+
+/* Layout experimental desativado: preserva a composição original. */
+@media (max-width: 0px) {
+
+/* ======================================================================= */
+/* DEALERSHIP v3 — alinhamento visual com a garagem                        */
+/* ======================================================================= */
+
+#dealership.dz {
+    --dz-pad-x: min(calc(var(--u) * 200), 10vw);
+    --dz-pad-y: min(calc(var(--u) * 62), 7vh);
+    --dz-col: min(calc(var(--u) * 380), 34vw);
+}
+
+#dealership.dz::before {
+    background:
+        radial-gradient(circle at 50% 52%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.08) 27%, rgba(0,0,0,0.50) 66%, rgba(0,0,0,0.72) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.18) 34%, rgba(0,0,0,0.18) 62%, rgba(0,0,0,0.72) 100%);
+}
+
+#dealership.dz .dz-top {
+    gap: calc(var(--u) * 18);
+}
+
+#dealership.dz .dz-tabs {
+    gap: calc(var(--u) * 9);
+}
+
+#dealership.dz .dz-tab,
+#dealership.dz .dz-tab:first-child {
+    height: calc(var(--u) * 40);
+    padding: 0 calc(var(--u) * 20);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.72);
+    background: rgba(18,18,20,0.55);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: calc(var(--u) * 8);
+    font-size: var(--dz-fs-sm);
+    font-weight: 650;
+    letter-spacing: 0.02em;
+    transition: color .18s ease, background .18s ease, border-color .18s ease;
+}
+
+#dealership.dz .dz-tab:not(:last-child)::after {
+    content: none;
+}
+
+#dealership.dz .dz-tab:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.18);
+}
+
+#dealership.dz .dz-tab.active {
+    color: #fff;
+    background: var(--dz-accent);
+    border-color: var(--dz-accent);
+}
+
+#dealership.dz .dz-wallet {
+    gap: calc(var(--u) * 9);
+}
+
+#dealership.dz .dz-wallet-item,
+#dealership.dz .dz-exit {
+    height: calc(var(--u) * 40);
+    padding: 0 calc(var(--u) * 13);
+    gap: calc(var(--u) * 9);
+    color: rgba(255,255,255,0.84);
+    background: rgba(18,18,20,0.55);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: calc(var(--u) * 8);
+    font-size: var(--dz-fs-md);
+    font-weight: 650;
+    letter-spacing: 0;
+}
+
+#dealership.dz .dz-wallet-item:hover,
+#dealership.dz .dz-exit:hover {
+    color: #fff;
+    border-color: rgba(var(--dz-accent-rgb), 0.62);
+}
+
+#dealership.dz .dz-ic-money {
+    width: auto;
+    height: auto;
+    color: var(--dz-accent);
+    border: 0;
+    border-radius: 0;
+    font-size: 1em;
+    font-weight: 850;
+}
+
+#dealership.dz .dz-exit-box {
+    width: auto;
+    min-width: calc(var(--u) * 34);
+    height: calc(var(--u) * 24);
+    padding: 0 calc(var(--u) * 7);
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: calc(var(--u) * 5);
+    font-size: calc(var(--u) * 10);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+#dealership.dz .dz-exit:hover .dz-exit-box {
+    color: #fff;
+    background: rgba(var(--dz-accent-rgb), 0.15);
+    border-color: rgba(var(--dz-accent-rgb), 0.5);
+}
+
+#dealership.dz .dz-body {
+    gap: calc(var(--u) * 40);
+    padding: calc(var(--u) * 34) 0 calc(var(--u) * 20);
+}
+
+#dealership.dz .dz-left,
+#dealership.dz .dz-right {
+    background: rgba(18,18,20,0.57);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: calc(var(--u) * 12);
+    box-shadow: 0 calc(var(--u) * 18) calc(var(--u) * 48) rgba(0,0,0,0.18);
+}
+
+#dealership.dz .dz-left {
+    padding: calc(var(--u) * 18);
+}
+
+#dealership.dz .dz-right {
+    padding: calc(var(--u) * 24);
+    text-align: left;
+}
+
+#dealership.dz .dz-badge {
+    padding: 0.55em 1em;
+    border-radius: calc(var(--u) * 7);
+    font-size: var(--dz-fs-xs);
+    letter-spacing: 0.08em;
+}
+
+#dealership.dz .dz-heading {
+    margin-top: calc(var(--u) * 12);
+    font-size: calc(var(--u) * 29);
+    font-weight: 850;
+    line-height: 1.05;
+}
+
+#dealership.dz .dz-search {
+    margin-top: calc(var(--u) * 17);
+    height: calc(var(--u) * 40);
+    padding: 0 calc(var(--u) * 13);
+    background: rgba(255,255,255,0.055);
+    border-radius: calc(var(--u) * 8);
+}
+
+#dealership.dz .dz-search:focus-within {
+    background: rgba(var(--dz-accent-rgb), 0.06);
+    border-color: rgba(var(--dz-accent-rgb), 0.68);
+}
+
+#dealership.dz .dz-search input {
+    letter-spacing: 0.02em;
+}
+
+#dealership.dz .dz-list-label {
+    margin-top: calc(var(--u) * 18);
+    gap: calc(var(--u) * 9);
+    color: rgba(255,255,255,0.72);
+    font-size: var(--dz-fs-xs);
+    letter-spacing: 0.07em;
+}
+
+#dealership.dz .dz-list {
+    margin-top: calc(var(--u) * 11);
+    padding-right: calc(var(--u) * 7);
+    gap: calc(var(--u) * 10);
+}
+
+#dealership.dz .dz-list::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--dz-accent-rgb), 0.72);
+}
+
+#dealership.dz .dz-list-more {
+    margin-top: calc(var(--u) * 12);
+    width: calc(var(--u) * 30);
+    height: calc(var(--u) * 30);
+    color: rgba(255,255,255,0.62);
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.12);
+}
+
+#dealership.dz .dz-list-more:hover {
+    color: #fff;
+    background: rgba(var(--dz-accent-rgb), 0.16);
+    border-color: var(--dz-accent);
+}
+
+#dealership.dz .dz-left-note {
+    margin-top: calc(var(--u) * 13);
+    color: rgba(255,255,255,0.42);
+    font-size: var(--dz-fs-xs);
+}
+
+#dealership.dz .dz-card {
+    height: calc(var(--u) * 124);
+    background: rgba(24,24,26,0.5);
+    border-color: rgba(255,255,255,0.08);
+    border-radius: calc(var(--u) * 10);
+}
+
+#dealership.dz .dz-card:hover {
+    background: rgba(30,30,32,0.64);
+    border-color: rgba(255,255,255,0.20);
+}
+
+#dealership.dz .dz-card.selected {
+    background: rgba(var(--dz-accent-rgb), 0.08);
+    border-color: var(--dz-accent);
+}
+
+#dealership.dz .dz-card-info {
+    left: calc(var(--u) * 14);
+    top: calc(var(--u) * 13);
+    right: 43%;
+}
+
+#dealership.dz .dz-card-top {
+    letter-spacing: 0.06em;
+}
+
+#dealership.dz .dz-card-name {
+    margin-top: calc(var(--u) * 3);
+    font-size: calc(var(--u) * 17);
+    font-weight: 750;
+}
+
+#dealership.dz .dz-card-badge {
+    margin-top: calc(var(--u) * 12);
+    height: calc(var(--u) * 30);
+    padding: 0 calc(var(--u) * 11);
+    background: rgba(255,255,255,0.07);
+    border-radius: calc(var(--u) * 7);
+    font-size: var(--dz-fs-sm);
+    font-weight: 650;
+}
+
+#dealership.dz .dz-card img {
+    right: 0;
+    top: 12%;
+    width: 56%;
+    height: 76%;
+}
+
+#dealership.dz .dz-card-icon {
+    left: auto;
+    right: calc(var(--u) * 12);
+    top: calc(var(--u) * 11);
+    bottom: auto;
+    width: calc(var(--u) * 25);
+    height: calc(var(--u) * 25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.68);
+    background: rgba(0,0,0,0.34);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: calc(var(--u) * 6);
+}
+
+#dealership.dz .dz-veh-name {
+    font-size: calc(var(--u) * 28);
+    font-weight: 850;
+}
+
+#dealership.dz .dz-veh-desc {
+    margin-top: calc(var(--u) * 14);
+    padding: 0 0 0 calc(var(--u) * 14);
+    border: 0;
+    border-left: 2px solid var(--dz-accent);
+    font-size: var(--dz-fs-sm);
+}
+
+#dealership.dz .dz-section-label {
+    margin-top: calc(var(--u) * 26);
+    justify-content: flex-start;
+    gap: calc(var(--u) * 9);
+    color: rgba(255,255,255,0.72);
+    font-size: var(--dz-fs-xs);
+    letter-spacing: 0.07em;
+}
+
+#dealership.dz .dz-section-label .dz-caret {
+    order: -1;
+    border-top: 0.42em solid transparent;
+    border-bottom: 0.42em solid transparent;
+    border-right: 0;
+    border-left: 0.66em solid var(--dz-accent);
+}
+
+#dealership.dz .dz-stats {
+    margin-top: calc(var(--u) * 18);
+    gap: calc(var(--u) * 16);
+}
+
+#dealership.dz .dz-stat-head {
+    flex-direction: row-reverse;
+}
+
+#dealership.dz .dz-stat-value,
+#dealership.dz .dz-stat-label {
+    font-size: var(--dz-fs-sm);
+}
+
+#dealership.dz .dz-stat-value {
+    color: rgba(255,255,255,0.58);
+}
+
+#dealership.dz .dz-stat-label {
+    color: rgba(255,255,255,0.86);
+    letter-spacing: 0.02em;
+}
+
+#dealership.dz .dz-stat-bar {
+    margin-top: calc(var(--u) * 7);
+    height: calc(var(--u) * 6);
+    border-radius: 999px;
+}
+
+#dealership.dz .dz-stat-fill {
+    border-radius: 999px;
+}
+
+#dealership.dz .dz-buy,
+#dealership.dz .dz-testdrive {
+    height: calc(var(--u) * 46);
+    border-radius: calc(var(--u) * 8);
+    font-size: var(--dz-fs-md);
+    letter-spacing: 0.04em;
+}
+
+#dealership.dz .dz-buy {
+    margin-top: calc(var(--u) * 26);
+}
+
+#dealership.dz .dz-testdrive {
+    margin-top: calc(var(--u) * 10);
+    background: rgba(255,255,255,0.055);
+    border-color: rgba(255,255,255,0.11);
+    color: rgba(255,255,255,0.78);
+}
+
+#dealership.dz .dz-right-empty {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--u) * 9);
+    text-align: center;
+    color: rgba(255,255,255,0.38);
+}
+
+#dealership.dz .dz-right-empty i {
+    margin-bottom: calc(var(--u) * 5);
+    color: rgba(255,255,255,0.22);
+    font-size: calc(var(--u) * 38);
+}
+
+#dealership.dz .dz-right-empty strong {
+    color: rgba(255,255,255,0.72);
+    font-size: var(--dz-fs-lg);
+}
+
+#dealership.dz .dz-right-empty span {
+    max-width: calc(var(--u) * 230);
+    font-size: var(--dz-fs-xs);
+    line-height: 1.5;
+}
+
+#dealership.dz .dz-bottom {
+    min-height: calc(var(--u) * 112);
+}
+
+#dealership.dz .dz-colors {
+    gap: calc(var(--u) * 16);
+    padding: calc(var(--u) * 10) calc(var(--u) * 14);
+    background: rgba(18,18,20,0.57);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: calc(var(--u) * 12);
+}
+
+#dealership.dz .dz-colors:empty {
+    display: none;
+}
+
+#dealership.dz .dz-hexes {
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, calc(var(--u) * 34));
+    gap: calc(var(--u) * 6);
+}
+
+#dealership.dz .dz-hex,
+#dealership.dz .dz-hex-0,
+#dealership.dz .dz-hex-1,
+#dealership.dz .dz-hex-2,
+#dealership.dz .dz-hex-3 {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: calc(var(--u) * 34);
+    height: calc(var(--u) * 34);
+    padding: calc(var(--u) * 3);
+    opacity: 1;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: calc(var(--u) * 8);
+    clip-path: none;
+}
+
+#dealership.dz .dz-hex span {
+    border-radius: calc(var(--u) * 5);
+    clip-path: none;
+}
+
+#dealership.dz .dz-hex:hover {
+    transform: translateY(calc(var(--u) * -2));
+}
+
+#dealership.dz .dz-hex.active {
+    background: rgba(var(--dz-accent-rgb), 0.16);
+    border-color: var(--dz-accent);
+    transform: none;
+}
+
+#dealership.dz .dz-wheel {
+    width: calc(var(--u) * 92);
+    height: calc(var(--u) * 92);
+    border: calc(var(--u) * 3) solid rgba(255,255,255,0.12);
+    box-shadow: 0 calc(var(--u) * 8) calc(var(--u) * 20) rgba(0,0,0,0.28);
+}
+
+#dealership.dz .dz-hints {
+    gap: calc(var(--u) * 9);
+}
+
+#dealership.dz .dz-hint {
+    min-height: calc(var(--u) * 40);
+    padding: 0 calc(var(--u) * 12);
+    background: rgba(18,18,20,0.50);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: calc(var(--u) * 8);
+}
+
+#dealership.dz .dz-key {
+    min-width: auto;
+    height: auto;
+    padding: 0;
+    color: var(--dz-accent);
+    border: 0;
+}
+
+#dealership.dz .dz-hint span {
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.50);
+}
+
+@media (max-height: 720px) {
+    #dealership.dz .dz-left-note {
+        display: none;
+    }
+
+    #dealership.dz .dz-card {
+        height: calc(var(--u) * 112);
+    }
+}
+
+}
+
+/* ======================================================================= */
+/* Refinamento visual — sem alterar disposição, dimensões ou espaçamentos  */
+/* ======================================================================= */
+
+#dealership.dz::before {
+    background:
+        linear-gradient(180deg, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0) 18%),
+        linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.30) 26%, rgba(0,0,0,0) 44%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.34) 80%, rgba(0,0,0,0.78) 100%);
+}
+
+#dealership.dz .dz-badge {
+    border-radius: calc(var(--u) * 7);
+}
+
+#dealership.dz .dz-search {
+    background: rgba(18,18,20,0.55);
+    border-color: rgba(255,255,255,0.10);
+    border-radius: calc(var(--u) * 8);
+}
+
+#dealership.dz .dz-search:focus-within {
+    background: rgba(var(--dz-accent-rgb), 0.06);
+    border-color: rgba(var(--dz-accent-rgb), 0.65);
+}
+
+#dealership.dz .dz-card {
+    background: rgba(24,24,26,0.50);
+    border-color: rgba(255,255,255,0.08);
+    border-radius: calc(var(--u) * 10);
+}
+
+#dealership.dz .dz-card:hover {
+    background: rgba(30,30,32,0.62);
+    border-color: rgba(255,255,255,0.20);
+}
+
+#dealership.dz .dz-card.selected {
+    background: rgba(var(--dz-accent-rgb), 0.08);
+    border-color: var(--dz-accent);
+}
+
+#dealership.dz .dz-card-badge {
+    border-radius: calc(var(--u) * 7);
+}
+
+#dealership.dz .dz-card-badge.gems {
+    color: #eadcff;
+    background: rgba(139,92,246,0.14);
+    border-color: rgba(167,139,250,0.34);
+}
+
+#dealership.dz .dz-card-badge.gems .fa-gem {
+    color: #c4b5fd;
+    filter: drop-shadow(0 0 calc(var(--u) * 4) rgba(167,139,250,0.46));
+}
+
+#dealership.dz .dz-card.selected .dz-card-badge.gems {
+    color: #fff;
+    background: #8b5cf6;
+    border-color: #a78bfa;
+}
+
+#dealership.dz .dz-stat-bar,
+#dealership.dz .dz-stat-fill {
+    border-radius: 999px;
+}
+
+#dealership.dz .dz-buy,
+#dealership.dz .dz-testdrive {
+    border-radius: calc(var(--u) * 8);
+}
+
+#dealership.dz .dz-testdrive {
+    background: rgba(18,18,20,0.55);
+    border-color: rgba(255,255,255,0.12);
+}
+
+#dealership.dz .dz-key {
+    border-radius: calc(var(--u) * 7);
+}
+
+/* Seletor de categorias — mantém a posição original e comporta listas longas. */
+#dealership.dz .dz-category-select {
+    position: relative;
+    z-index: 20;
+    width: min(calc(var(--u) * 250), 30vw);
+    flex: 0 0 auto;
+    font-family: var(--dz-font);
+}
+
+#dealership.dz .dz-category-trigger {
+    width: 100%;
+    height: calc(var(--u) * 36);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--u) * 14);
+    padding: 0 calc(var(--u) * 3) calc(var(--u) * 9) 0;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.16);
+    border-radius: 0;
+    box-shadow: none;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .18s ease, color .18s ease;
+}
+
+#dealership.dz .dz-category-trigger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: calc(var(--u) * 42);
+    height: calc(var(--u) * 2);
+    background: var(--dz-accent);
+    transition: width .2s ease;
+}
+
+#dealership.dz .dz-category-trigger:hover,
+#dealership.dz .dz-category-select.open .dz-category-trigger {
+    background: transparent;
+    border-color: rgba(255,255,255,0.32);
+    box-shadow: none;
+}
+
+#dealership.dz .dz-category-select.open .dz-category-trigger::after {
+    width: 100%;
+}
+
+#dealership.dz .dz-category-current {
+    min-width: 0;
+    overflow: hidden;
+    color: rgba(255,255,255,0.9);
+    font-size: var(--dz-fs-xl);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+#dealership.dz .dz-category-trigger-icon {
+    width: calc(var(--u) * 34);
+    height: calc(var(--u) * 34);
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    color: var(--dz-accent);
+    background: rgba(var(--dz-accent-rgb), 0.13);
+    border: 1px solid rgba(var(--dz-accent-rgb), 0.24);
+    border-radius: calc(var(--u) * 7);
+    font-size: calc(var(--u) * 13);
+}
+
+#dealership.dz .dz-category-trigger-copy {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 1);
+}
+
+#dealership.dz .dz-category-trigger-copy small {
+    color: rgba(255,255,255,0.38);
+    font-size: calc(var(--u) * 8);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 1;
+}
+
+#dealership.dz .dz-category-trigger-copy strong {
+    overflow: hidden;
+    color: rgba(255,255,255,0.94);
+    font-size: calc(var(--u) * 13);
+    font-weight: 800;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#dealership.dz .dz-category-chevron {
+    flex: 0 0 auto;
+    color: rgba(255,255,255,0.46);
+    font-size: calc(var(--u) * 8);
+    transition: color .18s ease, transform .18s ease;
+}
+
+#dealership.dz .dz-category-select.open .dz-category-chevron {
+    color: var(--dz-accent);
+    transform: rotate(180deg);
+}
+
+#dealership.dz .dz-category-menu {
+    position: absolute;
+    top: calc(100% + var(--u) * 6);
+    left: 0;
+    width: 100%;
+    max-height: min(calc(var(--u) * 320), 56vh);
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: calc(var(--u) * 5) 0;
+    background: rgba(16,16,18,0.94);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-top: 1px solid rgba(var(--dz-accent-rgb),0.72);
+    border-radius: calc(var(--u) * 4);
+    box-shadow: 0 calc(var(--u) * 16) calc(var(--u) * 36) rgba(0,0,0,0.38);
+    scrollbar-color: var(--dz-accent) rgba(255,255,255,0.05);
+    scrollbar-width: thin;
+    animation: dz-category-menu-in .16s ease-out;
+}
+
+#dealership.dz .dz-category-menu::-webkit-scrollbar {
+    width: calc(var(--u) * 3);
+}
+
+#dealership.dz .dz-category-menu::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+}
+
+#dealership.dz .dz-category-menu::-webkit-scrollbar-thumb {
+    background: var(--dz-accent);
+    border-radius: 999px;
+}
+
+#dealership.dz .dz-category-option {
+    width: 100%;
+    min-height: calc(var(--u) * 34);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--u) * 10);
+    padding: 0 calc(var(--u) * 14);
+    color: rgba(255,255,255,0.58);
+    background: transparent;
+    border: 0;
+    border-left: calc(var(--u) * 2) solid transparent;
+    border-radius: 0;
+    font: inherit;
+    font-size: calc(var(--u) * 10.5);
+    font-weight: 700;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+    text-align: left;
+    cursor: pointer;
+    transition: color .15s ease, background .15s ease, border-color .15s ease;
+}
+
+#dealership.dz .dz-category-option:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.065);
+}
+
+#dealership.dz .dz-category-option.active {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(var(--dz-accent-rgb), 0.12), transparent 76%);
+    border-left-color: var(--dz-accent);
+}
+
+#dealership.dz .dz-category-option > .fa-check {
+    color: var(--dz-accent);
+    font-size: calc(var(--u) * 9);
+}
+
+#dealership.dz .dz-category-garage > span {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 8);
+}
+
+#dealership.dz .dz-category-garage > span > i {
+    color: var(--dz-accent);
+    font-size: calc(var(--u) * 10);
+}
+
+#dealership.dz .dz-category-divider {
+    height: 1px;
+    margin: calc(var(--u) * 5) calc(var(--u) * 14);
+    background: rgba(255,255,255,0.08);
+}
+
+@keyframes dz-category-menu-in {
+    from {
+        opacity: 0;
+        transform: translateY(calc(var(--u) * -5));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Personalização discreta: o seletor completo aparece só quando solicitado. */
+#dealership.dz .dz-bottom {
+    min-height: calc(var(--u) * 58);
+}
+
+#dealership.dz .dz-colors {
+    z-index: 15;
+    gap: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+}
+
+#dealership.dz .dz-color-picker {
+    position: relative;
+}
+
+#dealership.dz .dz-color-trigger {
+    min-width: calc(var(--u) * 154);
+    height: calc(var(--u) * 36);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 9);
+    padding: 0 calc(var(--u) * 11) 0 calc(var(--u) * 7);
+    color: rgba(255,255,255,0.62);
+    background: rgba(18,18,20,0.5);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: calc(var(--u) * 7);
+    font-family: var(--dz-font);
+    font-size: calc(var(--u) * 10.5);
+    font-weight: 700;
+    letter-spacing: 0.035em;
+    cursor: pointer;
+    transition: color .16s ease, background .16s ease, border-color .16s ease;
+}
+
+#dealership.dz .dz-color-trigger:hover,
+#dealership.dz .dz-colors.open .dz-color-trigger {
+    color: #fff;
+    background: rgba(23,23,25,0.76);
+    border-color: rgba(255,255,255,0.16);
+}
+
+#dealership.dz .dz-color-current {
+    width: calc(var(--u) * 22);
+    height: calc(var(--u) * 22);
+    flex: 0 0 auto;
+    border: calc(var(--u) * 2) solid rgba(255,255,255,0.22);
+    border-radius: calc(var(--u) * 5);
+    box-shadow: 0 calc(var(--u) * 2) calc(var(--u) * 6) rgba(0,0,0,0.26);
+}
+
+#dealership.dz .dz-color-trigger > span:nth-child(2) {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+}
+
+#dealership.dz .dz-color-trigger > i {
+    color: rgba(255,255,255,0.34);
+    font-size: calc(var(--u) * 7.5);
+    transition: color .16s ease, transform .18s ease;
+}
+
+#dealership.dz .dz-colors.open .dz-color-trigger > i {
+    color: var(--dz-accent);
+    transform: rotate(180deg);
+}
+
+#dealership.dz .dz-color-popover {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + var(--u) * 8);
+    width: calc(var(--u) * 218);
+    padding: calc(var(--u) * 10);
+    transform: translateX(-50%);
+    background: rgba(16,16,18,0.94);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: calc(var(--u) * 8);
+    box-shadow: 0 calc(var(--u) * 16) calc(var(--u) * 38) rgba(0,0,0,0.42);
+    animation: dz-color-popover-in .16s ease-out;
+}
+
+#dealership.dz .dz-color-popover-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: calc(var(--u) * 8);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+#dealership.dz .dz-color-popover-head span,
+#dealership.dz .dz-color-popover-head strong {
+    font-size: calc(var(--u) * 8.5);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+#dealership.dz .dz-color-popover-head span {
+    color: rgba(255,255,255,0.42);
+}
+
+#dealership.dz .dz-color-popover-head strong {
+    color: rgba(255,255,255,0.74);
+}
+
+#dealership.dz .dz-color-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--u) * 12);
+    padding-top: calc(var(--u) * 10);
+}
+
+#dealership.dz .dz-color-controls .dz-hexes {
+    width: calc(var(--u) * 48);
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, calc(var(--u) * 20));
+    gap: calc(var(--u) * 7);
+}
+
+#dealership.dz .dz-color-controls .dz-hex,
+#dealership.dz .dz-color-controls .dz-hex-0,
+#dealership.dz .dz-color-controls .dz-hex-1,
+#dealership.dz .dz-color-controls .dz-hex-2,
+#dealership.dz .dz-color-controls .dz-hex-3 {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: calc(var(--u) * 20);
+    height: calc(var(--u) * 20);
+    padding: calc(var(--u) * 2);
+    opacity: 1;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    clip-path: none;
+    cursor: pointer;
+}
+
+#dealership.dz .dz-color-controls .dz-hex span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip-path: none;
+}
+
+#dealership.dz .dz-color-controls .dz-hex:hover {
+    transform: scale(1.08);
+}
+
+#dealership.dz .dz-color-controls .dz-hex.active {
+    background: transparent;
+    border-color: var(--dz-accent);
+    transform: none;
+}
+
+#dealership.dz .dz-color-controls .dz-wheel {
+    width: calc(var(--u) * 92);
+    height: calc(var(--u) * 92);
+    border: calc(var(--u) * 2) solid rgba(255,255,255,0.11);
+    box-shadow: none;
+}
+
+@keyframes dz-color-popover-in {
+    from {
+        opacity: 0;
+        transform: translate(-50%, calc(var(--u) * 5));
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
